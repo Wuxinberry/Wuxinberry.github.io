@@ -11,15 +11,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
     
-    <!-- <meta name="keywords" content="">
-    <meta name="description" content=""> -->
+    <!-- <meta name="keywords" content="后端/游戏/">
+    <meta name="description" content="目前是游戏行业服务器端工程师，一个空闲时摄影、游戏、电影什么都爱捣鼓捣鼓的00后"> -->
   
-  <meta property="og:type" content="website">
+  <meta name="description" content="目前是游戏行业服务器端工程师，一个空闲时摄影、游戏、电影什么都爱捣鼓捣鼓的00后">
+<meta property="og:type" content="website">
 <meta property="og:title" content="Berry&#39;s Blog">
 <meta property="og:url" content="https://wuxinberry.github.io/index.html">
 <meta property="og:site_name" content="Berry&#39;s Blog">
+<meta property="og:description" content="目前是游戏行业服务器端工程师，一个空闲时摄影、游戏、电影什么都爱捣鼓捣鼓的00后">
 <meta property="og:locale" content="en_US">
 <meta property="article:author" content="Berry">
+<meta property="article:tag" content="后端&#x2F;游戏&#x2F;">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Berry&#39;s Blog" type="application/atom+xml">
@@ -335,7 +338,7 @@
 <p><code>hexo new page &lt;page-name&gt;</code>可以创建一个新的页面，你也可以根据需要尝试一下~</p>
 <h2 id="四、DIY你的博客"><a href="#四、DIY你的博客" class="headerlink" title="四、DIY你的博客"></a>四、DIY你的博客</h2><h3 id="4-1-选择你喜欢的主题"><a href="#4-1-选择你喜欢的主题" class="headerlink" title="4.1 选择你喜欢的主题"></a>4.1 选择你喜欢的主题</h3><p>hexo 支持替换主题，在hexo的官网，你可以看到400+个主题。我本人使用的是yilia，也有不少人使用的是Next。安装一个主题可以帮助你省下不少事，因为它们通常会集成一些插件、工具，也会有更好看的样式。</p>
 <p>如果你有选定的主题，那么可以直接去对应主题的官网进行下载，下载后解压（如果需要的话）到themes目录下。之后，在_config.yml文件中，找到 theme 相关配置，将其修改为 </p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">theme: fluid <span class="comment"># 或者 Next 等 改成对应的主题名</span></span><br><span class="line">language: zh-CN <span class="comment"># 指定语言</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">theme: yilia-plus <span class="comment"># 或者 Next 等 改成对应的主题名</span></span><br></pre></td></tr></table></figure>
 
 <p>接下来，不同的主题作者通常会给出不同的指引文档，我建议你直接按照对应的文档进行操作。</p>
 <p>完成这些后，重复上述的 <code>hexo g</code> <code>hexo d</code>指令，即可看到替换主题以后的博客。例如，我现在使用的，就是yilia-plus主题：</p>
@@ -343,7 +346,12 @@
 
 
 
-<h3 id="4-2-修改标题、作者、头像"><a href="#4-2-修改标题、作者、头像" class="headerlink" title="4.2 修改标题、作者、头像"></a>4.2 修改标题、作者、头像</h3><h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a target="_blank" rel="noopener" href="https://hexo.io/docs/">hexo官方文档</a></p>
+<h3 id="4-2-修改标题、作者、头像"><a href="#4-2-修改标题、作者、头像" class="headerlink" title="4.2 修改标题、作者、头像"></a>4.2 修改标题、作者、头像</h3><p>最后，我们来做一些锦上添花的工作。如果你足够细心，或许在之前打开 _config.yml时，就已经注意到，其中有不少自定义项目。话不多说，直接上配置：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Site</span></span><br><span class="line">title: <span class="string">&quot;Berry&#x27;s Blog&quot;</span> <span class="comment"># 这里是你的blog名字 它会显示在浏览器网页的tab上</span></span><br><span class="line">subtitle: <span class="string">&#x27;三分钟有三分钟的进步&#x27;</span> <span class="comment"># 来一句自己的slogan</span></span><br><span class="line">description: <span class="string">&#x27;目前是游戏行业服务器端工程师，一个空闲时摄影、游戏、电影什么都爱捣鼓捣鼓的00后&#x27;</span> </span><br><span class="line">keywords: <span class="string">&#x27;后端/游戏/&#x27;</span></span><br><span class="line">author: Berry <span class="comment"># 你的名字</span></span><br><span class="line">language: en <span class="comment"># 博客语言</span></span><br><span class="line">timezone: <span class="string">&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## Set your site url here. For example, if you use GitHub Page, set url as &#x27;https://username.github.io/project&#x27;</span></span><br><span class="line">url: https://wuxinberry.github.io/ <span class="comment"># 替换成你自己的url</span></span><br><span class="line"></span><br><span class="line">post_asset_folder: true <span class="comment"># 设置为true以后 在new一个新的博客时 会同时在_post下创建一个文件夹 方便你存放对应的图片</span></span><br></pre></td></tr></table></figure>
+
+<p>修改以后，重复我们之前的操作，再次打开浏览器访问，生效以后的网站就已经完全是你的个人博客啦~</p>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p>更多的自定义内容以及hexo的功能，建议直接翻阅文档👇</p>
+<p><a target="_blank" rel="noopener" href="https://hexo.io/docs/">hexo官方文档</a></p>
 
     
 

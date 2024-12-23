@@ -10,20 +10,25 @@
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="这是一份ComfyUI 的入门笔记。将介绍从零开始如何使用ComfyUI，生成所需要的素材。 ComfyUI 简介ComfyUI是一款AIGC工具，主要功能是输入图文、视频等，产出图片或视频。相较于原生的Stable Diffusion、Midjourney等AIGC工具，SD Web UI和ComfyUI将模型与工具分离。简单理解就是更容易实现自定义配置，生成我们想要的风格的作品。SD Web">
+  <meta name="description" content="这是一份ComfyUI 的入门笔记。将介绍从零开始如何使用ComfyUI，生成所需要的素材。本文注重实操，如果你对ComfyUI的原理感兴趣，可以移步我的另一篇博客《AI绘图，从算力到画面——以ComfyUI为例》（挖坑待填）。 ComfyUI 简介ComfyUI是一款AIGC工具，主要功能是输入图文、视频等，产出图片或视频。相较于原生的 Stable Diffusion、Midjourney 等">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ComfyUI 入门笔记">
 <meta property="og:url" content="https://wuxinberry.github.io/2024/04/17/ComfyUI%E5%85%A5%E9%97%A8/index.html">
 <meta property="og:site_name" content="Berry&#39;s Blog">
-<meta property="og:description" content="这是一份ComfyUI 的入门笔记。将介绍从零开始如何使用ComfyUI，生成所需要的素材。 ComfyUI 简介ComfyUI是一款AIGC工具，主要功能是输入图文、视频等，产出图片或视频。相较于原生的Stable Diffusion、Midjourney等AIGC工具，SD Web UI和ComfyUI将模型与工具分离。简单理解就是更容易实现自定义配置，生成我们想要的风格的作品。SD Web">
+<meta property="og:description" content="这是一份ComfyUI 的入门笔记。将介绍从零开始如何使用ComfyUI，生成所需要的素材。本文注重实操，如果你对ComfyUI的原理感兴趣，可以移步我的另一篇博客《AI绘图，从算力到画面——以ComfyUI为例》（挖坑待填）。 ComfyUI 简介ComfyUI是一款AIGC工具，主要功能是输入图文、视频等，产出图片或视频。相较于原生的 Stable Diffusion、Midjourney 等">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://wuxinberry.github.io/2024/04/17/ComfyUI%E5%85%A5%E9%97%A8/load-checkpoint.png">
+<meta property="og:image" content="https://wuxinberry.github.io/2024/04/17/ComfyUI%E5%85%A5%E9%97%A8/clip-encode.png">
+<meta property="og:image" content="https://wuxinberry.github.io/2024/04/17/ComfyUI%E5%85%A5%E9%97%A8/empty-latent-image.png">
+<meta property="og:image" content="https://wuxinberry.github.io/2024/04/17/ComfyUI%E5%85%A5%E9%97%A8/ksampler.png">
 <meta property="article:published_time" content="2024-04-17T10:01:15.000Z">
-<meta property="article:modified_time" content="2024-12-19T06:33:48.218Z">
+<meta property="article:modified_time" content="2024-12-22T12:28:09.047Z">
 <meta property="article:author" content="Berry">
 <meta property="article:tag" content="AIGC">
 <meta property="article:tag" content="ComfyUI">
 <meta property="article:tag" content="Stable Diffusion">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wuxinberry.github.io/2024/04/17/ComfyUI%E5%85%A5%E9%97%A8/load-checkpoint.png">
   
     <link rel="alternative" href="/atom.xml" title="Berry&#39;s Blog" type="application/atom+xml">
   
@@ -83,7 +88,9 @@
 			
 				<li><a href="/" target="_blank">主页</a></li>
 			
-				<li><a href="/tags/AIGC" target="_blank">随笔</a></li>
+				<li><a href="/tags/%E5%BB%BA%E7%AB%99" target="_blank">建站指南</a></li>
+			
+				<li><a href="/tags/AIGC" target="_blank">AIGC</a></li>
 			
 			</ul>
 		</nav>
@@ -154,6 +161,8 @@
 			
 				
 			
+				
+			
 			
 			
 			<nav class="header-nav">
@@ -178,12 +187,14 @@
 			</nav>
 
 			<nav class="header-menu js-header-menu">
-				<ul style="width: 50%">
+				<ul style="width: 70%">
 				
 				
-					<li style="width: 50%"><a href="/">主页</a></li>
+					<li style="width: 33.333333333333336%"><a href="/">主页</a></li>
 		        
-					<li style="width: 50%"><a href="/tags/AIGC">随笔</a></li>
+					<li style="width: 33.333333333333336%"><a href="/tags/%E5%BB%BA%E7%AB%99">建站指南</a></li>
+		        
+					<li style="width: 33.333333333333336%"><a href="/tags/AIGC">AIGC</a></li>
 		        
 				</ul>
 			</nav>
@@ -232,7 +243,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">885字</span>
+      <span class="post-count">1.7k字</span>
     </span>
   </span>
 
@@ -241,7 +252,7 @@
     <span class="post-meta-item-icon">
       <i class="icon-book icon"></i>
       <span class="post-meta-item-text"> 阅读时长≈</span>
-      <span class="post-count">3分</span>
+      <span class="post-count">6分</span>
     </span>
   </span>
 </div>
@@ -252,26 +263,64 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <p>这是一份ComfyUI 的入门笔记。将介绍从零开始如何使用ComfyUI，生成所需要的素材。</p>
-<h2 id="ComfyUI-简介"><a href="#ComfyUI-简介" class="headerlink" title="ComfyUI 简介"></a>ComfyUI 简介</h2><p>ComfyUI是一款AIGC工具，主要功能是输入图文、视频等，产出图片或视频。<br>相较于原生的Stable Diffusion、Midjourney等AIGC工具，SD Web UI和ComfyUI将模型与工具分离。简单理解就是更容易实现自定义配置，生成我们想要的风格的作品。SD Web UI和ComfyUI都对SD的工作流进行了拆分，webUI仍然是传统网页页面的形式，虽然能够自由输入、调整模型、安装插件，但是如果想要将输出作为下一个环节的输入，就需要切换页面，ComfyUI则以节点为单位，更加自由，能够以类似于拼乐高的形式搭建AI生图的工作流程。</p>
-<h2 id="ComfyUI-安装"><a href="#ComfyUI-安装" class="headerlink" title="ComfyUI 安装"></a>ComfyUI 安装</h2><p>参考<a target="_blank" rel="noopener" href="https://github.com/comfyanonymous/ComfyUI">ComfyUI</a>的GitHub主页，按照指定的方式进行安装即可。<br>虽然现在有很多的整合包、一键启动包，但是仍然推荐使用Git进行本地安装，更新会更加方便。</p>
+    <p>这是一份ComfyUI 的入门笔记。将介绍从零开始如何使用ComfyUI，生成所需要的素材。本文注重实操，如果你对ComfyUI的原理感兴趣，可以移步我的另一篇博客《AI绘图，从算力到画面——以ComfyUI为例》（挖坑待填）。</p>
+<h2 id="ComfyUI-简介"><a href="#ComfyUI-简介" class="headerlink" title="ComfyUI 简介"></a>ComfyUI 简介</h2><p>ComfyUI是一款AIGC工具，主要功能是输入图文、视频等，产出图片或视频。<br>相较于原生的 Stable Diffusion、Midjourney 等AIGC工具，SD Web UI 和 ComfyUI 将模型与工具分离。简单理解就是更容易实现自定义配置，生成我们想要的风格的作品。SD Web UI 和 ComfyUI 都对SD的工作流进行了拆分，webUI仍然是传统网页页面的形式，虽然能够自由输入、调整模型、安装插件，但是如果想要将输出作为下一个环节的输入，就需要切换页面，ComfyUI 则以节点为单位，更加自由，能够以类似于拼乐高的形式搭建AI生图的工作流程。</p>
+<h2 id="ComfyUI-安装"><a href="#ComfyUI-安装" class="headerlink" title="ComfyUI 安装"></a>ComfyUI 安装</h2><p>参考 <a target="_blank" rel="noopener" href="https://github.com/comfyanonymous/ComfyUI">ComfyUI</a> 的GitHub主页，按照指定的方式进行安装即可。<br>虽然现在有很多的整合包、一键启动包，但是仍然推荐使用Git进行本地安装，更新会更加方便。</p>
 <h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><h4 id="打包版本安装"><a href="#打包版本安装" class="headerlink" title="打包版本安装"></a>打包版本安装</h4><ol>
-<li>ComfyUI官方提供了打包版本，进入上述官网，找到”Direct link to download”，点击并下载。</li>
-<li>下载完成后选择解压，可以得到”ComfyUI_windows_portable”文件夹。</li>
-<li>进入到”ComfyUI_windows_portable”文件夹，根据自己的本机（或服务器配置），选择对应GPU或者CPU的运行方式，即双击运行run_nvidia_gpu.bat或run_cpu.bat。</li>
-<li>注意，到这一步为止，只是成功运行了ComfyUI，如果想要实际出图，还需要下载Stable Diffusion的模型。请将模型下载到”ComfyUI_windows_portable\ComfyUI\models\checkpoints”路径下。<br>推荐模型: v1-5-pruned-emaonly.ckpt, realisticVisionV60B1_v51VAE.safetensors，可以到文末的C站下载。每次下载新的模型到路径，都要刷新或重启ComfyUI，才能够读取到，不然可能会检测不到对应的模型。</li>
+<li>ComfyUI 官方提供了打包版本，进入上述官网，找到 “Direct link to download”，点击并下载。</li>
+<li>下载完成后选择解压，可以得到 “ComfyUI_windows_portable” 文件夹。</li>
+<li>进入到 “ComfyUI_windows_portable” 文件夹，根据自己的本机（或服务器配置），选择对应GPU或者CPU的运行方式，即双击运行run_nvidia_gpu.bat或run_cpu.bat。</li>
+<li>注意，到这一步为止，只是成功运行了 ComfyUI，如果想要实际出图，还需要下载 Stable Diffusion 的模型。请将模型下载到 “ComfyUI_windows_portable\ComfyUI\models\checkpoints” 路径下。<br>推荐模型: v1-5-pruned-emaonly.ckpt, realisticVisionV60B1_v51VAE.safetensors，可以到文末的C站下载。每次下载新的模型到路径，都要刷新或重启ComfyUI，才能够读取到，不然可能会检测不到对应的模型。</li>
 </ol>
 <h4 id="Git安装"><a href="#Git安装" class="headerlink" title="Git安装"></a>Git安装</h4><ol>
 <li>安装并配置Git。这个网上教程很多，此处不加赘述。</li>
-<li>安装并配置python环境。推荐使用Conda安装，并创建ComfyUI使用的虚拟python环境，可以参考网上教程。</li>
-<li>在想要安装ComfyUI的文件路径下，右键打开Git Bash（Terminal, CMD都行）, 输入以下命令<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/comfyanonymous/ComfyUI.git</span><br></pre></td></tr></table></figure></li>
+<li>安装并配置python环境。推荐使用Conda安装，并创建ComfyUI使用的虚拟 python 环境，可以参考网上教程。</li>
+<li>在想要安装 ComfyUI 的文件路径下，右键打开 Git Bash（Terminal, CMD都行）, 输入以下命令<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/comfyanonymous/ComfyUI.git</span><br></pre></td></tr></table></figure></li>
 <li>等待Git将ComfyUI的项目拉取完成后，输入以下命令（如果使用的是虚拟环境，请提前激活。虚拟环境激活时，命令行前缀会出现虚拟环境的名字，如 (venv_py_comfyUI) C:User&#x2F;…）<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install -r requirements.txt</span><br></pre></td></tr></table></figure></li>
-<li>将SD模型放置在models&#x2F;checkpoints下，将VAE模型放置在models&#x2F;vae，lora、controlNet等模型也是一样。</li>
+<li>将SD模型放置在 models&#x2F;checkpoints 下，将VAE模型放置在 models&#x2F;vae，lora、controlNet 等模型也是一样。</li>
 <li>完成后，切换路径在项目根目录下，输入以下命令启动ComfyUI<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python main.py</span><br></pre></td></tr></table></figure></li>
 <li>浏览器访问 127.0.0.1:8188，即可使用。</li>
 </ol>
-<h3 id="插件推荐"><a href="#插件推荐" class="headerlink" title="插件推荐"></a>插件推荐</h3><p>ComfyUI有许多强大的插件拓展，以下强推几个插件！非常好用！！</p>
-<h2 id="ComfyUI-的基础使用，以文生图demo为例"><a href="#ComfyUI-的基础使用，以文生图demo为例" class="headerlink" title="ComfyUI 的基础使用，以文生图demo为例"></a>ComfyUI 的基础使用，以文生图demo为例</h2><h3 id="认识基本节点"><a href="#认识基本节点" class="headerlink" title="认识基本节点"></a>认识基本节点</h3><h3 id="Demo-搭建文生图工作流"><a href="#Demo-搭建文生图工作流" class="headerlink" title="Demo: 搭建文生图工作流"></a>Demo: 搭建文生图工作流</h3><h2 id="ComfyUI-学习资源参考"><a href="#ComfyUI-学习资源参考" class="headerlink" title="ComfyUI 学习资源参考"></a>ComfyUI 学习资源参考</h2><p><a target="_blank" rel="noopener" href="https://github.com/comfyanonymous/ComfyUI">ComfyUI</a>: ComfyUI的Github主页。<br><a target="_blank" rel="noopener" href="https://www.comflowy.com/zh-CN">Comfylowy</a>: 这是一个ComfyUI社区，介绍了ComfyUI的功能、安装使用以及一些基础的AI绘图的原理。<br><a target="_blank" rel="noopener" href="https://www.openart.ai/">OpenArt</a>: 当前最大的AIGC社区，有相当多的可用资源（各种风格模型、参考工作流等），但是需要魔法。<br><a target="_blank" rel="noopener" href="https://civitai.com/">Civitai C站</a>: C站上有非常多的模型资源可供下载，下载模型时记得留意作者的推荐参数。</p>
+<h3 id="插件推荐"><a href="#插件推荐" class="headerlink" title="插件推荐"></a>插件推荐</h3><p>ComfyUI 有许多强大的插件拓展，以下强推几个插件！非常好用！！</p>
+<ol>
+<li><p><strong>ComfyUI Manager</strong> 一个图形化管理工具，一站式集成了模型下载、插件安装、更新重启、设置等多种功能。可以说是使用ComfyUI必下的插件。</p>
+</li>
+<li><p><strong>SDXL prompt styler</strong> 提供SDXL prompt styler节点，可以直接在这个节点选择生成的图片风格，不用再在prompt里面写描述。</p>
+</li>
+<li><p><strong>upscale</strong> 用于放大、细化图片</p>
+</li>
+<li><p><strong>IP-Adapter</strong> 实现单图lora效果，给一张风格图，能够提取输入的图片风格，输出一张类似风格的图片。</p>
+</li>
+<li><p><strong>YoloWorld</strong>插件 输入图片或者视频，可以进行检测和分割，输出对应的蒙版</p>
+</li>
+</ol>
+<p>搜索时可以带上 ComfyUI 关键词，更容易搜索到。</p>
+<ol start="5">
+<li><strong>ZHO-ZHO-ZHO</strong>  一个 ComfyUI 大佬的 github 仓库，做了很多模型的 ComfyUI 迁移与插件化的工作，同时也会提供插件使用的 sample workflow 文件。</li>
+</ol>
+<h2 id="ComfyUI-的基础使用，以文生图demo为例"><a href="#ComfyUI-的基础使用，以文生图demo为例" class="headerlink" title="ComfyUI 的基础使用，以文生图demo为例"></a>ComfyUI 的基础使用，以文生图demo为例</h2><p>ComfyUI 的工作流是通过很多个工作节点连接起来的。将各个功能的节点，按照符合输入输出格式的方式连接起来，就可以搭建工作流。</p>
+<h3 id="认识基本节点"><a href="#认识基本节点" class="headerlink" title="认识基本节点"></a>认识基本节点</h3><p>我们首先要认识一些基本的节点，了解其输入输出和起到的作用，才能够知道如何将它们连起来。现在，你或许还无法理解那些专业的名词到底是什么，但是没关系，大致有个概念即可。</p>
+<h4 id="Load-Checkpoint"><a href="#Load-Checkpoint" class="headerlink" title="Load Checkpoint"></a>Load Checkpoint</h4><p>载入 diffusion、CLIP 和 VAE 模型，是<strong>工作流的起点</strong>。</p>
+<img src="/2024/04/17/ComfyUI%E5%85%A5%E9%97%A8/load-checkpoint.png" class="" title="load-checkpoint">
+
+<h4 id="CLIP-Text-Encode-Prompt"><a href="#CLIP-Text-Encode-Prompt" class="headerlink" title="CLIP Text Encode(Prompt)"></a>CLIP Text Encode(Prompt)</h4><p>用于<strong>输入 prompt</strong>，使用逗号分割。</p>
+<p>格式为 (keyword:weight)，例 (hight building: 1.2) 可以控制 prompt 的权重。</p>
+<img src="/2024/04/17/ComfyUI%E5%85%A5%E9%97%A8/clip-encode.png" class="" title="clip-encode">
+
+<h4 id="Empty-Latent-Image"><a href="#Empty-Latent-Image" class="headerlink" title="Empty Latent Image"></a>Empty Latent Image</h4><p>空的潜空间图像节点（其实就是一张随机噪声图，不是里面的数据是空的意思），可以<strong>设置像素和每批生成的图片数量</strong>。</p>
+<img src="/2024/04/17/ComfyUI%E5%85%A5%E9%97%A8/empty-latent-image.png" class="" title="empty-latent-image">
+
+<h4 id="KSampler"><a href="#KSampler" class="headerlink" title="KSampler"></a>KSampler</h4><p>采样算法控制器，其中的参数就是我们生成图片的过程中相当重要的采样算法、步数等参数。通常大家所说的“炼丹调参”，就是指调整这里的参数。以下是几个常用的参数介绍：</p>
+<p>seed 随机种子，控制初始噪声。</p>
+<p>steps 采样步数，通常控制在15-35，太大也未必有好的效果，反而会降低出图效率，太小则图片精度不够。</p>
+<p>sampler_name 采样算法。</p>
+<p>scheduler 去噪过程的调度算法。</p>
+<p>不了解这些算法该怎么选择也没有关系，不同的模型偏好的参数都不一样，没有明确、唯一的最优解。在生图过程中多多尝试、调整，参考模型作者给出的最优参数，都能够提高出图质量。</p>
+<img src="/2024/04/17/ComfyUI%E5%85%A5%E9%97%A8/ksampler.png" class="" title="ksampler">
+
+<h3 id="Demo-搭建文生图工作流"><a href="#Demo-搭建文生图工作流" class="headerlink" title="Demo: 搭建文生图工作流"></a>Demo: 搭建文生图工作流</h3><p>认识了几个基础的节点以后，我们要学习如何将他们连接起来。</p>
+<p>我们可以注意到，节点的左边或者右边，会有几个不同颜色的小圆圈，它们就是这个节点的输入、输入。左边是输入，右边是输出，不同的颜色对应了不同的数据类型。连线时，只有相同类型的数据，才能够被成功连上。</p>
+<h2 id="最佳实践"><a href="#最佳实践" class="headerlink" title="最佳实践"></a>最佳实践</h2><h2 id="ComfyUI-学习资源参考"><a href="#ComfyUI-学习资源参考" class="headerlink" title="ComfyUI 学习资源参考"></a>ComfyUI 学习资源参考</h2><p><a target="_blank" rel="noopener" href="https://github.com/comfyanonymous/ComfyUI">ComfyUI</a>: ComfyUI的Github主页。<br><a target="_blank" rel="noopener" href="https://www.comflowy.com/zh-CN">Comfylowy</a>: 这是一个ComfyUI社区，介绍了ComfyUI的功能、安装使用以及一些基础的AI绘图的原理。<br><a target="_blank" rel="noopener" href="https://www.openart.ai/">OpenArt</a>: 当前最大的AIGC社区，有相当多的可用资源（各种风格模型、参考工作流等），但是需要魔法。<br><a target="_blank" rel="noopener" href="https://civitai.com/">Civitai C站</a>: C站上有非常多的模型资源可供下载，下载模型时记得留意作者的推荐参数。</p>
 <p>另：B站和YouTube上也有很多ComfyUI的教程可供参考。</p>
 
     
@@ -453,7 +502,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#ComfyUI-%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">ComfyUI 简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ComfyUI-%E5%AE%89%E8%A3%85"><span class="toc-number">2.</span> <span class="toc-text">ComfyUI 安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-number">2.1.</span> <span class="toc-text">安装</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%89%93%E5%8C%85%E7%89%88%E6%9C%AC%E5%AE%89%E8%A3%85"><span class="toc-number">2.1.1.</span> <span class="toc-text">打包版本安装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Git%E5%AE%89%E8%A3%85"><span class="toc-number">2.1.2.</span> <span class="toc-text">Git安装</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%92%E4%BB%B6%E6%8E%A8%E8%8D%90"><span class="toc-number">2.2.</span> <span class="toc-text">插件推荐</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ComfyUI-%E7%9A%84%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8%EF%BC%8C%E4%BB%A5%E6%96%87%E7%94%9F%E5%9B%BEdemo%E4%B8%BA%E4%BE%8B"><span class="toc-number">3.</span> <span class="toc-text">ComfyUI 的基础使用，以文生图demo为例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%A4%E8%AF%86%E5%9F%BA%E6%9C%AC%E8%8A%82%E7%82%B9"><span class="toc-number">3.1.</span> <span class="toc-text">认识基本节点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Demo-%E6%90%AD%E5%BB%BA%E6%96%87%E7%94%9F%E5%9B%BE%E5%B7%A5%E4%BD%9C%E6%B5%81"><span class="toc-number">3.2.</span> <span class="toc-text">Demo: 搭建文生图工作流</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ComfyUI-%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90%E5%8F%82%E8%80%83"><span class="toc-number">4.</span> <span class="toc-text">ComfyUI 学习资源参考</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#ComfyUI-%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">ComfyUI 简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ComfyUI-%E5%AE%89%E8%A3%85"><span class="toc-number">2.</span> <span class="toc-text">ComfyUI 安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-number">2.1.</span> <span class="toc-text">安装</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%89%93%E5%8C%85%E7%89%88%E6%9C%AC%E5%AE%89%E8%A3%85"><span class="toc-number">2.1.1.</span> <span class="toc-text">打包版本安装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Git%E5%AE%89%E8%A3%85"><span class="toc-number">2.1.2.</span> <span class="toc-text">Git安装</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%92%E4%BB%B6%E6%8E%A8%E8%8D%90"><span class="toc-number">2.2.</span> <span class="toc-text">插件推荐</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ComfyUI-%E7%9A%84%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8%EF%BC%8C%E4%BB%A5%E6%96%87%E7%94%9F%E5%9B%BEdemo%E4%B8%BA%E4%BE%8B"><span class="toc-number">3.</span> <span class="toc-text">ComfyUI 的基础使用，以文生图demo为例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%A4%E8%AF%86%E5%9F%BA%E6%9C%AC%E8%8A%82%E7%82%B9"><span class="toc-number">3.1.</span> <span class="toc-text">认识基本节点</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Load-Checkpoint"><span class="toc-number">3.1.1.</span> <span class="toc-text">Load Checkpoint</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CLIP-Text-Encode-Prompt"><span class="toc-number">3.1.2.</span> <span class="toc-text">CLIP Text Encode(Prompt)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Empty-Latent-Image"><span class="toc-number">3.1.3.</span> <span class="toc-text">Empty Latent Image</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#KSampler"><span class="toc-number">3.1.4.</span> <span class="toc-text">KSampler</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Demo-%E6%90%AD%E5%BB%BA%E6%96%87%E7%94%9F%E5%9B%BE%E5%B7%A5%E4%BD%9C%E6%B5%81"><span class="toc-number">3.2.</span> <span class="toc-text">Demo: 搭建文生图工作流</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5"><span class="toc-number">4.</span> <span class="toc-text">最佳实践</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ComfyUI-%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90%E5%8F%82%E8%80%83"><span class="toc-number">5.</span> <span class="toc-text">ComfyUI 学习资源参考</span></a></li></ol>
                     </div>
                 </span>
             </div>

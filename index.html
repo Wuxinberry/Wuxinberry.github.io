@@ -83,7 +83,9 @@
 			
 				<li><a href="/" target="_blank">主页</a></li>
 			
-				<li><a href="/tags/AIGC" target="_blank">随笔</a></li>
+				<li><a href="/tags/%E5%BB%BA%E7%AB%99" target="_blank">建站指南</a></li>
+			
+				<li><a href="/tags/AIGC" target="_blank">AIGC</a></li>
 			
 			</ul>
 		</nav>
@@ -154,6 +156,8 @@
 			
 				
 			
+				
+			
 			
 			
 			<nav class="header-nav">
@@ -178,12 +182,14 @@
 			</nav>
 
 			<nav class="header-menu js-header-menu">
-				<ul style="width: 50%">
+				<ul style="width: 70%">
 				
 				
-					<li style="width: 50%"><a href="/">主页</a></li>
+					<li style="width: 33.333333333333336%"><a href="/">主页</a></li>
 		        
-					<li style="width: 50%"><a href="/tags/AIGC">随笔</a></li>
+					<li style="width: 33.333333333333336%"><a href="/tags/%E5%BB%BA%E7%AB%99">建站指南</a></li>
+		        
+					<li style="width: 33.333333333333336%"><a href="/tags/AIGC">AIGC</a></li>
 		        
 				</ul>
 			</nav>
@@ -300,11 +306,11 @@
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;utf-8&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>your name<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>XXX的个人博客<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h2</span>&gt;</span>Hello<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p>之后，在浏览器访问 <your-name>.github.io&#x2F;，看看是否成功吧~</p>
-<h2 id="二、安装-Hexo-并初始化你的博客"><a href="#二、安装-Hexo-并初始化你的博客" class="headerlink" title="二、安装 Hexo 并初始化你的博客"></a>二、安装 Hexo 并初始化你的博客</h2><h3 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h3><p>在之前的准备工作中，我们已经安装node.js。接下来，继续打开你的命令行，我们将使用npm来安装Hexo。输入：</p>
+<h2 id="二、安装-Hexo-并初始化你的博客"><a href="#二、安装-Hexo-并初始化你的博客" class="headerlink" title="二、安装 Hexo 并初始化你的博客"></a>二、安装 Hexo 并初始化你的博客</h2><h3 id="1-安装Hexo"><a href="#1-安装Hexo" class="headerlink" title="1. 安装Hexo"></a>1. 安装Hexo</h3><p>在之前的准备工作中，我们已经安装node.js。接下来，继续打开你的命令行，我们将使用npm来安装Hexo。输入：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
 
 <p>等待指令操作完成后，执行 <code>hexo -v</code> 查看版本，返回版本号即为成功。</p>
-<h3 id="初始化博客"><a href="#初始化博客" class="headerlink" title="初始化博客"></a>初始化博客</h3><p>首先，找一个你想要存放你的博客数据的路径，然后右键打开命令行工具。一步一步输入如下指令，来创建你的博客项目：</p>
+<h3 id="2-初始化博客"><a href="#2-初始化博客" class="headerlink" title="2. 初始化博客"></a>2. 初始化博客</h3><p>首先，找一个你想要存放你的博客数据的路径，然后右键打开命令行工具。一步一步输入如下指令，来创建你的博客项目：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo init my-blog</span><br><span class="line">cd my-blog</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
 
 <p>此时，你的博客项目已经初始化完成，你可以看到 <em>my-blog</em> 的文件夹下已经出现了一些东西，这些文件夹和文件分别有什么作用，将在后文介绍。</p>
@@ -317,7 +323,7 @@
 
 <img src="/2024/12/21/%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%972/hexo-hello.png" class="" title="hexo-hello">
 
-<h3 id="部署Hexo-到GitHub"><a href="#部署Hexo-到GitHub" class="headerlink" title="部署Hexo 到GitHub"></a>部署Hexo 到GitHub</h3><p>接下来，我们要让本地的这些修改，能够被外部访问。这需要我们将Hexo 部署到GitHub上。</p>
+<h3 id="3-部署Hexo-到GitHub"><a href="#3-部署Hexo-到GitHub" class="headerlink" title="3. 部署Hexo 到GitHub"></a>3. 部署Hexo 到GitHub</h3><p>接下来，我们要让本地的这些修改，能够被外部访问。这需要我们将Hexo 部署到GitHub上。</p>
 <p>在命令行输入 <code>npm install hexo-deploy-git --save</code>，安装完毕后，我们打开进入到刚才创建的博客目录，打开 _config.yml文件，添加如下配置：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Deployment</span></span><br><span class="line"><span class="comment">## Docs: https://hexo.io/docs/one-command-deployment</span></span><br><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repository: https://github.com/Wuxinberry/Wuxinberry.github.io.git <span class="comment"># 此处要替换成你自己刚才创建的仓库地址</span></span><br><span class="line">  branch: main</span><br></pre></td></tr></table></figure>
 
@@ -336,7 +342,7 @@
 <li><code>hexo d</code> 部署内容</li>
 </ol>
 <p><code>hexo new page &lt;page-name&gt;</code>可以创建一个新的页面，你也可以根据需要尝试一下~</p>
-<h2 id="四、DIY你的博客"><a href="#四、DIY你的博客" class="headerlink" title="四、DIY你的博客"></a>四、DIY你的博客</h2><h3 id="4-1-选择你喜欢的主题"><a href="#4-1-选择你喜欢的主题" class="headerlink" title="4.1 选择你喜欢的主题"></a>4.1 选择你喜欢的主题</h3><p>hexo 支持替换主题，在hexo的官网，你可以看到400+个主题。我本人使用的是yilia，也有不少人使用的是Next。安装一个主题可以帮助你省下不少事，因为它们通常会集成一些插件、工具，也会有更好看的样式。</p>
+<h2 id="四、DIY你的博客"><a href="#四、DIY你的博客" class="headerlink" title="四、DIY你的博客"></a>四、DIY你的博客</h2><h3 id="选择你喜欢的主题"><a href="#选择你喜欢的主题" class="headerlink" title="选择你喜欢的主题"></a>选择你喜欢的主题</h3><p>hexo 支持替换主题，在hexo的官网，你可以看到400+个主题。我本人使用的是yilia，也有不少人使用的是Next。安装一个主题可以帮助你省下不少事，因为它们通常会集成一些插件、工具，也会有更好看的样式。</p>
 <p>如果你有选定的主题，那么可以直接去对应主题的官网进行下载，下载后解压（如果需要的话）到themes目录下。之后，在_config.yml文件中，找到 theme 相关配置，将其修改为 </p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">theme: yilia-plus <span class="comment"># 或者 Next 等 改成对应的主题名</span></span><br></pre></td></tr></table></figure>
 
@@ -346,7 +352,7 @@
 
 
 
-<h3 id="4-2-修改标题、作者、头像"><a href="#4-2-修改标题、作者、头像" class="headerlink" title="4.2 修改标题、作者、头像"></a>4.2 修改标题、作者、头像</h3><p>最后，我们来做一些锦上添花的工作。如果你足够细心，或许在之前打开 _config.yml时，就已经注意到，其中有不少自定义项目。话不多说，直接上配置：</p>
+<h3 id="修改标题、作者、头像"><a href="#修改标题、作者、头像" class="headerlink" title="修改标题、作者、头像"></a>修改标题、作者、头像</h3><p>最后，我们来做一些锦上添花的工作。如果你足够细心，或许在之前打开 _config.yml时，就已经注意到，其中有不少自定义项目。话不多说，直接上配置：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Site</span></span><br><span class="line">title: <span class="string">&quot;Berry&#x27;s Blog&quot;</span> <span class="comment"># 这里是你的blog名字 它会显示在浏览器网页的tab上</span></span><br><span class="line">subtitle: <span class="string">&#x27;三分钟有三分钟的进步&#x27;</span> <span class="comment"># 来一句自己的slogan</span></span><br><span class="line">description: <span class="string">&#x27;目前是游戏行业服务器端工程师，一个空闲时摄影、游戏、电影什么都爱捣鼓捣鼓的00后&#x27;</span> </span><br><span class="line">keywords: <span class="string">&#x27;后端/游戏/&#x27;</span></span><br><span class="line">author: Berry <span class="comment"># 你的名字</span></span><br><span class="line">language: en <span class="comment"># 博客语言</span></span><br><span class="line">timezone: <span class="string">&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## Set your site url here. For example, if you use GitHub Page, set url as &#x27;https://username.github.io/project&#x27;</span></span><br><span class="line">url: https://wuxinberry.github.io/ <span class="comment"># 替换成你自己的url</span></span><br><span class="line"></span><br><span class="line">post_asset_folder: true <span class="comment"># 设置为true以后 在new一个新的博客时 会同时在_post下创建一个文件夹 方便你存放对应的图片</span></span><br></pre></td></tr></table></figure>
 
 <p>修改以后，重复我们之前的操作，再次打开浏览器访问，生效以后的网站就已经完全是你的个人博客啦~</p>
@@ -592,26 +598,64 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <p>这是一份ComfyUI 的入门笔记。将介绍从零开始如何使用ComfyUI，生成所需要的素材。</p>
-<h2 id="ComfyUI-简介"><a href="#ComfyUI-简介" class="headerlink" title="ComfyUI 简介"></a>ComfyUI 简介</h2><p>ComfyUI是一款AIGC工具，主要功能是输入图文、视频等，产出图片或视频。<br>相较于原生的Stable Diffusion、Midjourney等AIGC工具，SD Web UI和ComfyUI将模型与工具分离。简单理解就是更容易实现自定义配置，生成我们想要的风格的作品。SD Web UI和ComfyUI都对SD的工作流进行了拆分，webUI仍然是传统网页页面的形式，虽然能够自由输入、调整模型、安装插件，但是如果想要将输出作为下一个环节的输入，就需要切换页面，ComfyUI则以节点为单位，更加自由，能够以类似于拼乐高的形式搭建AI生图的工作流程。</p>
-<h2 id="ComfyUI-安装"><a href="#ComfyUI-安装" class="headerlink" title="ComfyUI 安装"></a>ComfyUI 安装</h2><p>参考<a target="_blank" rel="noopener" href="https://github.com/comfyanonymous/ComfyUI">ComfyUI</a>的GitHub主页，按照指定的方式进行安装即可。<br>虽然现在有很多的整合包、一键启动包，但是仍然推荐使用Git进行本地安装，更新会更加方便。</p>
+    <p>这是一份ComfyUI 的入门笔记。将介绍从零开始如何使用ComfyUI，生成所需要的素材。本文注重实操，如果你对ComfyUI的原理感兴趣，可以移步我的另一篇博客《AI绘图，从算力到画面——以ComfyUI为例》（挖坑待填）。</p>
+<h2 id="ComfyUI-简介"><a href="#ComfyUI-简介" class="headerlink" title="ComfyUI 简介"></a>ComfyUI 简介</h2><p>ComfyUI是一款AIGC工具，主要功能是输入图文、视频等，产出图片或视频。<br>相较于原生的 Stable Diffusion、Midjourney 等AIGC工具，SD Web UI 和 ComfyUI 将模型与工具分离。简单理解就是更容易实现自定义配置，生成我们想要的风格的作品。SD Web UI 和 ComfyUI 都对SD的工作流进行了拆分，webUI仍然是传统网页页面的形式，虽然能够自由输入、调整模型、安装插件，但是如果想要将输出作为下一个环节的输入，就需要切换页面，ComfyUI 则以节点为单位，更加自由，能够以类似于拼乐高的形式搭建AI生图的工作流程。</p>
+<h2 id="ComfyUI-安装"><a href="#ComfyUI-安装" class="headerlink" title="ComfyUI 安装"></a>ComfyUI 安装</h2><p>参考 <a target="_blank" rel="noopener" href="https://github.com/comfyanonymous/ComfyUI">ComfyUI</a> 的GitHub主页，按照指定的方式进行安装即可。<br>虽然现在有很多的整合包、一键启动包，但是仍然推荐使用Git进行本地安装，更新会更加方便。</p>
 <h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><h4 id="打包版本安装"><a href="#打包版本安装" class="headerlink" title="打包版本安装"></a>打包版本安装</h4><ol>
-<li>ComfyUI官方提供了打包版本，进入上述官网，找到”Direct link to download”，点击并下载。</li>
-<li>下载完成后选择解压，可以得到”ComfyUI_windows_portable”文件夹。</li>
-<li>进入到”ComfyUI_windows_portable”文件夹，根据自己的本机（或服务器配置），选择对应GPU或者CPU的运行方式，即双击运行run_nvidia_gpu.bat或run_cpu.bat。</li>
-<li>注意，到这一步为止，只是成功运行了ComfyUI，如果想要实际出图，还需要下载Stable Diffusion的模型。请将模型下载到”ComfyUI_windows_portable\ComfyUI\models\checkpoints”路径下。<br>推荐模型: v1-5-pruned-emaonly.ckpt, realisticVisionV60B1_v51VAE.safetensors，可以到文末的C站下载。每次下载新的模型到路径，都要刷新或重启ComfyUI，才能够读取到，不然可能会检测不到对应的模型。</li>
+<li>ComfyUI 官方提供了打包版本，进入上述官网，找到 “Direct link to download”，点击并下载。</li>
+<li>下载完成后选择解压，可以得到 “ComfyUI_windows_portable” 文件夹。</li>
+<li>进入到 “ComfyUI_windows_portable” 文件夹，根据自己的本机（或服务器配置），选择对应GPU或者CPU的运行方式，即双击运行run_nvidia_gpu.bat或run_cpu.bat。</li>
+<li>注意，到这一步为止，只是成功运行了 ComfyUI，如果想要实际出图，还需要下载 Stable Diffusion 的模型。请将模型下载到 “ComfyUI_windows_portable\ComfyUI\models\checkpoints” 路径下。<br>推荐模型: v1-5-pruned-emaonly.ckpt, realisticVisionV60B1_v51VAE.safetensors，可以到文末的C站下载。每次下载新的模型到路径，都要刷新或重启ComfyUI，才能够读取到，不然可能会检测不到对应的模型。</li>
 </ol>
 <h4 id="Git安装"><a href="#Git安装" class="headerlink" title="Git安装"></a>Git安装</h4><ol>
 <li>安装并配置Git。这个网上教程很多，此处不加赘述。</li>
-<li>安装并配置python环境。推荐使用Conda安装，并创建ComfyUI使用的虚拟python环境，可以参考网上教程。</li>
-<li>在想要安装ComfyUI的文件路径下，右键打开Git Bash（Terminal, CMD都行）, 输入以下命令<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/comfyanonymous/ComfyUI.git</span><br></pre></td></tr></table></figure></li>
+<li>安装并配置python环境。推荐使用Conda安装，并创建ComfyUI使用的虚拟 python 环境，可以参考网上教程。</li>
+<li>在想要安装 ComfyUI 的文件路径下，右键打开 Git Bash（Terminal, CMD都行）, 输入以下命令<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/comfyanonymous/ComfyUI.git</span><br></pre></td></tr></table></figure></li>
 <li>等待Git将ComfyUI的项目拉取完成后，输入以下命令（如果使用的是虚拟环境，请提前激活。虚拟环境激活时，命令行前缀会出现虚拟环境的名字，如 (venv_py_comfyUI) C:User&#x2F;…）<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install -r requirements.txt</span><br></pre></td></tr></table></figure></li>
-<li>将SD模型放置在models&#x2F;checkpoints下，将VAE模型放置在models&#x2F;vae，lora、controlNet等模型也是一样。</li>
+<li>将SD模型放置在 models&#x2F;checkpoints 下，将VAE模型放置在 models&#x2F;vae，lora、controlNet 等模型也是一样。</li>
 <li>完成后，切换路径在项目根目录下，输入以下命令启动ComfyUI<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python main.py</span><br></pre></td></tr></table></figure></li>
 <li>浏览器访问 127.0.0.1:8188，即可使用。</li>
 </ol>
-<h3 id="插件推荐"><a href="#插件推荐" class="headerlink" title="插件推荐"></a>插件推荐</h3><p>ComfyUI有许多强大的插件拓展，以下强推几个插件！非常好用！！</p>
-<h2 id="ComfyUI-的基础使用，以文生图demo为例"><a href="#ComfyUI-的基础使用，以文生图demo为例" class="headerlink" title="ComfyUI 的基础使用，以文生图demo为例"></a>ComfyUI 的基础使用，以文生图demo为例</h2><h3 id="认识基本节点"><a href="#认识基本节点" class="headerlink" title="认识基本节点"></a>认识基本节点</h3><h3 id="Demo-搭建文生图工作流"><a href="#Demo-搭建文生图工作流" class="headerlink" title="Demo: 搭建文生图工作流"></a>Demo: 搭建文生图工作流</h3><h2 id="ComfyUI-学习资源参考"><a href="#ComfyUI-学习资源参考" class="headerlink" title="ComfyUI 学习资源参考"></a>ComfyUI 学习资源参考</h2><p><a target="_blank" rel="noopener" href="https://github.com/comfyanonymous/ComfyUI">ComfyUI</a>: ComfyUI的Github主页。<br><a target="_blank" rel="noopener" href="https://www.comflowy.com/zh-CN">Comfylowy</a>: 这是一个ComfyUI社区，介绍了ComfyUI的功能、安装使用以及一些基础的AI绘图的原理。<br><a target="_blank" rel="noopener" href="https://www.openart.ai/">OpenArt</a>: 当前最大的AIGC社区，有相当多的可用资源（各种风格模型、参考工作流等），但是需要魔法。<br><a target="_blank" rel="noopener" href="https://civitai.com/">Civitai C站</a>: C站上有非常多的模型资源可供下载，下载模型时记得留意作者的推荐参数。</p>
+<h3 id="插件推荐"><a href="#插件推荐" class="headerlink" title="插件推荐"></a>插件推荐</h3><p>ComfyUI 有许多强大的插件拓展，以下强推几个插件！非常好用！！</p>
+<ol>
+<li><p><strong>ComfyUI Manager</strong> 一个图形化管理工具，一站式集成了模型下载、插件安装、更新重启、设置等多种功能。可以说是使用ComfyUI必下的插件。</p>
+</li>
+<li><p><strong>SDXL prompt styler</strong> 提供SDXL prompt styler节点，可以直接在这个节点选择生成的图片风格，不用再在prompt里面写描述。</p>
+</li>
+<li><p><strong>upscale</strong> 用于放大、细化图片</p>
+</li>
+<li><p><strong>IP-Adapter</strong> 实现单图lora效果，给一张风格图，能够提取输入的图片风格，输出一张类似风格的图片。</p>
+</li>
+<li><p><strong>YoloWorld</strong>插件 输入图片或者视频，可以进行检测和分割，输出对应的蒙版</p>
+</li>
+</ol>
+<p>搜索时可以带上 ComfyUI 关键词，更容易搜索到。</p>
+<ol start="5">
+<li><strong>ZHO-ZHO-ZHO</strong>  一个 ComfyUI 大佬的 github 仓库，做了很多模型的 ComfyUI 迁移与插件化的工作，同时也会提供插件使用的 sample workflow 文件。</li>
+</ol>
+<h2 id="ComfyUI-的基础使用，以文生图demo为例"><a href="#ComfyUI-的基础使用，以文生图demo为例" class="headerlink" title="ComfyUI 的基础使用，以文生图demo为例"></a>ComfyUI 的基础使用，以文生图demo为例</h2><p>ComfyUI 的工作流是通过很多个工作节点连接起来的。将各个功能的节点，按照符合输入输出格式的方式连接起来，就可以搭建工作流。</p>
+<h3 id="认识基本节点"><a href="#认识基本节点" class="headerlink" title="认识基本节点"></a>认识基本节点</h3><p>我们首先要认识一些基本的节点，了解其输入输出和起到的作用，才能够知道如何将它们连起来。现在，你或许还无法理解那些专业的名词到底是什么，但是没关系，大致有个概念即可。</p>
+<h4 id="Load-Checkpoint"><a href="#Load-Checkpoint" class="headerlink" title="Load Checkpoint"></a>Load Checkpoint</h4><p>载入 diffusion、CLIP 和 VAE 模型，是<strong>工作流的起点</strong>。</p>
+<img src="/2024/04/17/ComfyUI%E5%85%A5%E9%97%A8/load-checkpoint.png" class="" title="load-checkpoint">
+
+<h4 id="CLIP-Text-Encode-Prompt"><a href="#CLIP-Text-Encode-Prompt" class="headerlink" title="CLIP Text Encode(Prompt)"></a>CLIP Text Encode(Prompt)</h4><p>用于<strong>输入 prompt</strong>，使用逗号分割。</p>
+<p>格式为 (keyword:weight)，例 (hight building: 1.2) 可以控制 prompt 的权重。</p>
+<img src="/2024/04/17/ComfyUI%E5%85%A5%E9%97%A8/clip-encode.png" class="" title="clip-encode">
+
+<h4 id="Empty-Latent-Image"><a href="#Empty-Latent-Image" class="headerlink" title="Empty Latent Image"></a>Empty Latent Image</h4><p>空的潜空间图像节点（其实就是一张随机噪声图，不是里面的数据是空的意思），可以<strong>设置像素和每批生成的图片数量</strong>。</p>
+<img src="/2024/04/17/ComfyUI%E5%85%A5%E9%97%A8/empty-latent-image.png" class="" title="empty-latent-image">
+
+<h4 id="KSampler"><a href="#KSampler" class="headerlink" title="KSampler"></a>KSampler</h4><p>采样算法控制器，其中的参数就是我们生成图片的过程中相当重要的采样算法、步数等参数。通常大家所说的“炼丹调参”，就是指调整这里的参数。以下是几个常用的参数介绍：</p>
+<p>seed 随机种子，控制初始噪声。</p>
+<p>steps 采样步数，通常控制在15-35，太大也未必有好的效果，反而会降低出图效率，太小则图片精度不够。</p>
+<p>sampler_name 采样算法。</p>
+<p>scheduler 去噪过程的调度算法。</p>
+<p>不了解这些算法该怎么选择也没有关系，不同的模型偏好的参数都不一样，没有明确、唯一的最优解。在生图过程中多多尝试、调整，参考模型作者给出的最优参数，都能够提高出图质量。</p>
+<img src="/2024/04/17/ComfyUI%E5%85%A5%E9%97%A8/ksampler.png" class="" title="ksampler">
+
+<h3 id="Demo-搭建文生图工作流"><a href="#Demo-搭建文生图工作流" class="headerlink" title="Demo: 搭建文生图工作流"></a>Demo: 搭建文生图工作流</h3><p>认识了几个基础的节点以后，我们要学习如何将他们连接起来。</p>
+<p>我们可以注意到，节点的左边或者右边，会有几个不同颜色的小圆圈，它们就是这个节点的输入、输入。左边是输入，右边是输出，不同的颜色对应了不同的数据类型。连线时，只有相同类型的数据，才能够被成功连上。</p>
+<h2 id="最佳实践"><a href="#最佳实践" class="headerlink" title="最佳实践"></a>最佳实践</h2><h2 id="ComfyUI-学习资源参考"><a href="#ComfyUI-学习资源参考" class="headerlink" title="ComfyUI 学习资源参考"></a>ComfyUI 学习资源参考</h2><p><a target="_blank" rel="noopener" href="https://github.com/comfyanonymous/ComfyUI">ComfyUI</a>: ComfyUI的Github主页。<br><a target="_blank" rel="noopener" href="https://www.comflowy.com/zh-CN">Comfylowy</a>: 这是一个ComfyUI社区，介绍了ComfyUI的功能、安装使用以及一些基础的AI绘图的原理。<br><a target="_blank" rel="noopener" href="https://www.openart.ai/">OpenArt</a>: 当前最大的AIGC社区，有相当多的可用资源（各种风格模型、参考工作流等），但是需要魔法。<br><a target="_blank" rel="noopener" href="https://civitai.com/">Civitai C站</a>: C站上有非常多的模型资源可供下载，下载模型时记得留意作者的推荐参数。</p>
 <p>另：B站和YouTube上也有很多ComfyUI的教程可供参考。</p>
 
     

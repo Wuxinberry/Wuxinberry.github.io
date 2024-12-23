@@ -328,37 +328,10 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Deployment</span></span><br><span class="line"><span class="comment">## Docs: https://hexo.io/docs/one-command-deployment</span></span><br><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repository: https://github.com/Wuxinberry/Wuxinberry.github.io.git <span class="comment"># 此处要替换成你自己刚才创建的仓库地址</span></span><br><span class="line">  branch: main</span><br></pre></td></tr></table></figure>
 
 <p>保存后，在命令行输入 <code>hexo d</code>，即可将内容部署到GitHub上。命令执行完成后，即可在浏览器中输入自己的仓库名（<username>.github.io）进行访问啦~</p>
-<h2 id="三、来创建你的第一篇博文吧"><a href="#三、来创建你的第一篇博文吧" class="headerlink" title="三、来创建你的第一篇博文吧"></a>三、来创建你的第一篇博文吧</h2><p>依旧是使用命令行工具。在刚才创建的博客目录下，我们打开命令行，输入</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new &lt;blog-name&gt; # 创建一篇新的博客</span><br></pre></td></tr></table></figure>
-
-<p>之后，你会在 source &#x2F; _post 文件夹中，看到新创建的 .md 文件。之后，你就可以开始编辑这个markdown文件了。如果你不知道什么是markdown？可以简单花一点时间学习一下。</p>
-<p>创建完成后，输入 <code> hexo g</code> 进行生成，如果遇到抛错，可以使用 <code>hexo clean</code>，修改以后再使用 <code>hexo g</code> 重新生成。最后，使用 <code>hexo d</code>即可完成部署，能够在网络上访问到最新的博客内容。</p>
-<p>之后，创建一篇博文的流程也都是如此：</p>
-<ol>
-<li><code>hexo new &lt;blog-name&gt;</code> 生成新的博客文件</li>
-<li><code>hexo clean</code> 清除本地文件。这是为了你之后的部署能够实时生效。亲测如果不适用这一步，GitHub的页面常常会不同步显示你的最新改动。</li>
-<li><code>hexo g</code> 生成网页文件</li>
-<li>（可选）<code>hexo s</code> 本地预览</li>
-<li><code>hexo d</code> 部署内容</li>
-</ol>
-<p><code>hexo new page &lt;page-name&gt;</code>可以创建一个新的页面，你也可以根据需要尝试一下~</p>
-<h2 id="四、DIY你的博客"><a href="#四、DIY你的博客" class="headerlink" title="四、DIY你的博客"></a>四、DIY你的博客</h2><h3 id="选择你喜欢的主题"><a href="#选择你喜欢的主题" class="headerlink" title="选择你喜欢的主题"></a>选择你喜欢的主题</h3><p>hexo 支持替换主题，在hexo的官网，你可以看到400+个主题。我本人使用的是yilia，也有不少人使用的是Next。安装一个主题可以帮助你省下不少事，因为它们通常会集成一些插件、工具，也会有更好看的样式。</p>
-<p>如果你有选定的主题，那么可以直接去对应主题的官网进行下载，下载后解压（如果需要的话）到themes目录下。之后，在_config.yml文件中，找到 theme 相关配置，将其修改为 </p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">theme: yilia-plus <span class="comment"># 或者 Next 等 改成对应的主题名</span></span><br></pre></td></tr></table></figure>
-
-<p>接下来，不同的主题作者通常会给出不同的指引文档，我建议你直接按照对应的文档进行操作。</p>
-<p>完成这些后，重复上述的 <code>hexo g</code> <code>hexo d</code>指令，即可看到替换主题以后的博客。例如，我现在使用的，就是yilia-plus主题：</p>
-<img src="/2024/12/21/%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%972/yilia-plus-theme.png" class="" title="yilia-plus-theme">
-
-
-
-<h3 id="修改标题、作者、头像"><a href="#修改标题、作者、头像" class="headerlink" title="修改标题、作者、头像"></a>修改标题、作者、头像</h3><p>最后，我们来做一些锦上添花的工作。如果你足够细心，或许在之前打开 _config.yml时，就已经注意到，其中有不少自定义项目。话不多说，直接上配置：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Site</span></span><br><span class="line">title: <span class="string">&quot;Berry&#x27;s Blog&quot;</span> <span class="comment"># 这里是你的blog名字 它会显示在浏览器网页的tab上</span></span><br><span class="line">subtitle: <span class="string">&#x27;三分钟有三分钟的进步&#x27;</span> <span class="comment"># 来一句自己的slogan</span></span><br><span class="line">description: <span class="string">&#x27;目前是游戏行业服务器端工程师，一个空闲时摄影、游戏、电影什么都爱捣鼓捣鼓的00后&#x27;</span> </span><br><span class="line">keywords: <span class="string">&#x27;后端/游戏/&#x27;</span></span><br><span class="line">author: Berry <span class="comment"># 你的名字</span></span><br><span class="line">language: en <span class="comment"># 博客语言</span></span><br><span class="line">timezone: <span class="string">&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## Set your site url here. For example, if you use GitHub Page, set url as &#x27;https://username.github.io/project&#x27;</span></span><br><span class="line">url: https://wuxinberry.github.io/ <span class="comment"># 替换成你自己的url</span></span><br><span class="line"></span><br><span class="line">post_asset_folder: true <span class="comment"># 设置为true以后 在new一个新的博客时 会同时在_post下创建一个文件夹 方便你存放对应的图片</span></span><br></pre></td></tr></table></figure>
-
-<p>修改以后，重复我们之前的操作，再次打开浏览器访问，生效以后的网站就已经完全是你的个人博客啦~</p>
-<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p>更多的自定义内容以及hexo的功能，建议直接翻阅文档👇</p>
-<p><a target="_blank" rel="noopener" href="https://hexo.io/docs/">hexo官方文档</a></p>
-
+<h2 id="三、来创建你的第一篇博文吧"><a href="#三、来创建你的第一篇博文吧" class="headerlink" title="三、来创建你的第一篇博文吧"></a>三、来创建你的第一篇博文吧</h2><p>依旧是使用命令行工具。在刚才创建的博客目录下，我们打开命令行，输入
+    
+    <a class="article-more-a" href="/2024/12/21/%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%972/#more">more >></a>
+    
     
 
     
@@ -456,60 +429,9 @@
 <h3 id="GitHub-Hexo"><a href="#GitHub-Hexo" class="headerlink" title="GitHub + Hexo"></a>GitHub + Hexo</h3><p>如果你只是想要一个定制化的博客、图文展示面板，不想为此付出额外的金钱，那么可以白嫖 GitHub（国内想要更方便的话，也可以使用Gitee）的服务器，使用 <strong>GitHub + Hexo</strong> 就能够搭建一个简洁的博客。其中 GitHub 提供了云服务，让你免于租服务器的开销与部署的繁琐，Hexo 则是一款简洁高效的博客搭建框架，只要稍加熟悉，几条指令就能帮助你完成从文本到 html 的生成工作。参考下方网站，这就是一个使用 GitHub + Hexo 搭建的个人博客。</p>
 <p><a href="https://wuxinberry.github.io/">GitHub + Hexo 搭建的博客</a></p>
 <img src="/2024/12/21/%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%971/github-blog.png" class="" title="github-blog">
-
-<h2 id="三、建站方式对比与推荐"><a href="#三、建站方式对比与推荐" class="headerlink" title="三、建站方式对比与推荐"></a>三、建站方式对比与推荐</h2><h3 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h3><table>
-<thead>
-<tr>
-<th></th>
-<th>开销</th>
-<th>便捷程度</th>
-<th>定制化程度</th>
-<th>适合场景</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>WordPress.com</td>
-<td>一站式托管费用 、域名费用。一般都是按年费记。费用会根据你需要的服务器性能、域名价值浮动。WP内还有付费主题和组件，如使用这些内容会产生一些额外费用。</td>
-<td>相对便捷，WP的客服会为你提供指导。</td>
-<td>高</td>
-<td>各种场景</td>
-</tr>
-<tr>
-<td>WordPress.org</td>
-<td>单纯使用WP没有额外的开销，因为你的服务器和域名需要自己另外去找云服务厂家购买，其实就是把钱花给了云服务商。WP内还有付费主题和组件，如使用这些内容会产生一些额外费用。</td>
-<td>需要自己提供服务器、域名，完成一系列的部署工作，比起来相对麻烦。</td>
-<td>高</td>
-<td>各种场景</td>
-</tr>
-<tr>
-<td>GitHub + Hexo</td>
-<td>无额外费用。</td>
-<td>便捷。不用提供服务器和域名，只需要有Git账号和环境，安装Hexo必须的Node.js等（相信我，这比起前两个来已经不算是麻烦了）。</td>
-<td>只适用于博客等静态网页，且无法选择自己喜欢的域名。一个GitHub账号只能创建一个网站。</td>
-<td>个人博客、设计集等的展示</td>
-</tr>
-</tbody></table>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><h4 id="费用"><a href="#费用" class="headerlink" title="费用"></a>费用</h4><p>GitHub + Hexo &lt; WordPress.org &lt; WordPress.com</p>
-<h4 id="便捷程度"><a href="#便捷程度" class="headerlink" title="便捷程度"></a>便捷程度</h4><p>GitHub + Hexo &lt; WordPress.com &lt; WordPress.org</p>
-<h4 id="定制化程度"><a href="#定制化程度" class="headerlink" title="定制化程度"></a>定制化程度</h4><p>GitHub + Hexo &lt; WordPress.org &#x3D; WordPress.com</p>
-<p>但是GitHub + Hexo的方式，不能使用自己挑选的域名，一个账号也只能创建一个网站，这两个弊端还是比较明显的。</p>
-<h2 id="在开始前还有一些注意事项"><a href="#在开始前还有一些注意事项" class="headerlink" title="在开始前还有一些注意事项"></a>在开始前还有一些注意事项</h2><h3 id="关于服务器"><a href="#关于服务器" class="headerlink" title="关于服务器"></a>关于服务器</h3><p>如果你对于什么是服务器没有概念，不必担心，那些复杂的概念不重要，它就是一台机器。你只需要把它当作一个用来存储、计算你的网站的东西即可。它和你的PC差不多，只不过对于个人网站而言，它通常是一个”云服务器“，不像你手边的笔记本电脑或者台式机那样操作便捷，你大概率需要通过一些指令或者宝塔面板来帮助你对这台机器进行操作。</p>
-<h4 id="为什么使用云服务器"><a href="#为什么使用云服务器" class="headerlink" title="为什么使用云服务器"></a>为什么使用云服务器</h4><p>或许你会问，我是不是可以使用自己的电脑作为服务器，用来部署和发布的我的网站呢？答案是可以的，你可以自己准备物理机，在上面部署。但是通常情况下，我还是推荐你使用云服务器，它有许多出众的优点：</p>
-<ol>
-<li>便于使用。注意，这个便于使用，指的是能让你几分钟内就完成配置，而无需自己安装服务器、维护物理机等</li>
-<li>全球化。租赁云服务器时，你可以选择地区，比如大陆或是港澳、海外，如果你要开展外贸，或是主要的访问对象都在海外，那么云服务器是你的首选。</li>
-<li>成本低。云服务器遵循现收现付的定价模式。相较于自己拥有一台物理机，并坚持维护它，保持机房的干燥和温度适中，云服务器只有支付给云服务商的租赁费用。你不需要自己购买机器，当你不想继续时，取消续费即可，这对于临时或不常用的需求来说非常划算。当然，如果你下定决心，要长期运行这个网站，那么可以计算一下，你所需求的配置的云服务，相较于自己购买物理机并维护，多少年才会成本持平。</li>
-</ol>
-<h4 id="如何挑选云服务器"><a href="#如何挑选云服务器" class="headerlink" title="如何挑选云服务器"></a>如何挑选云服务器</h4><p>只是想要搭建一个自己的网站，我们并不需要成为云服务器专家。但是你还是得知道，究竟什么配置、什么类型的服务器是我需要的。这就像挑选电脑一样，你不必成为硬件发烧友，但是如果希望少花点冤枉钱，你还是得了解一下那些参数的含义、配件的作用，或者至少至少，要能对照着找到适合自己的云服务器。下面是一个关于选择合适的云服务器的文章，如果读到这里，你已经失去耐心，那也没关系。直接找一家靠谱的云服务商，理清楚自己的需求，咨询他的售前客服即可😎</p>
-<h5 id="云服务商与配置选择"><a href="#云服务商与配置选择" class="headerlink" title="云服务商与配置选择"></a>云服务商与配置选择</h5><p><a target="_blank" rel="noopener" href="https://developer.aliyun.com/article/62876">如何选择适合我的云服务器</a></p>
-<p>简而言之，1核1GB 1M的入门型适用于个人网站初始阶段，如果是视频，下载等为主的网站，可能几百个人同时在线就需要占用10M以上的带宽。在操作系统的选择上，我推荐使用Linux的系统，但其实现在的厂商，大多都提供了各种操作系统的镜像。不过，Windows系统所需要占据的存储空间会更大，Linux系统会更精简，对PHP程序也更友好（使用WordPress 就会用到PHP）。</p>
-<p>国内靠谱的云服务商有阿里云、腾讯云。国外也有一些很大的云服务商，比如亚马逊、微软云等，但是国外的服务器通常更贵，售前售后服务不如国内的方便，可选择的地区也有限制。一般情况下，阿里云、腾讯云二选一即可。</p>
-<h5 id="地区选择"><a href="#地区选择" class="headerlink" title="地区选择"></a>地区选择</h5><p>租赁了云服务器以后，还需要选择地区，按照现行法规，大陆的服务器都是需要备案的，否则你的网站只能通过IP地址访问，无法使用域名解析。备案的流程冗长繁琐，但是如果后续你要接入支付宝、微信支付等接口（这里指的是接入接口，不是指放一张你的收款码），那么备案是必不可少的。而将地区选择在港澳或者海外，另外配置一些用于中国境内的安全加速服务，即CDN，即可实现海内外的高速访问。</p>
-<h3 id="关于域名"><a href="#关于域名" class="headerlink" title="关于域名"></a>关于域名</h3><p>域名好比网站的门牌号，虽然更换域名并不麻烦，但是考虑到品牌效应、商业影响等，还是建议一开始就挑选一个合适的域名。</p>
-<p>我们通常可以将域名分为 <strong>前缀</strong> 和 <strong>后缀</strong>，例如baidu.com，”baidu“ 就是前缀，”com”就是后缀。前缀是你需要构思的部分。后缀也非常重要，例如一些奇怪的后缀 “xyz”等，看起来就不太正经，也会影响访客对你的网站的印象。通常，没有特殊需求的话，”com“就是一个很通用的、广为人知的后缀名。</p>
-<p>在选定了前后缀以后，可以去域名注册商（阿里云、腾讯云等，或者其他的注册商）那儿去检查是否已被使用。推荐直接在你租赁云服务器的服务商那儿注册域名，方便后续的一系列管理操作。</p>
-<h3 id="最后的最后"><a href="#最后的最后" class="headerlink" title="最后的最后"></a>最后的最后</h3><p>能够读到这里你已经成功了一半。最后的最后，还需要提醒你，如果你是个零基础小白，不要害怕看见代码和一些指令相关的操作，大多数时候你只需要复制粘贴一些指令，然后等待它执行完毕即可。</p>
-
+    
+    <a class="article-more-a" href="/2024/12/21/%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%971/#more">more >></a>
+    
     
 
     
@@ -599,13 +521,16 @@
   <div class="article-entry" itemprop="articleBody">
     
     <p>这是一份ComfyUI 的入门笔记。将介绍从零开始如何使用ComfyUI，生成所需要的素材。本文注重实操，如果你对ComfyUI的原理感兴趣，可以移步我的另一篇博客《AI绘图，从算力到画面——以ComfyUI为例》（挖坑待填）。</p>
-<h2 id="ComfyUI-简介"><a href="#ComfyUI-简介" class="headerlink" title="ComfyUI 简介"></a>ComfyUI 简介</h2><p>ComfyUI是一款AIGC工具，主要功能是输入图文、视频等，产出图片或视频。<br>相较于原生的 Stable Diffusion、Midjourney 等AIGC工具，SD Web UI 和 ComfyUI 将模型与工具分离。简单理解就是更容易实现自定义配置，生成我们想要的风格的作品。SD Web UI 和 ComfyUI 都对SD的工作流进行了拆分，webUI仍然是传统网页页面的形式，虽然能够自由输入、调整模型、安装插件，但是如果想要将输出作为下一个环节的输入，就需要切换页面，ComfyUI 则以节点为单位，更加自由，能够以类似于拼乐高的形式搭建AI生图的工作流程。</p>
-<h2 id="ComfyUI-安装"><a href="#ComfyUI-安装" class="headerlink" title="ComfyUI 安装"></a>ComfyUI 安装</h2><p>参考 <a target="_blank" rel="noopener" href="https://github.com/comfyanonymous/ComfyUI">ComfyUI</a> 的GitHub主页，按照指定的方式进行安装即可。<br>虽然现在有很多的整合包、一键启动包，但是仍然推荐使用Git进行本地安装，更新会更加方便。</p>
+<h2 id="ComfyUI-简介"><a href="#ComfyUI-简介" class="headerlink" title="ComfyUI 简介"></a>ComfyUI 简介</h2><p>ComfyUI是一款AIGC工具，主要功能是输入图文、视频等，产出图片或视频。</p>
+<p>相较于原生的 Stable Diffusion、Midjourney 等 AIGC 工具，SD Web UI 和 ComfyUI 将模型与工具分离。简单理解就是<strong>更容易实现自定义配置</strong>，生成我们想要的风格的作品。</p>
+<p>SD Web UI 和 ComfyUI 都对SD的工作流进行了拆分，webUI仍然是传统网页页面的形式，虽然能够自由输入、调整模型、安装插件，但是如果想要将输出作为下一个环节的输入，就需要切换页面，ComfyUI 则以节点为单位，更加自由，能够以类似于拼乐高的形式搭建AI生图的工作流程。</p>
+<h2 id="ComfyUI-安装"><a href="#ComfyUI-安装" class="headerlink" title="ComfyUI 安装"></a>ComfyUI 安装</h2><p>参考 <a target="_blank" rel="noopener" href="https://github.com/comfyanonymous/ComfyUI">ComfyUI</a> 的GitHub主页，按照指定的方式进行安装即可。</p>
+<p>虽然现在有很多的整合包、一键启动包，但是仍然推荐使用Git进行本地安装，更新会更加方便。</p>
 <h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><h4 id="打包版本安装"><a href="#打包版本安装" class="headerlink" title="打包版本安装"></a>打包版本安装</h4><ol>
 <li>ComfyUI 官方提供了打包版本，进入上述官网，找到 “Direct link to download”，点击并下载。</li>
 <li>下载完成后选择解压，可以得到 “ComfyUI_windows_portable” 文件夹。</li>
 <li>进入到 “ComfyUI_windows_portable” 文件夹，根据自己的本机（或服务器配置），选择对应GPU或者CPU的运行方式，即双击运行run_nvidia_gpu.bat或run_cpu.bat。</li>
-<li>注意，到这一步为止，只是成功运行了 ComfyUI，如果想要实际出图，还需要下载 Stable Diffusion 的模型。请将模型下载到 “ComfyUI_windows_portable\ComfyUI\models\checkpoints” 路径下。<br>推荐模型: v1-5-pruned-emaonly.ckpt, realisticVisionV60B1_v51VAE.safetensors，可以到文末的C站下载。每次下载新的模型到路径，都要刷新或重启ComfyUI，才能够读取到，不然可能会检测不到对应的模型。</li>
+<li>注意，到这一步为止，只是成功运行了 ComfyUI，如果想要实际出图，还需要下载 Stable Diffusion 的模型。请将模型下载到 “ComfyUI_windows_portable\ComfyUI\models\checkpoints” 路径下。<br>推荐模型: v1-5-pruned-emaonly.ckpt, realisticVisionV60B1_v51VAE.safetensors，可以到文末推荐的C站下载。每次下载新的模型到路径，都要刷新或重启ComfyUI，才能够读取到，不然可能会检测不到对应的模型。</li>
 </ol>
 <h4 id="Git安装"><a href="#Git安装" class="headerlink" title="Git安装"></a>Git安装</h4><ol>
 <li>安装并配置Git。这个网上教程很多，此处不加赘述。</li>
@@ -614,50 +539,10 @@
 <li>等待Git将ComfyUI的项目拉取完成后，输入以下命令（如果使用的是虚拟环境，请提前激活。虚拟环境激活时，命令行前缀会出现虚拟环境的名字，如 (venv_py_comfyUI) C:User&#x2F;…）<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install -r requirements.txt</span><br></pre></td></tr></table></figure></li>
 <li>将SD模型放置在 models&#x2F;checkpoints 下，将VAE模型放置在 models&#x2F;vae，lora、controlNet 等模型也是一样。</li>
 <li>完成后，切换路径在项目根目录下，输入以下命令启动ComfyUI<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python main.py</span><br></pre></td></tr></table></figure></li>
-<li>浏览器访问 127.0.0.1:8188，即可使用。</li>
-</ol>
-<h3 id="插件推荐"><a href="#插件推荐" class="headerlink" title="插件推荐"></a>插件推荐</h3><p>ComfyUI 有许多强大的插件拓展，以下强推几个插件！非常好用！！</p>
-<ol>
-<li><p><strong>ComfyUI Manager</strong> 一个图形化管理工具，一站式集成了模型下载、插件安装、更新重启、设置等多种功能。可以说是使用ComfyUI必下的插件。</p>
-</li>
-<li><p><strong>SDXL prompt styler</strong> 提供SDXL prompt styler节点，可以直接在这个节点选择生成的图片风格，不用再在prompt里面写描述。</p>
-</li>
-<li><p><strong>upscale</strong> 用于放大、细化图片</p>
-</li>
-<li><p><strong>IP-Adapter</strong> 实现单图lora效果，给一张风格图，能够提取输入的图片风格，输出一张类似风格的图片。</p>
-</li>
-<li><p><strong>YoloWorld</strong>插件 输入图片或者视频，可以进行检测和分割，输出对应的蒙版</p>
-</li>
-</ol>
-<p>搜索时可以带上 ComfyUI 关键词，更容易搜索到。</p>
-<ol start="5">
-<li><strong>ZHO-ZHO-ZHO</strong>  一个 ComfyUI 大佬的 github 仓库，做了很多模型的 ComfyUI 迁移与插件化的工作，同时也会提供插件使用的 sample workflow 文件。</li>
-</ol>
-<h2 id="ComfyUI-的基础使用，以文生图demo为例"><a href="#ComfyUI-的基础使用，以文生图demo为例" class="headerlink" title="ComfyUI 的基础使用，以文生图demo为例"></a>ComfyUI 的基础使用，以文生图demo为例</h2><p>ComfyUI 的工作流是通过很多个工作节点连接起来的。将各个功能的节点，按照符合输入输出格式的方式连接起来，就可以搭建工作流。</p>
-<h3 id="认识基本节点"><a href="#认识基本节点" class="headerlink" title="认识基本节点"></a>认识基本节点</h3><p>我们首先要认识一些基本的节点，了解其输入输出和起到的作用，才能够知道如何将它们连起来。现在，你或许还无法理解那些专业的名词到底是什么，但是没关系，大致有个概念即可。</p>
-<h4 id="Load-Checkpoint"><a href="#Load-Checkpoint" class="headerlink" title="Load Checkpoint"></a>Load Checkpoint</h4><p>载入 diffusion、CLIP 和 VAE 模型，是<strong>工作流的起点</strong>。</p>
-<img src="/2024/04/17/ComfyUI%E5%85%A5%E9%97%A8/load-checkpoint.png" class="" title="load-checkpoint">
-
-<h4 id="CLIP-Text-Encode-Prompt"><a href="#CLIP-Text-Encode-Prompt" class="headerlink" title="CLIP Text Encode(Prompt)"></a>CLIP Text Encode(Prompt)</h4><p>用于<strong>输入 prompt</strong>，使用逗号分割。</p>
-<p>格式为 (keyword:weight)，例 (hight building: 1.2) 可以控制 prompt 的权重。</p>
-<img src="/2024/04/17/ComfyUI%E5%85%A5%E9%97%A8/clip-encode.png" class="" title="clip-encode">
-
-<h4 id="Empty-Latent-Image"><a href="#Empty-Latent-Image" class="headerlink" title="Empty Latent Image"></a>Empty Latent Image</h4><p>空的潜空间图像节点（其实就是一张随机噪声图，不是里面的数据是空的意思），可以<strong>设置像素和每批生成的图片数量</strong>。</p>
-<img src="/2024/04/17/ComfyUI%E5%85%A5%E9%97%A8/empty-latent-image.png" class="" title="empty-latent-image">
-
-<h4 id="KSampler"><a href="#KSampler" class="headerlink" title="KSampler"></a>KSampler</h4><p>采样算法控制器，其中的参数就是我们生成图片的过程中相当重要的采样算法、步数等参数。通常大家所说的“炼丹调参”，就是指调整这里的参数。以下是几个常用的参数介绍：</p>
-<p>seed 随机种子，控制初始噪声。</p>
-<p>steps 采样步数，通常控制在15-35，太大也未必有好的效果，反而会降低出图效率，太小则图片精度不够。</p>
-<p>sampler_name 采样算法。</p>
-<p>scheduler 去噪过程的调度算法。</p>
-<p>不了解这些算法该怎么选择也没有关系，不同的模型偏好的参数都不一样，没有明确、唯一的最优解。在生图过程中多多尝试、调整，参考模型作者给出的最优参数，都能够提高出图质量。</p>
-<img src="/2024/04/17/ComfyUI%E5%85%A5%E9%97%A8/ksampler.png" class="" title="ksampler">
-
-<h3 id="Demo-搭建文生图工作流"><a href="#Demo-搭建文生图工作流" class="headerlink" title="Demo: 搭建文生图工作流"></a>Demo: 搭建文生图工作流</h3><p>认识了几个基础的节点以后，我们要学习如何将他们连接起来。</p>
-<p>我们可以注意到，节点的左边或者右边，会有几个不同颜色的小圆圈，它们就是这个节点的输入、输入。左边是输入，右边是输出，不同的颜色对应了不同的数据类型。连线时，只有相同类型的数据，才能够被成功连上。</p>
-<h2 id="最佳实践"><a href="#最佳实践" class="headerlink" title="最佳实践"></a>最佳实践</h2><h2 id="ComfyUI-学习资源参考"><a href="#ComfyUI-学习资源参考" class="headerlink" title="ComfyUI 学习资源参考"></a>ComfyUI 学习资源参考</h2><p><a target="_blank" rel="noopener" href="https://github.com/comfyanonymous/ComfyUI">ComfyUI</a>: ComfyUI的Github主页。<br><a target="_blank" rel="noopener" href="https://www.comflowy.com/zh-CN">Comfylowy</a>: 这是一个ComfyUI社区，介绍了ComfyUI的功能、安装使用以及一些基础的AI绘图的原理。<br><a target="_blank" rel="noopener" href="https://www.openart.ai/">OpenArt</a>: 当前最大的AIGC社区，有相当多的可用资源（各种风格模型、参考工作流等），但是需要魔法。<br><a target="_blank" rel="noopener" href="https://civitai.com/">Civitai C站</a>: C站上有非常多的模型资源可供下载，下载模型时记得留意作者的推荐参数。</p>
-<p>另：B站和YouTube上也有很多ComfyUI的教程可供参考。</p>
-
+<li>浏览器访问 <strong>127.0.0.1:8188</strong>，即可使用。
+    
+    <a class="article-more-a" href="/2024/04/17/ComfyUI%E5%85%A5%E9%97%A8/#more">more >></a>
+    
     
 
     

@@ -6,16 +6,16 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://wuxinberry.github.io">
-  <title>ComfyUI 入门笔记 | Berry&#39;s Blog</title>
+  <title>AI绘图，是如何从算力到画面的 | Berry&#39;s Blog</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="这是一份ComfyUI 的入门笔记。将介绍从零开始如何使用ComfyUI，生成所需要的素材。本文注重实操，如果你对ComfyUI的原理感兴趣，可以移步我的另一篇博客《AI绘图，从算力到画面——以ComfyUI为例》（挖坑待填）。 ComfyUI 简介ComfyUI是一款AIGC工具，主要功能是输入图文、视频等，产出图片或视频。 相较于原生的 Stable Diffusion、Midjourney">
+  <meta name="description" content="这是一份 ComfyUI 的零基础入门指南。文本将介绍如何从零开始使用 ComfyUI，生成所需要的素材。本文注重实操，如果你对AI绘图的原理感兴趣，可以移步我的另一篇博客《AI绘图，是如何从算力到画面的》。了解一下 AI 生图的基本原理，也有助于我们选取模型、编写 prompt，调整参数。 或许一开始你觉得生成的图片差强人意，但是随着你逐渐进阶，只需要传几张风格图，输入一些指令，ComfyUI">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ComfyUI 入门笔记">
+<meta property="og:title" content="AI绘图，是如何从算力到画面的">
 <meta property="og:url" content="https://wuxinberry.github.io/2024/04/17/ComfyUI%E5%85%A5%E9%97%A8/index.html">
 <meta property="og:site_name" content="Berry&#39;s Blog">
-<meta property="og:description" content="这是一份ComfyUI 的入门笔记。将介绍从零开始如何使用ComfyUI，生成所需要的素材。本文注重实操，如果你对ComfyUI的原理感兴趣，可以移步我的另一篇博客《AI绘图，从算力到画面——以ComfyUI为例》（挖坑待填）。 ComfyUI 简介ComfyUI是一款AIGC工具，主要功能是输入图文、视频等，产出图片或视频。 相较于原生的 Stable Diffusion、Midjourney">
+<meta property="og:description" content="这是一份 ComfyUI 的零基础入门指南。文本将介绍如何从零开始使用 ComfyUI，生成所需要的素材。本文注重实操，如果你对AI绘图的原理感兴趣，可以移步我的另一篇博客《AI绘图，是如何从算力到画面的》。了解一下 AI 生图的基本原理，也有助于我们选取模型、编写 prompt，调整参数。 或许一开始你觉得生成的图片差强人意，但是随着你逐渐进阶，只需要传几张风格图，输入一些指令，ComfyUI">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://wuxinberry.github.io/2024/04/17/ComfyUI%E5%85%A5%E9%97%A8/load-checkpoint.png">
 <meta property="og:image" content="https://wuxinberry.github.io/2024/04/17/ComfyUI%E5%85%A5%E9%97%A8/clip-encode.png">
@@ -28,7 +28,7 @@
 <meta property="og:image" content="https://wuxinberry.github.io/2024/04/17/ComfyUI%E5%85%A5%E9%97%A8/ComfyUI-KSamplerTable.png">
 <meta property="og:image" content="https://wuxinberry.github.io/2024/04/17/ComfyUI%E5%85%A5%E9%97%A8/ComfyUI-SDXL-prompt-styler.png">
 <meta property="article:published_time" content="2024-04-17T10:01:15.000Z">
-<meta property="article:modified_time" content="2024-12-23T13:30:09.311Z">
+<meta property="article:modified_time" content="2024-12-24T11:25:11.455Z">
 <meta property="article:author" content="Berry">
 <meta property="article:tag" content="AIGC">
 <meta property="article:tag" content="ComfyUI">
@@ -223,7 +223,7 @@
   
   
     <h1 class="article-title" itemprop="name">
-      ComfyUI 入门笔记
+      AI绘图，是如何从算力到画面的
     </h1>
   
 
@@ -249,7 +249,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">2.8k字</span>
+      <span class="post-count">3.1k字</span>
     </span>
   </span>
 
@@ -258,7 +258,7 @@
     <span class="post-meta-item-icon">
       <i class="icon-book icon"></i>
       <span class="post-meta-item-text"> 阅读时长≈</span>
-      <span class="post-count">10分</span>
+      <span class="post-count">11分</span>
     </span>
   </span>
 </div>
@@ -269,12 +269,14 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <p>这是一份ComfyUI 的入门笔记。将介绍从零开始如何使用ComfyUI，生成所需要的素材。本文注重实操，如果你对ComfyUI的原理感兴趣，可以移步我的另一篇博客《AI绘图，从算力到画面——以ComfyUI为例》（挖坑待填）。</p>
-<h2 id="ComfyUI-简介"><a href="#ComfyUI-简介" class="headerlink" title="ComfyUI 简介"></a>ComfyUI 简介</h2><p>ComfyUI是一款AIGC工具，主要功能是输入图文、视频等，产出图片或视频。</p>
-<p>相较于原生的 Stable Diffusion、Midjourney 等 AIGC 工具，SD Web UI 和 ComfyUI 将模型与工具分离。简单理解就是<strong>更容易实现自定义配置</strong>，生成我们想要的风格的作品。</p>
-<p>SD Web UI 和 ComfyUI 都对SD的工作流进行了拆分，webUI仍然是传统网页页面的形式，虽然能够自由输入、调整模型、安装插件，但是如果想要将输出作为下一个环节的输入，就需要切换页面，ComfyUI 则以节点为单位，更加自由，能够以类似于拼乐高的形式搭建AI生图的工作流程。</p>
-<h2 id="ComfyUI-安装"><a href="#ComfyUI-安装" class="headerlink" title="ComfyUI 安装"></a>ComfyUI 安装</h2><p>参考 <a target="_blank" rel="noopener" href="https://github.com/comfyanonymous/ComfyUI">ComfyUI</a> 的GitHub主页，按照指定的方式进行安装即可。</p>
-<p>虽然现在有很多的整合包、一键启动包，但是仍然推荐使用Git进行本地安装，更新会更加方便。</p>
+    <p>这是一份 ComfyUI 的零基础入门指南。文本将介绍如何从零开始使用 ComfyUI，生成所需要的素材。本文注重实操，如果你对AI绘图的原理感兴趣，可以移步我的另一篇博客《AI绘图，是如何从算力到画面的》。了解一下 AI 生图的基本原理，也有助于我们选取模型、编写 prompt，调整参数。</p>
+<p>或许一开始你觉得生成的图片差强人意，但是随着你逐渐进阶，只需要传几张风格图，输入一些指令，ComfyUI 分分钟就可以帮助你生成足以商用的广告图、海报、Logo 甚至是视频，为你节省大量的时间和资金成本。还在等什么，来，试试看！</p>
+<h2 id="ComfyUI-简介"><a href="#ComfyUI-简介" class="headerlink" title="ComfyUI 简介"></a>ComfyUI 简介</h2><p>如果你还不知道什么是ComfyUI，那么，最简单的介绍就是 ComfyUI 是一款 AIGC 工具，主要功能是输入图文、视频等，产出图片或视频。</p>
+<p>市面上有许多生成式的AI工具。为什么要选择 ComfyUI 呢？相较于原生的 Stable Diffusion、Midjourney 等 AIGC 工具，SD Web UI 和 ComfyUI 将模型与工具分离。简单理解就是<strong>更容易实现自定义配置，有着更高的上限</strong>，更生成我们想要的风格的作品。</p>
+<p>SD Web UI 和 ComfyUI 都对SD的工作流进行了拆分，WebUI 仍然是传统网页页面的形式，虽然能够自由输入、调整模型、安装插件，但是如果想要将输出作为下一个环节的输入，就需要切换页面，ComfyUI 则以节点为单位，<strong>更加自由</strong>，能够以类似于拼乐高的形式搭建AI生图的工作流程。</p>
+<h2 id="ComfyUI-安装"><a href="#ComfyUI-安装" class="headerlink" title="ComfyUI 安装"></a>ComfyUI 安装</h2><p>ComfyUI 的安装很简单，参考 <a target="_blank" rel="noopener" href="https://github.com/comfyanonymous/ComfyUI">ComfyUI</a> 的GitHub主页，按照指定的方式进行安装即可。</p>
+<p>虽然现在有很多的整合包、一键启动包，但是我仍然推荐使用 Git 进行本地安装，因为这样更新会更加方便。</p>
+<p>在安装以前，有一点需要提醒的是，AI生图对算力的需求比较高，通常我们会用到配备有独立显卡的计算机。当然，ComfyUI 也支持使用 CPU 来计算，但是那样一来，出图的效率就会降低到 30%-40%。</p>
 <h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><h4 id="打包版本安装"><a href="#打包版本安装" class="headerlink" title="打包版本安装"></a>打包版本安装</h4><ol>
 <li>ComfyUI 官方提供了打包版本，进入上述官网，找到 “Direct link to download”，点击并下载。</li>
 <li>下载完成后选择解压，可以得到 “ComfyUI_windows_portable” 文件夹。</li>
@@ -287,10 +289,10 @@
 <li>在想要安装 ComfyUI 的文件路径下，右键打开 Git Bash（Terminal, CMD都行）, 输入以下命令<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/comfyanonymous/ComfyUI.git</span><br></pre></td></tr></table></figure></li>
 <li>等待Git将ComfyUI的项目拉取完成后，输入以下命令（如果使用的是虚拟环境，请提前激活。虚拟环境激活时，命令行前缀会出现虚拟环境的名字，如 (venv_py_comfyUI) C:User&#x2F;…）<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install -r requirements.txt</span><br></pre></td></tr></table></figure></li>
 <li>将SD模型放置在 models&#x2F;checkpoints 下，将VAE模型放置在 models&#x2F;vae，lora、controlNet 等模型也是一样。</li>
-<li>完成后，切换路径在项目根目录下，输入以下命令启动ComfyUI<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python main.py</span><br></pre></td></tr></table></figure></li>
+<li>完成后，切换路径在项目根目录下，输入以下命令启动ComfyUI<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">python main.py </span><br><span class="line"><span class="comment"># 如果没有GPU 就使用</span></span><br><span class="line">pythom main.py --cpu</span><br></pre></td></tr></table></figure></li>
 <li>浏览器访问 <strong>127.0.0.1:8188</strong>，即可使用。<span id="more"></span></li>
 </ol>
-<h3 id="插件推荐"><a href="#插件推荐" class="headerlink" title="插件推荐"></a>插件推荐</h3><p>ComfyUI 有许多强大的插件拓展，以下强推几个插件！非常好用！！</p>
+<h3 id="插件推荐"><a href="#插件推荐" class="headerlink" title="插件推荐"></a>插件推荐</h3><p>ComfyUI 有许多强大的插件拓展，极大地提升了它的功能，以下强推几个插件！非常好用！！</p>
 <ol>
 <li><p><strong>ComfyUI Manager</strong> 一个图形化管理工具，一站式集成了模型下载、插件安装、更新重启、设置等多种功能。可以说是使用ComfyUI必下的插件。</p>
 </li>
@@ -303,13 +305,13 @@
 <li><p><strong>YoloWorld</strong>插件 输入图片或者视频，可以进行检测和分割，输出对应的蒙版</p>
 </li>
 </ol>
-<p>搜索时可以带上 ComfyUI 关键词，更容易搜索到。</p>
+<p>在搜索时可以带上 ComfyUI 关键词，更容易搜索到。</p>
 <ol start="5">
-<li><strong>ZHO-ZHO-ZHO</strong>  一个 ComfyUI 大佬的 github 仓库，做了很多模型的 ComfyUI 迁移与插件化的工作，同时也会提供插件使用的 sample workflow 文件。</li>
+<li><strong>ZHO-ZHO-ZHO</strong>  一个 ComfyUI 大佬的 GitHub 仓库，做了很多模型的 ComfyUI 迁移与插件化的工作，同时也会提供插件使用的 sample workflow 文件。</li>
 </ol>
 <h2 id="ComfyUI-的基础使用，以文生图demo为例"><a href="#ComfyUI-的基础使用，以文生图demo为例" class="headerlink" title="ComfyUI 的基础使用，以文生图demo为例"></a>ComfyUI 的基础使用，以文生图demo为例</h2><p>ComfyUI 的工作流是通过很多个工作节点连接起来的。将各个功能的节点，按照符合输入输出格式的方式连接起来，就可以搭建工作流。</p>
 <h3 id="认识基本节点"><a href="#认识基本节点" class="headerlink" title="认识基本节点"></a>认识基本节点</h3><p>我们首先要认识一些基本的节点，了解其输入输出和起到的作用，才能够知道如何将它们连起来。现在，你或许还无法理解那些专业的名词到底是什么，但是没关系，大致有个概念即可。</p>
-<h4 id="Load-Checkpoint"><a href="#Load-Checkpoint" class="headerlink" title="Load Checkpoint"></a>Load Checkpoint</h4><p>载入 diffusion、CLIP 和 VAE 模型，是<strong>工作流的起点</strong>。</p>
+<h4 id="Load-Checkpoint"><a href="#Load-Checkpoint" class="headerlink" title="Load Checkpoint"></a>Load Checkpoint</h4><p>载入 Diffusion、CLIP 和 VAE 模型，是<strong>工作流的起点</strong>。</p>
 <img src="/2024/04/17/ComfyUI%E5%85%A5%E9%97%A8/load-checkpoint.png" class="" title="load-checkpoint">
 
 <h4 id="CLIP-Text-Encode-Prompt"><a href="#CLIP-Text-Encode-Prompt" class="headerlink" title="CLIP Text Encode(Prompt)"></a>CLIP Text Encode(Prompt)</h4><p>用于<strong>输入 prompt</strong>，使用逗号分割。</p>
@@ -438,7 +440,7 @@
         </li>
         <li>
           <strong>本文链接：</strong>
-          <a href="https://wuxinberry.github.io/2024/04/17/ComfyUI入门/" title="ComfyUI 入门笔记" target="_blank">https://wuxinberry.github.io/2024/04/17/ComfyUI入门/</a>
+          <a href="https://wuxinberry.github.io/2024/04/17/ComfyUI入门/" title="AI绘图，是如何从算力到画面的" target="_blank">https://wuxinberry.github.io/2024/04/17/ComfyUI入门/</a>
         </li>
         
         <li>
@@ -599,7 +601,7 @@
     <script src="/lib/gitment.js"></script>
   
   <script>
-    <!-- id: "ComfyUI 入门笔记" -->
+    <!-- id: "AI绘图，是如何从算力到画面的" -->
     var gitment = new Gitment({
       id: "20240417180115",
       owner: 'Wuxinberry',
@@ -815,8 +817,7 @@
     	<section class="tools-section tools-section-me" q-show="aboutme">
         
           
-  	  		<div class="aboutme-wrap" id="aboutme">一个游戏行业的开发小白
- 什么都学了一些，什么都会一点。欢迎大家指点交流~
+  	  		<div class="aboutme-wrap" id="aboutme">一个游戏行业的开发小白。什么都学了一些，什么都会一点。AIGC/ComfyUI工作流搭建/AI聊天机器人/Lua/C++……欢迎咨询交流。欢迎大家指点交流~
 邮箱: wuxinbei0409@gmail.com</div>
   	  	
     	</section>

@@ -208,6 +208,149 @@
             
 
   
+    <article id="post-ComfyUI基础原理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2024/12/23/ComfyUI%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86/" target="_blank">AI绘图，是如何从算力到画面的</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2024/12/23/ComfyUI%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86/" class="archive-article-date">
+        <time datetime="2024-12-23T13:34:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-12-23</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <p>现如今，AI绘图软件风靡互联网。使用AI绘图，你只要输入几个词语，动动手指就可以生成一张图片。你是否好奇这背后的逻辑？SD是什么？潜空间又是什么？AI 究竟是如何将算力转化为那些鲜活的图片的？如果你对此感到好奇，那么请往下阅读。本文将以最简明易懂的方式，阐释 AI 的基础原理。了解其中的流程和原理，能够帮助你更好地使用AI绘图工具，更高效地调整AI绘图的参数，更有目的性地选择对应的模型。</p>
+<h2 id="AI绘图的过程"><a href="#AI绘图的过程" class="headerlink" title="AI绘图的过程"></a>AI绘图的过程</h2><p>首先，让我们来了解一下 AI绘图的基本流程，它到底是怎么运作的？不同的 AI 绘图软件，提供的界面、交互方式或许有很大差别，但是本质都是一样的。让我们从最简单的开始，以 ComfyUI 最基础的一个文生图流程为例。</p>
+<img src="/2024/12/23/ComfyUI%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86/Text2Img.png" class="" title="Text2Img">
+
+<p>或许你会感到奇怪，Load Checkpoint 为什么要载入模型？为什么输入 Prompt 的节点，却被称为 CLIP Text Encoder？为什么在 KSampler 之后，Save Image之前，还需要有一个 VAE Decoder？不要着急，我们先提炼这张图中显示的，AI绘图的基础流程。</p>
+<p>如上图所示，我们可以看到：</p>
+<ol>
+<li>首先，在Load Checkpoint 中，我们载入了模型。</li>
+<li>之后，我们要输入文本 prompt，也就是所谓的提示词，以文字的形式告诉 AI，我们想要的图片里面有什么元素，是什么风格。</li>
+<li>然后，这些文本会被输入到 <strong>CLIP 编码器</strong>中，也就是 CLIP Encoder。在这里，CLIP 编码器会从我们输入的自然语言中，提取形态（小狗的四肢分布）、视觉（斑点小狗）、语义（小狗是人类忠诚的伙伴）等多个方面的特征，将我们输入的文本转换成词特征向量。什么是<em>词特征向量</em>？在这里，你暂且把它当成一种 AI 能够读懂的数据格式就好，CLIP 编码器就是人类与AI的翻译官。</li>
+<li>在上一步得到的词特征向量，接下来，会和一张随机噪声图一起，被传入 VAE 编码器中进行编码。<strong>VAE 编码器</strong>会提取这些像素空间中的信息，压缩转化到潜空间中，大大减少空间的占用。所谓<em>潜空间</em>，就是 Latent Image，可以理解为压缩信息后更节省空间的一种数据存储方式。</li>
+<li>在这之后，<strong>Diffusion 模型</strong>会在潜空间中开始运算，不断地迭代。每一步，它都根据 prompt 来预测噪声，然后去除这个噪声，直到达到我们指定的迭代步数。</li>
+<li>去除噪声以后获得的仍然是潜空间中的一堆压缩数据。这些数据还需要再经过 VAE 解码器，即 VAE Decoder 的解码，才能够转化到像素空间中，得到右侧生成的图像。</li>
+</ol>
+<p>上述提到的流程或许还是有一些晦涩难懂。我们不妨来个比喻。其实整个AI绘图的过程就好比是雕刻。一张随机的噪声图就是一块石料，每一次要刻哪里、怎么刻，就是 Diffusion 模型通过我们输入的 prompt 来计算得到的。而 CLIP 编码器只是个翻译官，帮助 Diffusion 模型理解我们下达的文本指令。 VAE 编码器则是提取、压缩数据信息，提供了一个更舒适、高效的工作环境。</p>
+<p>可以看到AI绘图中使用到了三个基础模型，分别是VAE, diffusion扩散模型和CLIP模型。这三个模型在 AI 绘图的过程中至关重要，让我们在后文更进一步地认识它们。</p>
+<h2 id="三个基础模型：VAE-CLIP-DIFFUSION"><a href="#三个基础模型：VAE-CLIP-DIFFUSION" class="headerlink" title="三个基础模型：VAE &#x2F; CLIP &#x2F; DIFFUSION"></a>三个基础模型：VAE &#x2F; CLIP &#x2F; DIFFUSION</h2><h3 id="VAE-Variation-Auto-Encoder-变分自编码器"><a href="#VAE-Variation-Auto-Encoder-变分自编码器" class="headerlink" title="VAE: Variation Auto-Encoder 变分自编码器"></a>VAE: Variation Auto-Encoder 变分自编码器</h3><p>要了解 VAE，我们首先要知道什么是 Auto Encoder。</p>
+<h4 id="Auto-encoder-自编码器"><a href="#Auto-encoder-自编码器" class="headerlink" title="Auto-encoder 自编码器"></a>Auto-encoder 自编码器</h4><p>Auto Encoder 实际上是一个对称的网络结构，它包含了 encoder 和 decoder 两个部分。</p>
+<ul>
+<li>Encoder：将数据量为n维的数据压缩成更小的k维特征（潜空间），并尽可能包含原始数据的所有信息。</li>
+<li>Decoder：将k维特征转换回原始数据。</li>
+</ul>
+<p>不难理解，经过提取和重建，输出的数据会和之前的输入有所不同。因此，自编码器的训练目标，就是让原始输入数据和重建输出的数据之间的差尽可能小。如下图所示：</p>
+<img src="/2024/12/23/ComfyUI%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86/auto-encoder.png" class="" title="auto-encoder">
+
+<p>这种训练好的自编码器，常常被用于特征提取，例如图像分类应用，输入一张图片，判断是不是小狗。它的优势很明显，能够节省存储空间，降低应用对硬件的要求，提升效率，更有效地表示图像特征，对图像进行更精细的控制和编辑等。但是缺点也不可忽视，自编码器随机生成新图像的能力很差，而且在输入输出前后，数据会有一定的丢失。</p>
+<h4 id="Variation-Auto-encoder-变分自编码器"><a href="#Variation-Auto-encoder-变分自编码器" class="headerlink" title="Variation Auto-encoder 变分自编码器"></a>Variation Auto-encoder 变分自编码器</h4><p>VAE 就是在上述的自编码器上，改进得到的产物。它满足 k 维特征中的每个值都符合高斯分布的概率值，只要改变概率，就可以平滑地改变图片信息。例如下图，就是将性别特征这个维度从0到1调整，图像中人物的性别也能够平滑地变化。</p>
+<img src="/2024/12/23/ComfyUI%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86/vae-img.png" class="" title="vae-img">
+
+<p>当然，VAE 仍然通过原始数据和重建后数据的差来评估结果的好坏。只是它对于图像特征地把控，可以更细节，也更容易生成随机的图像。</p>
+<h3 id="Diffusion-Model-扩散模型"><a href="#Diffusion-Model-扩散模型" class="headerlink" title="Diffusion Model 扩散模型"></a>Diffusion Model 扩散模型</h3><p>Diffusion Model ，扩散模型，也是现在的AI绘图普遍使用的模型。它具体的数学理论很复杂，在这里我们不再展开。但是总体而言，它的运行思路是比较简洁的。Diffusion 模型的训练，其实就是从高斯噪声中还原图片，学习马尔科夫链的概率分布，使还原出来的图片符合训练集的分布。这些学术名词究竟是什么意思？别着急，往下看。</p>
+<p>如下图所示，从右到左，可以看到，不断地在上一个状态的基础上叠加符合正态分布的噪声，这就是扩散的过程。因为每次添加的噪声，都只和上一次的状态有关，所以，这是一个马尔科夫链模型。其中的转换矩阵可以用神经网络预测。而从左到右，图像越来越清晰，越来越接近我们的预期，这就是 Diffusion 模型做的事。它每一次，都去除掉预测的噪声，将图片一点点还原出来。</p>
+<img src="/2024/12/23/ComfyUI%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86/diffusion-img.png" class="" title="diffusion-img">
+
+<h3 id="CLIP-模型-Contractive-Language-Image-Pretraining"><a href="#CLIP-模型-Contractive-Language-Image-Pretraining" class="headerlink" title="CLIP 模型 Contractive Language-Image Pretraining"></a>CLIP 模型 Contractive Language-Image Pretraining</h3><p>如开头我们所提到的，CLIP 模型就好像是一位翻译官，将我们的自然语言，转化成 AI 能够理解的词特征向量，它所做的工作，其实就是对比语言和图像的预训练。如图所示，输入的文本会通过 Text Encoder 进行编码，图片则会通过 Image Encoder 进行编码，编码后进行向量运算，会得到一个相似性矩阵，也就是右侧的这个矩阵。因此，CLIP 模型常用于计算图片和文本之间的关联度（CLIP-score），这个关联度越高，说明图文越相符。</p>
+<img src="/2024/12/23/ComfyUI%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86/clip-img.png" class="" title="clip-img">
+
+<p>在 CLIP 模型的训练中，会使用巨量的文本和图片数据对，来计算图片和文本编码后的特征的相似性矩阵。优化的方式，就是最大化对角线元素，同时最小化非对角线元素，来提升两个编码器的准确率，让最后的文本和图片编码器的语义可以强对应起来。例如下图，是 OpenAI 使用了 4 亿组图片文本对，最后训练出来的 CLIP 模型效果。可以看到，例如一张猫猫图片和 “a facial photo of a tabby cat” 的对角线元素是最大的，说明它们的关联度最高。</p>
+<img src="/2024/12/23/ComfyUI%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86/openai-clip.png" class="" title="openai-clip">
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>至此，我们大概清楚了，一个 AI 绘图的基本流程可以其实可以梳理为：</p>
+<ol>
+<li>载入模型（VAE CLIP Diffusion）。</li>
+<li>输入提示，它可能是图片或者文字。</li>
+<li>CLIP 对输入的提示内容进行转化，输出词特征向量。</li>
+<li>将词特征向量和随机噪声图输入到 VAE 中，进一步地提取数据特征并压缩。</li>
+<li>Diffusion 开始迭代，预测噪声，并去除，一步步雕刻出预期的画面。</li>
+<li>最后，VAE 将潜空间中的输出解码，转化成我们看得懂的二维图像。</li>
+</ol>
+<p>现在，你应该能够理解，为什么在 ComfyUI 中的第一个节点，Load Checkpoint 总是要载入这三个模型了吧。因为它们是 AI 绘图的基础，并且三者的关系相当紧密。或许你能训练出一个很强的 CLIP 模型，但是它未必能和其他两个模型配合、发挥出更好的作用。因此，这三个模型在下载和载入时，通常都是捆绑的。为什么输入 Prompt 的节点，却被称为 CLIP Text Encoder？因为是由CLIP来完成输入的翻译和提取。为什么在 KSampler 之后，Save Image之前，还需要有一个 VAE Decoder？因为计算得到的图片它是一堆压缩数据，还需要解码，才能转化成我们想要的二维图像。</p>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">AIGC</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">ComfyUI</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Stable Diffusion</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2024/12/23/ComfyUI%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-建站指南2" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -499,7 +642,7 @@
   
     <h1 itemprop="name">
 	
-	  <a class="article-title" href="/2024/04/17/ComfyUI%E5%85%A5%E9%97%A8/" target="_blank">ComfyUI 入门笔记</a>
+	  <a class="article-title" href="/2024/04/17/ComfyUI%E5%85%A5%E9%97%A8/" target="_blank">AI绘图，是如何从算力到画面的</a>
   
     </h1>
   
@@ -520,12 +663,14 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <p>这是一份ComfyUI 的入门笔记。将介绍从零开始如何使用ComfyUI，生成所需要的素材。本文注重实操，如果你对ComfyUI的原理感兴趣，可以移步我的另一篇博客《AI绘图，从算力到画面——以ComfyUI为例》（挖坑待填）。</p>
-<h2 id="ComfyUI-简介"><a href="#ComfyUI-简介" class="headerlink" title="ComfyUI 简介"></a>ComfyUI 简介</h2><p>ComfyUI是一款AIGC工具，主要功能是输入图文、视频等，产出图片或视频。</p>
-<p>相较于原生的 Stable Diffusion、Midjourney 等 AIGC 工具，SD Web UI 和 ComfyUI 将模型与工具分离。简单理解就是<strong>更容易实现自定义配置</strong>，生成我们想要的风格的作品。</p>
-<p>SD Web UI 和 ComfyUI 都对SD的工作流进行了拆分，webUI仍然是传统网页页面的形式，虽然能够自由输入、调整模型、安装插件，但是如果想要将输出作为下一个环节的输入，就需要切换页面，ComfyUI 则以节点为单位，更加自由，能够以类似于拼乐高的形式搭建AI生图的工作流程。</p>
-<h2 id="ComfyUI-安装"><a href="#ComfyUI-安装" class="headerlink" title="ComfyUI 安装"></a>ComfyUI 安装</h2><p>参考 <a target="_blank" rel="noopener" href="https://github.com/comfyanonymous/ComfyUI">ComfyUI</a> 的GitHub主页，按照指定的方式进行安装即可。</p>
-<p>虽然现在有很多的整合包、一键启动包，但是仍然推荐使用Git进行本地安装，更新会更加方便。</p>
+    <p>这是一份 ComfyUI 的零基础入门指南。文本将介绍如何从零开始使用 ComfyUI，生成所需要的素材。本文注重实操，如果你对AI绘图的原理感兴趣，可以移步我的另一篇博客《AI绘图，是如何从算力到画面的》。了解一下 AI 生图的基本原理，也有助于我们选取模型、编写 prompt，调整参数。</p>
+<p>或许一开始你觉得生成的图片差强人意，但是随着你逐渐进阶，只需要传几张风格图，输入一些指令，ComfyUI 分分钟就可以帮助你生成足以商用的广告图、海报、Logo 甚至是视频，为你节省大量的时间和资金成本。还在等什么，来，试试看！</p>
+<h2 id="ComfyUI-简介"><a href="#ComfyUI-简介" class="headerlink" title="ComfyUI 简介"></a>ComfyUI 简介</h2><p>如果你还不知道什么是ComfyUI，那么，最简单的介绍就是 ComfyUI 是一款 AIGC 工具，主要功能是输入图文、视频等，产出图片或视频。</p>
+<p>市面上有许多生成式的AI工具。为什么要选择 ComfyUI 呢？相较于原生的 Stable Diffusion、Midjourney 等 AIGC 工具，SD Web UI 和 ComfyUI 将模型与工具分离。简单理解就是<strong>更容易实现自定义配置，有着更高的上限</strong>，更生成我们想要的风格的作品。</p>
+<p>SD Web UI 和 ComfyUI 都对SD的工作流进行了拆分，WebUI 仍然是传统网页页面的形式，虽然能够自由输入、调整模型、安装插件，但是如果想要将输出作为下一个环节的输入，就需要切换页面，ComfyUI 则以节点为单位，<strong>更加自由</strong>，能够以类似于拼乐高的形式搭建AI生图的工作流程。</p>
+<h2 id="ComfyUI-安装"><a href="#ComfyUI-安装" class="headerlink" title="ComfyUI 安装"></a>ComfyUI 安装</h2><p>ComfyUI 的安装很简单，参考 <a target="_blank" rel="noopener" href="https://github.com/comfyanonymous/ComfyUI">ComfyUI</a> 的GitHub主页，按照指定的方式进行安装即可。</p>
+<p>虽然现在有很多的整合包、一键启动包，但是我仍然推荐使用 Git 进行本地安装，因为这样更新会更加方便。</p>
+<p>在安装以前，有一点需要提醒的是，AI生图对算力的需求比较高，通常我们会用到配备有独立显卡的计算机。当然，ComfyUI 也支持使用 CPU 来计算，但是那样一来，出图的效率就会降低到 30%-40%。</p>
 <h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><h4 id="打包版本安装"><a href="#打包版本安装" class="headerlink" title="打包版本安装"></a>打包版本安装</h4><ol>
 <li>ComfyUI 官方提供了打包版本，进入上述官网，找到 “Direct link to download”，点击并下载。</li>
 <li>下载完成后选择解压，可以得到 “ComfyUI_windows_portable” 文件夹。</li>
@@ -538,7 +683,7 @@
 <li>在想要安装 ComfyUI 的文件路径下，右键打开 Git Bash（Terminal, CMD都行）, 输入以下命令<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/comfyanonymous/ComfyUI.git</span><br></pre></td></tr></table></figure></li>
 <li>等待Git将ComfyUI的项目拉取完成后，输入以下命令（如果使用的是虚拟环境，请提前激活。虚拟环境激活时，命令行前缀会出现虚拟环境的名字，如 (venv_py_comfyUI) C:User&#x2F;…）<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install -r requirements.txt</span><br></pre></td></tr></table></figure></li>
 <li>将SD模型放置在 models&#x2F;checkpoints 下，将VAE模型放置在 models&#x2F;vae，lora、controlNet 等模型也是一样。</li>
-<li>完成后，切换路径在项目根目录下，输入以下命令启动ComfyUI<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python main.py</span><br></pre></td></tr></table></figure></li>
+<li>完成后，切换路径在项目根目录下，输入以下命令启动ComfyUI<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">python main.py </span><br><span class="line"><span class="comment"># 如果没有GPU 就使用</span></span><br><span class="line">pythom main.py --cpu</span><br></pre></td></tr></table></figure></li>
 <li>浏览器访问 <strong>127.0.0.1:8188</strong>，即可使用。
     
     <a class="article-more-a" href="/2024/04/17/ComfyUI%E5%85%A5%E9%97%A8/#more">more >></a>
@@ -807,8 +952,7 @@
     	<section class="tools-section tools-section-me" q-show="aboutme">
         
           
-  	  		<div class="aboutme-wrap" id="aboutme">一个游戏行业的开发小白
- 什么都学了一些，什么都会一点。欢迎大家指点交流~
+  	  		<div class="aboutme-wrap" id="aboutme">一个游戏行业的开发小白。什么都学了一些，什么都会一点。AIGC/ComfyUI工作流搭建/AI聊天机器人/Lua/C++……欢迎咨询交流。欢迎大家指点交流~
 邮箱: wuxinbei0409@gmail.com</div>
   	  	
     	</section>

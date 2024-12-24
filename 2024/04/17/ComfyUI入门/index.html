@@ -6,20 +6,35 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://wuxinberry.github.io">
-  <title>Tag: Stable Diffusion | Berry&#39;s Blog</title>
+  <title>AI绘图神器：ComfyUI零基础入门指南（一） | Berry&#39;s Blog</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="目前是游戏行业服务器端工程师，一个空闲时摄影、游戏、电影什么都爱捣鼓捣鼓的00后">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Berry&#39;s Blog">
-<meta property="og:url" content="https://wuxinberry.github.io/tags/Stable-Diffusion/index.html">
+  <meta name="description" content="这是一份 ComfyUI 的零基础入门指南。文本将介绍如何从零开始使用 ComfyUI，生成所需要的素材。本文注重实操，如果你对AI绘图的原理感兴趣，可以移步我的另一篇博客《AI绘图，是如何从算力到画面的》。了解一下 AI 生图的基本原理，也有助于我们选取模型、编写 prompt，调整参数。 或许一开始你觉得生成的图片差强人意，但是随着你逐渐进阶，只需要传几张风格图，输入一些指令，ComfyUI">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AI绘图神器：ComfyUI零基础入门指南（一）">
+<meta property="og:url" content="https://wuxinberry.github.io/2024/04/17/ComfyUI%E5%85%A5%E9%97%A8/index.html">
 <meta property="og:site_name" content="Berry&#39;s Blog">
-<meta property="og:description" content="目前是游戏行业服务器端工程师，一个空闲时摄影、游戏、电影什么都爱捣鼓捣鼓的00后">
+<meta property="og:description" content="这是一份 ComfyUI 的零基础入门指南。文本将介绍如何从零开始使用 ComfyUI，生成所需要的素材。本文注重实操，如果你对AI绘图的原理感兴趣，可以移步我的另一篇博客《AI绘图，是如何从算力到画面的》。了解一下 AI 生图的基本原理，也有助于我们选取模型、编写 prompt，调整参数。 或许一开始你觉得生成的图片差强人意，但是随着你逐渐进阶，只需要传几张风格图，输入一些指令，ComfyUI">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://wuxinberry.github.io/2024/04/17/ComfyUI%E5%85%A5%E9%97%A8/load-checkpoint.png">
+<meta property="og:image" content="https://wuxinberry.github.io/2024/04/17/ComfyUI%E5%85%A5%E9%97%A8/clip-encode.png">
+<meta property="og:image" content="https://wuxinberry.github.io/2024/04/17/ComfyUI%E5%85%A5%E9%97%A8/empty-latent-image.png">
+<meta property="og:image" content="https://wuxinberry.github.io/2024/04/17/ComfyUI%E5%85%A5%E9%97%A8/ksampler.png">
+<meta property="og:image" content="https://wuxinberry.github.io/2024/04/17/ComfyUI%E5%85%A5%E9%97%A8/text2Img.png">
+<meta property="og:image" content="https://wuxinberry.github.io/2024/04/17/ComfyUI%E5%85%A5%E9%97%A8/ComfyUI-PreviewImg.png">
+<meta property="og:image" content="https://wuxinberry.github.io/2024/04/17/ComfyUI%E5%85%A5%E9%97%A8/ComfyUI-QueuePrompt.png">
+<meta property="og:image" content="https://wuxinberry.github.io/2024/04/17/ComfyUI%E5%85%A5%E9%97%A8/ComfyUI-default.png">
+<meta property="og:image" content="https://wuxinberry.github.io/2024/04/17/ComfyUI%E5%85%A5%E9%97%A8/ComfyUI-KSamplerTable.png">
+<meta property="og:image" content="https://wuxinberry.github.io/2024/04/17/ComfyUI%E5%85%A5%E9%97%A8/ComfyUI-SDXL-prompt-styler.png">
+<meta property="article:published_time" content="2024-04-17T10:01:15.000Z">
+<meta property="article:modified_time" content="2024-12-24T12:50:58.331Z">
 <meta property="article:author" content="Berry">
-<meta property="article:tag" content="后端&#x2F;游戏&#x2F;">
+<meta property="article:tag" content="AIGC">
+<meta property="article:tag" content="ComfyUI">
+<meta property="article:tag" content="Stable Diffusion">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wuxinberry.github.io/2024/04/17/ComfyUI%E5%85%A5%E9%97%A8/load-checkpoint.png">
   
     <link rel="alternative" href="/atom.xml" title="Berry&#39;s Blog" type="application/atom+xml">
   
@@ -201,92 +216,247 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-ComfyUI入门" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2024" class="archive-year">2024</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2024/12/23/ComfyUI%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86/" class="archive-article-date">
-        <time datetime="2024-12-23T13:34:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-12-23</time>
-</a>
-
-        </div>
-    	 
+      <header class="article-header">
   
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2024/12/23/ComfyUI%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86/" target="_blank">AI绘图，是如何从算力到画面的</a>
   
+    <h1 class="article-title" itemprop="name">
+      AI绘图神器：ComfyUI零基础入门指南（一）
     </h1>
   
 
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">AIGC</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">ComfyUI</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Stable Diffusion</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
+  
+        
+        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
+
 <a href="/2024/04/17/ComfyUI%E5%85%A5%E9%97%A8/" class="archive-article-date">
         <time datetime="2024-04-17T10:01:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-04-17</time>
 </a>
 
+  
+  
+    
+<div style="margin-top:10px;">
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <!-- fonts.scss -->
+      <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
+      <i class="icon-statistics"></i>
+      <span class="post-meta-item-text"> 字数统计:</span>
+      <span class="post-count">3.1k字</span>
+    </span>
+  </span>
+
+  <span class="post-time">
+    &nbsp; | &nbsp;
+    <span class="post-meta-item-icon">
+      <i class="icon-book icon"></i>
+      <span class="post-meta-item-text"> 阅读时长≈</span>
+      <span class="post-count">11分</span>
+    </span>
+  </span>
+</div>
+
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <p>这是一份 ComfyUI 的零基础入门指南。文本将介绍如何从零开始使用 ComfyUI，生成所需要的素材。本文注重实操，如果你对AI绘图的原理感兴趣，可以移步我的另一篇博客<a href="https://wuxinberry.github.io/2024/12/23/ComfyUI%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86/">《AI绘图，是如何从算力到画面的》</a>。了解一下 AI 生图的基本原理，也有助于我们选取模型、编写 prompt，调整参数。</p>
+<p>或许一开始你觉得生成的图片差强人意，但是随着你逐渐进阶，只需要传几张风格图，输入一些指令，ComfyUI 分分钟就可以帮助你生成足以商用的广告图、海报、Logo 甚至是视频，为你节省大量的时间和资金成本。还在等什么，来，试试看！</p>
+<h2 id="ComfyUI-简介"><a href="#ComfyUI-简介" class="headerlink" title="ComfyUI 简介"></a>ComfyUI 简介</h2><p>如果你还不知道什么是ComfyUI，那么，最简单的介绍就是 ComfyUI 是一款 AIGC 工具，主要功能是输入图文、视频等，产出图片或视频。</p>
+<p>市面上有许多生成式的AI工具。为什么要选择 ComfyUI 呢？相较于原生的 Stable Diffusion、Midjourney 等 AIGC 工具，SD Web UI 和 ComfyUI 将模型与工具分离。简单理解就是<strong>更容易实现自定义配置，有着更高的上限</strong>，更生成我们想要的风格的作品。</p>
+<p>SD Web UI 和 ComfyUI 都对SD的工作流进行了拆分，WebUI 仍然是传统网页页面的形式，虽然能够自由输入、调整模型、安装插件，但是如果想要将输出作为下一个环节的输入，就需要切换页面，ComfyUI 则以节点为单位，<strong>更加自由</strong>，能够以类似于拼乐高的形式搭建AI生图的工作流程。</p>
+<h2 id="ComfyUI-安装"><a href="#ComfyUI-安装" class="headerlink" title="ComfyUI 安装"></a>ComfyUI 安装</h2><p>ComfyUI 的安装很简单，参考 <a target="_blank" rel="noopener" href="https://github.com/comfyanonymous/ComfyUI">ComfyUI</a> 的GitHub主页，按照指定的方式进行安装即可。</p>
+<p>虽然现在有很多的整合包、一键启动包，但是我仍然推荐使用 Git 进行本地安装，因为这样更新会更加方便。</p>
+<p>在安装以前，有一点需要提醒的是，AI生图对算力的需求比较高，通常我们会用到配备有独立显卡的计算机。当然，ComfyUI 也支持使用 CPU 来计算，但是那样一来，出图的效率就会降低到 30%-40%。<span id="more"></span></p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><h4 id="打包版本安装"><a href="#打包版本安装" class="headerlink" title="打包版本安装"></a>打包版本安装</h4><ol>
+<li>ComfyUI 官方提供了打包版本，进入上述官网，找到 “Direct link to download”，点击并下载。</li>
+<li>下载完成后选择解压，可以得到 “ComfyUI_windows_portable” 文件夹。</li>
+<li>进入到 “ComfyUI_windows_portable” 文件夹，根据自己的本机（或服务器配置），选择对应GPU或者CPU的运行方式，即双击运行run_nvidia_gpu.bat或run_cpu.bat。</li>
+<li>注意，到这一步为止，只是成功运行了 ComfyUI，如果想要实际出图，还需要下载 Stable Diffusion 的模型。请将模型下载到 “ComfyUI_windows_portable\ComfyUI\models\checkpoints” 路径下。<br>推荐模型: v1-5-pruned-emaonly.ckpt, realisticVisionV60B1_v51VAE.safetensors，可以到文末推荐的C站下载。每次下载新的模型到路径，都要刷新或重启ComfyUI，才能够读取到，不然可能会检测不到对应的模型。</li>
+</ol>
+<h4 id="Git安装"><a href="#Git安装" class="headerlink" title="Git安装"></a>Git安装</h4><ol>
+<li>安装并配置Git。这个网上教程很多，此处不加赘述。</li>
+<li>安装并配置python环境。推荐使用Conda安装，并创建ComfyUI使用的虚拟 python 环境，可以参考网上教程。</li>
+<li>在想要安装 ComfyUI 的文件路径下，右键打开 Git Bash（Terminal, CMD都行）, 输入以下命令<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/comfyanonymous/ComfyUI.git</span><br></pre></td></tr></table></figure></li>
+<li>等待Git将ComfyUI的项目拉取完成后，输入以下命令（如果使用的是虚拟环境，请提前激活。虚拟环境激活时，命令行前缀会出现虚拟环境的名字，如 (venv_py_comfyUI) C:User&#x2F;…）<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install -r requirements.txt</span><br></pre></td></tr></table></figure></li>
+<li>将SD模型放置在 models&#x2F;checkpoints 下，将VAE模型放置在 models&#x2F;vae，lora、controlNet 等模型也是一样。</li>
+<li>完成后，切换路径在项目根目录下，输入以下命令启动ComfyUI<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">python main.py </span><br><span class="line"><span class="comment"># 如果没有GPU 就使用</span></span><br><span class="line">pythom main.py --cpu</span><br></pre></td></tr></table></figure></li>
+<li>浏览器访问 <strong>127.0.0.1:8188</strong>，即可使用。</li>
+</ol>
+<h3 id="插件推荐"><a href="#插件推荐" class="headerlink" title="插件推荐"></a>插件推荐</h3><p>ComfyUI 有许多强大的插件拓展，极大地提升了它的功能，以下强推几个插件！非常好用！！</p>
+<ol>
+<li><p><strong>ComfyUI Manager</strong> 一个图形化管理工具，一站式集成了模型下载、插件安装、更新重启、设置等多种功能。可以说是使用ComfyUI必下的插件。</p>
+</li>
+<li><p><strong>SDXL prompt styler</strong> 提供SDXL prompt styler节点，可以直接在这个节点选择生成的图片风格，不用再在prompt里面写描述。</p>
+</li>
+<li><p><strong>upscale</strong> 用于放大、细化图片</p>
+</li>
+<li><p><strong>IP-Adapter</strong> 实现单图lora效果，给一张风格图，能够提取输入的图片风格，输出一张类似风格的图片。</p>
+</li>
+<li><p><strong>YoloWorld</strong>插件 输入图片或者视频，可以进行检测和分割，输出对应的蒙版</p>
+</li>
+</ol>
+<p>在搜索时可以带上 ComfyUI 关键词，更容易搜索到。</p>
+<ol start="5">
+<li><strong>ZHO-ZHO-ZHO</strong>  一个 ComfyUI 大佬的 GitHub 仓库，做了很多模型的 ComfyUI 迁移与插件化的工作，同时也会提供插件使用的 sample workflow 文件。</li>
+</ol>
+<h2 id="ComfyUI-的基础使用，以文生图demo为例"><a href="#ComfyUI-的基础使用，以文生图demo为例" class="headerlink" title="ComfyUI 的基础使用，以文生图demo为例"></a>ComfyUI 的基础使用，以文生图demo为例</h2><p>ComfyUI 的工作流是通过很多个工作节点连接起来的。将各个功能的节点，按照符合输入输出格式的方式连接起来，就可以搭建工作流。</p>
+<h3 id="认识基本节点"><a href="#认识基本节点" class="headerlink" title="认识基本节点"></a>认识基本节点</h3><p>我们首先要认识一些基本的节点，了解其输入输出和起到的作用，才能够知道如何将它们连起来。现在，你或许还无法理解那些专业的名词到底是什么，但是没关系，大致有个概念即可。</p>
+<h4 id="Load-Checkpoint"><a href="#Load-Checkpoint" class="headerlink" title="Load Checkpoint"></a>Load Checkpoint</h4><p>载入 Diffusion、CLIP 和 VAE 模型，是<strong>工作流的起点</strong>。</p>
+<img src="/2024/04/17/ComfyUI%E5%85%A5%E9%97%A8/load-checkpoint.png" class="" title="load-checkpoint">
+
+<h4 id="CLIP-Text-Encode-Prompt"><a href="#CLIP-Text-Encode-Prompt" class="headerlink" title="CLIP Text Encode(Prompt)"></a>CLIP Text Encode(Prompt)</h4><p>用于<strong>输入 prompt</strong>，使用逗号分割。</p>
+<p>格式为 (keyword:weight)，例 (hight building: 1.2) 可以控制 prompt 的权重。</p>
+<img src="/2024/04/17/ComfyUI%E5%85%A5%E9%97%A8/clip-encode.png" class="" title="clip-encode">
+
+<h4 id="Empty-Latent-Image"><a href="#Empty-Latent-Image" class="headerlink" title="Empty Latent Image"></a>Empty Latent Image</h4><p>空的潜空间图像节点（其实就是一张随机噪声图，不是里面的数据是空的意思），可以<strong>设置像素和每批生成的图片数量</strong>。</p>
+<img src="/2024/04/17/ComfyUI%E5%85%A5%E9%97%A8/empty-latent-image.png" class="" title="empty-latent-image">
+
+<h4 id="KSampler"><a href="#KSampler" class="headerlink" title="KSampler"></a>KSampler</h4><p>采样算法控制器，其中的参数就是我们生成图片的过程中相当重要的采样算法、步数等参数。通常大家所说的“炼丹调参”，就是指调整这里的参数。以下是几个常用的参数介绍：</p>
+<ul>
+<li>seed 随机种子，控制初始噪声。</li>
+<li>steps 采样步数，通常控制在15-35，太大也未必有好的效果，反而会降低出图效率，太小则图片精度不够。</li>
+<li>sampler_name 采样算法。</li>
+<li>scheduler 去噪过程的调度算法。</li>
+</ul>
+<p>不了解这些算法该怎么选择也没有关系，不同的模型偏好的参数都不一样，没有明确、唯一的最优解。在生图过程中多多尝试、调整，参考模型作者给出的最优参数，都能够提高出图质量。</p>
+<img src="/2024/04/17/ComfyUI%E5%85%A5%E9%97%A8/ksampler.png" class="" title="ksampler">
+
+<h3 id="Demo-搭建文生图工作流"><a href="#Demo-搭建文生图工作流" class="headerlink" title="Demo: 搭建文生图工作流"></a>Demo: 搭建文生图工作流</h3><p>认识了几个基础的节点以后，我们要学习如何将他们连接起来。</p>
+<p>我们可以注意到，节点的左边或者右边，会有几个不同颜色的小圆圈，它们就是这个节点的输入、输入。左边是输入，右边是输出，不同的颜色对应了不同的数据类型。连线时，只有相同类型的数据，才能够被成功连上。</p>
+<p>初次进入ComfyUI界面，初始化显示的就是一个文生图工作流：</p>
+<img src="/2024/04/17/ComfyUI%E5%85%A5%E9%97%A8/text2Img.png" class="" title="text2Img">
+
+<p>如上图所示，每一个节点的功能都已经标注出来了。可以看到，相同颜色的节点通过线条连接，并且是从节点的右边输出，到节点的左边输入。</p>
+<p>现在，我们再来增加一个预览图片的节点 PreviewImage。点击 VAE Decode 节点右边的蓝色小圆圈，往外拖动再松开，就可以看到一个菜单栏，找到 Preview Image 节点，点击即可创建。</p>
+<img src="/2024/04/17/ComfyUI%E5%85%A5%E9%97%A8/ComfyUI-PreviewImg.png" class="" title="ComfyUI-PreviewImg">
+
+<p>现在我们来运行一下这个工作流。点击右侧的 ”Queue Prompt“，这个按钮就等于开启一个绘图的工作队列。运行过程中，节点外面有绿色框框的，表示当前正在运行的节点。</p>
+<img src="/2024/04/17/ComfyUI%E5%85%A5%E9%97%A8/ComfyUI-QueuePrompt.png" class="" title="ComfyUI-QueuePrompt">
+
+<p>顺便介绍一下这里的其他几个按钮，<em>Save</em> 表示保存当前的工作流为一个 json 文件，<em>Load</em> 则是导入一个 json 格式的工作流文件。<em>Refresh</em> 可以刷新当前载入的模型、下载的插件等。<em>Clear</em> 会清空当前页面的工作流。<em>Load Default</em> 会载入如我们上图所示的默认工作流。 <em>Manager</em> 则是我们之前推荐安装的 ComfyUI Manager 插件。</p>
+<img src="/2024/04/17/ComfyUI%E5%85%A5%E9%97%A8/ComfyUI-default.png" class="" title="ComfyUI-default">
+
+<p>这样，我们就实现了一个文生图的基础流程。你还可以修改Emty Latent Image的参数，可以改变生成的图像大小和一批次生成的图片数量。</p>
+<h2 id="最佳实践"><a href="#最佳实践" class="headerlink" title="最佳实践"></a>最佳实践</h2><p>我们已经实现了从无到有的过程，那么该如何让生成的图片更符合我们的预期呢？这里有一些实践技巧。</p>
+<h3 id="Stable-Diffusion-版本比较"><a href="#Stable-Diffusion-版本比较" class="headerlink" title="Stable Diffusion 版本比较"></a>Stable Diffusion 版本比较</h3><p>一般情况下，Stable Diffusion v1.5 &#x2F; Stable Diffusion v2.0 &#x2F; Stable Diffusion XL 使用得比较广泛。但它们也有各自的优劣势。</p>
+<ul>
+<li>v1.5 是最早的版本，XL是最新的版本。</li>
+<li>目前市场上很多 Lora 模型以及 ControlNet 模型都是基于v1.5来构建的，可用的模型比较多。</li>
+<li>v2.0 采用了新的文本编码器 OpenCLIP，可以更好地理解文本提示，支持更高的图像分辨率，可以生成默认分辨率为 512x512 像素和 768x768 像素的图像。</li>
+<li>XL 模型更大，生成图像质量更高，引入了新的功能，如更有艺术感的图像，更真实的图像，以及更清晰可读的字体等，但是对硬件要求也更高。</li>
+</ul>
+<h3 id="KSampler-1"><a href="#KSampler-1" class="headerlink" title="KSampler"></a>KSampler</h3><p>KSampler的一些参数配置如下图所示。该图来自 Comflowy 的总结。</p>
+<img src="/2024/04/17/ComfyUI%E5%85%A5%E9%97%A8/ComfyUI-KSamplerTable.png" class="" title="ComfyUI-KSamplerTable">
+
+<p>KSampler 的配置跟模型（checkpoint）强相关，比如 SDXL-Turbo 因为对图片生成过程进行了压缩，其最佳 cfg 反而不能太大，实验下来，1 或 4 最好。也可以参考下载的模型页面上作者提供的参数，通常都是该模型的最佳实践。</p>
+<h3 id="Prompt"><a href="#Prompt" class="headerlink" title="Prompt"></a>Prompt</h3><p>如何写好你的 Prompt，这是在任何一个 AIGC 应用中都很重要的技能。不同的应用，偏好的 prompt 不同，学习 ComfyUI 的 prompt 范式，能够更好地传达你的意图，提升生成的图片的质量。</p>
+<ul>
+<li><p>长度：不是越长越好，最好保持在75个 token（或约 60 字）以内，以精准描述为主。</p>
+</li>
+<li><p>排序：越重要的词越靠前。比如主体的描述要放在背景前。</p>
+</li>
+<li><p>符号</p>
+<ul>
+<li><p>逗号：使用逗号分割 token</p>
+<p>beautiful scenery, nature glass bottle landscape, purple galaxy bottle, </p>
+</li>
+<li><p>括号：使用括号调整权重，大于 1 表示权重变高，小于 1 表示权重降低。</p>
+<p>(high building:1.2)</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>这里提供一个万金油的 prompt 模板：</p>
+<ol>
+<li>主体（首位）</li>
+<li>环境：主体所处的环境，环境的氛围、光线&#x2F;灯光，天气</li>
+<li>媒介：相机&#x2F;油画&#x2F;相片等</li>
+<li>风格：什么年代的风格&#x2F;哪位艺术家或者哪种艺术风格&#x2F;什么国家或者文明的风格</li>
+</ol>
+<p>如果你使用的是 SDXL 模型，那么可以安装 SDXL prompt styler插件。这个插件会提供一个SDXL prompt styler节点。使用这个节点，可以选择生成的图片风格，而不需要在 prompt 里面写风格描述。如下图所示，你可以轻松控制出图的艺术效果。</p>
+<img src="/2024/04/17/ComfyUI%E5%85%A5%E9%97%A8/ComfyUI-SDXL-prompt-styler.png" class="" title="ComfyUI-SDXL-prompt-styler">
+
+
+
+<h2 id="ComfyUI-学习资源参考"><a href="#ComfyUI-学习资源参考" class="headerlink" title="ComfyUI 学习资源参考"></a>ComfyUI 学习资源参考</h2><p><a target="_blank" rel="noopener" href="https://github.com/comfyanonymous/ComfyUI">ComfyUI</a>: ComfyUI的 GitHub 主页。</p>
+<p><a target="_blank" rel="noopener" href="https://www.comflowy.com/zh-CN">Comfylowy</a>: 这是一个ComfyUI社区，介绍了ComfyUI的功能、安装使用以及一些基础的AI绘图的原理。</p>
+<p><a target="_blank" rel="noopener" href="https://www.openart.ai/">OpenArt</a>: 当前最大的AIGC社区，有相当多的可用资源（各种风格模型、参考工作流等），但是需要魔法。</p>
+<p><a target="_blank" rel="noopener" href="https://huggingface.co/">HuggingFace</a>: 有很多免费的模型可以下载。</p>
+<p><a target="_blank" rel="noopener" href="https://civitai.com/">Civitai C站</a>: C站上有非常多的模型资源可供下载，下载模型时记得留意作者的推荐参数。</p>
+<p>另：B站和YouTube上也有很多ComfyUI的教程可供参考。</p>
+
+    
+
+    
+    <div class="page-reward">
+      <a href="javascript:void(0);" class="page-reward-btn tooltip-top" target="_self">
+        <div class="tooltip tooltip-east">
+          <span class="tooltip-item">
+            赏
+          </span>
+          <span class="tooltip-content">
+            <span class="tooltip-text">
+              <span class="tooltip-inner">
+                <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i
+                    class="icon icon-quo-right"></i></p>
+                <div class="reward-box">
+                  
+                  <div class="reward-box-item">
+                    <img class="reward-img" src="/img/alipay.jpg">
+                    <span class="reward-type">支付宝</span>
+                  </div>
+                  
+                  
+                  <div class="reward-box-item">
+                    <img class="reward-img" src="/img/wechat_pay.jpg">
+                    <span class="reward-type">微信</span>
+                  </div>
+                  
+                </div>
+              </span>
+            </span>
+          </span>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2024/04/17/ComfyUI%E5%85%A5%E9%97%A8/" target="_blank">AI绘图神器：ComfyUI零基础入门指南（一）</a>
-  
-    </h1>
-  
+      </a>
+    </div>
+    
 
-
-        <div class="article-info info-on-right">
+    
+    <div class="declare"> 
+      <ul class="post-copyright">
+        <li>
+          <strong>本文作者：</strong>
+          Berry
+        </li>
+        <li>
+          <strong>本文链接：</strong>
+          <a href="https://wuxinberry.github.io/2024/04/17/ComfyUI入门/" title="AI绘图神器：ComfyUI零基础入门指南（一）" target="_blank">https://wuxinberry.github.io/2024/04/17/ComfyUI入门/</a>
+        </li>
+        
+        <li>
+          <strong>版权声明： </strong>
           
+          本博客所有文章除特别声明外，均采用 <a href="https://github.com/JoeyBling/hexo-theme-yilia-plus/blob/master/LICENSE" rel="external nofollow" target="_blank">MIT</a> 许可协议。转载请注明出处！
+        </li>
+        
+      </ul>
+    </div>
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -306,19 +476,147 @@
 		</ul>
 	</div>
 
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
+    
 
     
+
+    
+    
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <!-- <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a> -->
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://wuxinberry.github.io/2024/04/17/ComfyUI%E5%85%A5%E9%97%A8/" alt="微信分享二维码"> -->
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+
+<nav id="article-nav">
+  
+    <a href="/2024/12/21/%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%971/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          萌新友好！搭建属于你的个人网站（一）
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#ComfyUI-%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">ComfyUI 简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ComfyUI-%E5%AE%89%E8%A3%85"><span class="toc-number">2.</span> <span class="toc-text">ComfyUI 安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-number">2.1.</span> <span class="toc-text">安装</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%89%93%E5%8C%85%E7%89%88%E6%9C%AC%E5%AE%89%E8%A3%85"><span class="toc-number">2.1.1.</span> <span class="toc-text">打包版本安装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Git%E5%AE%89%E8%A3%85"><span class="toc-number">2.1.2.</span> <span class="toc-text">Git安装</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%92%E4%BB%B6%E6%8E%A8%E8%8D%90"><span class="toc-number">2.2.</span> <span class="toc-text">插件推荐</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ComfyUI-%E7%9A%84%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8%EF%BC%8C%E4%BB%A5%E6%96%87%E7%94%9F%E5%9B%BEdemo%E4%B8%BA%E4%BE%8B"><span class="toc-number">3.</span> <span class="toc-text">ComfyUI 的基础使用，以文生图demo为例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%A4%E8%AF%86%E5%9F%BA%E6%9C%AC%E8%8A%82%E7%82%B9"><span class="toc-number">3.1.</span> <span class="toc-text">认识基本节点</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Load-Checkpoint"><span class="toc-number">3.1.1.</span> <span class="toc-text">Load Checkpoint</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CLIP-Text-Encode-Prompt"><span class="toc-number">3.1.2.</span> <span class="toc-text">CLIP Text Encode(Prompt)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Empty-Latent-Image"><span class="toc-number">3.1.3.</span> <span class="toc-text">Empty Latent Image</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#KSampler"><span class="toc-number">3.1.4.</span> <span class="toc-text">KSampler</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Demo-%E6%90%AD%E5%BB%BA%E6%96%87%E7%94%9F%E5%9B%BE%E5%B7%A5%E4%BD%9C%E6%B5%81"><span class="toc-number">3.2.</span> <span class="toc-text">Demo: 搭建文生图工作流</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5"><span class="toc-number">4.</span> <span class="toc-text">最佳实践</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Stable-Diffusion-%E7%89%88%E6%9C%AC%E6%AF%94%E8%BE%83"><span class="toc-number">4.1.</span> <span class="toc-text">Stable Diffusion 版本比较</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#KSampler-1"><span class="toc-number">4.2.</span> <span class="toc-text">KSampler</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Prompt"><span class="toc-number">4.3.</span> <span class="toc-text">Prompt</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ComfyUI-%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90%E5%8F%82%E8%80%83"><span class="toc-number">5.</span> <span class="toc-text">ComfyUI 学习资源参考</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
+
+
+
+
+
+
+
+
+  
+  <div id="gitment-ctn"></div>
+  
+    <!-- 中文 -->
+    <link rel="stylesheet" href="/lib/gitment.css">
+    <script src="/lib/gitment.js"></script>
+  
+  <script>
+    <!-- id: "AI绘图神器：ComfyUI零基础入门指南（一）" -->
+    var gitment = new Gitment({
+      id: "20240417180115",
+      owner: 'Wuxinberry',
+      repo: 'blog_comments',
+      oauth: {
+        client_id: 'Ov23linQcyh9hypoAT9t',
+        client_secret: 'aa9da44b5100641bc5144e38c22465ca48640297',
+      },
+    })
+    gitment.render('gitment-ctn')
+  </script>
+
+
+  
+
 
 
           </div>
@@ -359,9 +657,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: true,
 		toc_hide_index: true,

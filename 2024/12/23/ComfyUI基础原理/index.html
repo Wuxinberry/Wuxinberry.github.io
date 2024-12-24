@@ -24,7 +24,7 @@
 <meta property="og:image" content="https://wuxinberry.github.io/2024/12/23/ComfyUI%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86/clip-img.png">
 <meta property="og:image" content="https://wuxinberry.github.io/2024/12/23/ComfyUI%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86/openai-clip.png">
 <meta property="article:published_time" content="2024-12-23T13:34:17.000Z">
-<meta property="article:modified_time" content="2024-12-24T12:43:16.468Z">
+<meta property="article:modified_time" content="2024-12-24T12:47:32.677Z">
 <meta property="article:author" content="Berry">
 <meta property="article:tag" content="AIGC">
 <meta property="article:tag" content="ComfyUI">
@@ -266,7 +266,7 @@
   <div class="article-entry" itemprop="articleBody">
     
     <p>现如今，AI绘图软件风靡互联网。使用AI绘图，你只要输入几个词语，动动手指就可以生成一张图片。你是否好奇这背后的逻辑？SD是什么？潜空间又是什么？AI 究竟是如何将算力转化为那些鲜活的图片的？如果你对此感到好奇，那么请往下阅读。本文将以最简明易懂的方式，阐释 AI 的基础原理。了解其中的流程和原理，能够帮助你更好地使用AI绘图工具，更高效地调整AI绘图的参数，更有目的性地选择对应的模型。</p>
-<h2 id="AI绘图的过程"><a href="#AI绘图的过程" class="headerlink" title="AI绘图的过程"></a>AI绘图的过程</h2><p>首先，让我们来了解一下 AI绘图的基本流程，它到底是怎么运作的？不同的 AI 绘图软件，提供的界面、交互方式或许有很大差别，但是本质都是一样的。让我们从最简单的开始，以 ComfyUI 最基础的一个文生图流程为例。</p>
+<h2 id="AI绘图的过程"><a href="#AI绘图的过程" class="headerlink" title="AI绘图的过程"></a>AI绘图的过程</h2><p>首先，让我们来了解一下 AI绘图的基本流程，它到底是怎么运作的？不同的 AI 绘图软件，提供的界面、交互方式或许有很大差别，但是本质都是一样的。让我们从最简单的开始，以 ComfyUI 最基础的一个文生图流程为例。<span id="more"></span></p>
 <img src="/2024/12/23/ComfyUI%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86/Text2Img.png" class="" title="Text2Img">
 
 <p>或许你会感到奇怪，Load Checkpoint 为什么要载入模型？为什么输入 Prompt 的节点，却被称为 CLIP Text Encoder？为什么在 KSampler 之后，Save Image之前，还需要有一个 VAE Decoder？不要着急，我们先提炼这张图中显示的，AI绘图的基础流程。</p>

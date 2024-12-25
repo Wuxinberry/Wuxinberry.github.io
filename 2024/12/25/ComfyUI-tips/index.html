@@ -24,7 +24,7 @@
 <meta property="og:image" content="https://wuxinberry.github.io/2024/12/25/ComfyUI-tips/little-prince.png">
 <meta property="og:image" content="https://wuxinberry.github.io/2024/12/25/ComfyUI-tips/ControlNet.png">
 <meta property="article:published_time" content="2024-12-25T06:40:25.000Z">
-<meta property="article:modified_time" content="2024-12-25T13:41:28.349Z">
+<meta property="article:modified_time" content="2024-12-25T13:46:42.093Z">
 <meta property="article:author" content="Berry">
 <meta property="article:tag" content="AIGC">
 <meta property="article:tag" content="ComfyUI">
@@ -266,7 +266,7 @@
   <div class="article-entry" itemprop="articleBody">
     
     <p>每一个使用 ComfyUI 或者其他 AI 绘图应用的人，尤其是初学者，大概率都有所体会：想要一张完全符合预期的图，总是耗费相当长的时间。你需要反复地换模型、调整参数、修改 prompt，几个小时过去，最终才能在上百张图中筛选出一张差强人意的图片。这和 “让 AI 解放你的生产力” 的口号实在是大相径庭。本篇博客，整理了作者本人在使用 ComfyUI 过程中踩过的一些坑，整理出来的一些实践小技巧，相信能够帮助你快速度过初学者的尴尬期，迅速提高出图效率和质量。</p>
-<h2 id="关于-Checkpoint-模型选取"><a href="#关于-Checkpoint-模型选取" class="headerlink" title="关于 Checkpoint 模型选取"></a>关于 Checkpoint 模型选取</h2><h3 id="SD-版本选取"><a href="#SD-版本选取" class="headerlink" title="SD 版本选取"></a>SD 版本选取</h3><p>从最早期的 Stable Diffusion v1.5 到 现如今的 Stable Diffusion XL，SD模型已经有多个应用中的版本。它们有着各自的特点和适用的场景，根据需要选择最适合的模型，能够帮助你提高出图的效率。话不多说，下面就是我整理的 SD 模型对比表格。</p>
+<h2 id="关于-Checkpoint-模型选取"><a href="#关于-Checkpoint-模型选取" class="headerlink" title="关于 Checkpoint 模型选取"></a>关于 Checkpoint 模型选取</h2><h3 id="SD-版本选取"><a href="#SD-版本选取" class="headerlink" title="SD 版本选取"></a>SD 版本选取</h3><p>从最早期的 Stable Diffusion v1.5 到 现如今的 Stable Diffusion XL，SD模型已经有多个应用中的版本。它们有着各自的特点和适用的场景，根据需要选择最适合的模型，能够帮助你提高出图的效率。话不多说，下面就是我整理的 SD 模型对比表格。<span id="more"></span></p>
 <table>
 <thead>
 <tr>
@@ -337,22 +337,14 @@
 
 <h3 id="Prompt"><a href="#Prompt" class="headerlink" title="Prompt"></a>Prompt</h3><p>关于如何写提示词 prompt ，我在 《AI绘图神器：ComfyUI零基础入门指南（一）》中已经提过。如果你没有读过，我在这里也重新放上来了。通常写 prompt 要注意<strong>长度</strong>、<strong>排序</strong>和<strong>符号</strong>。</p>
 <ol>
-<li><p>长度：不是越长越好，最好保持在75个 token（或约 60 字）以内，以精准描述为主。</p>
-</li>
-<li><p>排序：越重要的词越靠前。比如主体的描述要放在背景前。</p>
-</li>
-<li><p>符号</p>
-<ol>
-<li><p>逗号：使用逗号分割token</p>
-<p>beautiful scenery, nature glass bottle landscape, purple galaxy bottle</p>
-</li>
-<li><p>括号：使用括号调整权重，大于 1 表示权重变高，小于 1 表示权重降低。</p>
-<p>(high building:1.2)</p>
-</li>
+<li>长度：不是越长越好，最好保持在75个 token（或约 60 字）以内，以精准描述为主。</li>
+<li>排序：越重要的词越靠前。比如主体的描述要放在背景前。</li>
+<li>符号<ol>
+<li>逗号：使用逗号分割token      e.g. beautiful scenery, nature glass bottle landscape, purple galaxy bottle</li>
+<li>括号：使用括号调整权重，大于 1 表示权重变高，小于 1 表示权重降低。    e.g. (high building:1.2)</li>
 </ol>
 </li>
-<li><p>模板</p>
-<ol>
+<li>模板<ol>
 <li>主体（首位）</li>
 <li>环境：主体所处的环境，环境的氛围、光线&#x2F;灯光，天气等。</li>
 <li>媒介：相机&#x2F;油画&#x2F;相片等</li>

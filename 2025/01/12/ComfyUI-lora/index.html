@@ -6,24 +6,30 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://wuxinberry.github.io">
-  <title>Berry&#39;s Blog</title>
+  <title>ComfyUI 中使用 LoRA 模型全攻略 | Berry&#39;s Blog</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-    
-    <!-- <meta name="keywords" content="后端/游戏/">
-    <meta name="description" content="目前是游戏行业服务器端工程师，一个空闲时摄影、游戏、电影什么都爱捣鼓捣鼓的00后"> -->
-  
-  <meta name="description" content="目前是游戏行业服务器端工程师，一个空闲时摄影、游戏、电影什么都爱捣鼓捣鼓的00后">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Berry&#39;s Blog">
-<meta property="og:url" content="https://wuxinberry.github.io/index.html">
+  <meta name="description" content="在 AI 绘画领域，ComfyUI 是一款备受欢迎的工具，而 LoRA 模型的加入更是为创作带来了更多可能。本文将详细介绍如何在 ComfyUI 中使用 LoRA 模型，包括 LoRA 模型的原理、安装方法以及工作流的搭建。 LoRA模型的原理如果你是AI绘图的忠实用户，或许你早已耳闻 LoRA。它堪称是AI绘图神器之一。 LoRA，即 Low-Rank Adaptation of Large L">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ComfyUI 中使用 LoRA 模型全攻略">
+<meta property="og:url" content="https://wuxinberry.github.io/2025/01/12/ComfyUI-lora/index.html">
 <meta property="og:site_name" content="Berry&#39;s Blog">
-<meta property="og:description" content="目前是游戏行业服务器端工程师，一个空闲时摄影、游戏、电影什么都爱捣鼓捣鼓的00后">
+<meta property="og:description" content="在 AI 绘画领域，ComfyUI 是一款备受欢迎的工具，而 LoRA 模型的加入更是为创作带来了更多可能。本文将详细介绍如何在 ComfyUI 中使用 LoRA 模型，包括 LoRA 模型的原理、安装方法以及工作流的搭建。 LoRA模型的原理如果你是AI绘图的忠实用户，或许你早已耳闻 LoRA。它堪称是AI绘图神器之一。 LoRA，即 Low-Rank Adaptation of Large L">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://wuxinberry.github.io/2025/01/12/ComfyUI-lora/civitai-lora.png">
+<meta property="og:image" content="https://wuxinberry.github.io/2025/01/12/ComfyUI-lora/text2Img.png">
+<meta property="og:image" content="https://wuxinberry.github.io/2025/01/12/ComfyUI-lora/load-lora.png">
+<meta property="og:image" content="https://wuxinberry.github.io/2025/01/12/ComfyUI-lora/LoRA.png">
+<meta property="og:image" content="https://wuxinberry.github.io/2025/01/12/ComfyUI-lora/text2ImgWithLora.png">
+<meta property="article:published_time" content="2025-01-12T10:21:15.000Z">
+<meta property="article:modified_time" content="2025-01-12T11:11:48.857Z">
 <meta property="article:author" content="Berry">
-<meta property="article:tag" content="后端&#x2F;游戏&#x2F;">
+<meta property="article:tag" content="AIGC">
+<meta property="article:tag" content="ComfyUI">
+<meta property="article:tag" content="Stable Diffusion">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wuxinberry.github.io/2025/01/12/ComfyUI-lora/civitai-lora.png">
   
     <link rel="alternative" href="/atom.xml" title="Berry&#39;s Blog" type="application/atom+xml">
   
@@ -205,25 +211,25 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-
-  
-    <article id="post-ComfyUI-lora" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-ComfyUI-lora" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
   
   
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2025/01/12/ComfyUI-lora/" target="_blank">ComfyUI 中使用 LoRA 模型全攻略</a>
-  
+    <h1 class="article-title" itemprop="name">
+      ComfyUI 中使用 LoRA 模型全攻略
     </h1>
   
 
 
   
   
+        
+        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
+
 <a href="/2025/01/12/ComfyUI-lora/" class="archive-article-date">
         <time datetime="2025-01-12T10:21:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-01-12</time>
 </a>
@@ -231,6 +237,27 @@
   
   
     
+<div style="margin-top:10px;">
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <!-- fonts.scss -->
+      <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
+      <i class="icon-statistics"></i>
+      <span class="post-meta-item-text"> 字数统计:</span>
+      <span class="post-count">1.2k字</span>
+    </span>
+  </span>
+
+  <span class="post-time">
+    &nbsp; | &nbsp;
+    <span class="post-meta-item-icon">
+      <i class="icon-book icon"></i>
+      <span class="post-meta-item-text"> 阅读时长≈</span>
+      <span class="post-count">4分</span>
+    </span>
+  </span>
+</div>
+
 
   
   </header>
@@ -242,14 +269,83 @@
 <p>LoRA，即 Low-Rank Adaptation of Large Language Models，最初是为了高效微调大型语言模型而提出的，后来广泛应用于 AI 绘画模型中。它的核心原理是通过引入可训练的低秩矩阵，对预训练模型的特定层进行微调。</p>
 <p>在传统的模型微调中，需要对整个模型的参数进行更新，这不仅计算成本高，而且容易导致过拟合。LoRA 模型则是在模型的某些层后添加两个可训练的低秩矩阵（一个降维矩阵和一个升维矩阵），只对这两个低秩矩阵进行训练，这样一来，就大大减少了需要训练的参数数量，提升了训练效率。这样，在不改变原始模型权重的情况下，能够快速适应新的任务或数据集，同时保持了模型的泛化能力。例如，在绘画模型中，LoRA 可以针对特定的风格、主题等进行微调，让模型生成符合特定要求的图像。就好像我们想要一幅画像，画像中有一个微笑的女人，那么，不同的画风会带来极大的差异，有可能是蒙娜丽莎，也有可能是幼稚园插画。通常我们会在 prompt 中描述我们想要的艺术风格，但这样做的效果很难让人满意，而 LoRA 则可以帮助我们实现对风格的精准把控。</p>
 <p>总结就是，LoRA能够让我们灵活地指定个性风格，同时因为其模型小、参数少，训练快，效率高，应用起来也十分方便。</p>
-<h2 id="LoRA模型的安装"><a href="#LoRA模型的安装" class="headerlink" title="LoRA模型的安装"></a>LoRA模型的安装</h2><p>LoRA 模型既然那么好用，我们应该去哪里下载呢？大多数AI绘图的社区都有提供 LoRA 模型下载，例如C站（civitai: <a target="_blank" rel="noopener" href="https://civitai.com/">https://civitai.com</a>）、L站（liblib: <a target="_blank" rel="noopener" href="https://www.liblib.art/%EF%BC%89%E7%AD%89%E3%80%82">https://www.liblib.art/）等。</a>
-    
-    <a class="article-more-a" href="/2025/01/12/ComfyUI-lora/#more">more >></a>
-    
-    
+<h2 id="LoRA模型的安装"><a href="#LoRA模型的安装" class="headerlink" title="LoRA模型的安装"></a>LoRA模型的安装</h2><p>LoRA 模型既然那么好用，我们应该去哪里下载呢？大多数AI绘图的社区都有提供 LoRA 模型下载，例如C站（civitai: <a target="_blank" rel="noopener" href="https://civitai.com/">https://civitai.com</a>）、L站（liblib: <a target="_blank" rel="noopener" href="https://www.liblib.art/%EF%BC%89%E7%AD%89%E3%80%82">https://www.liblib.art/）等。</a><span id="more"></span></p>
+<p>以C站为例，进入到 Model 页面后，点击右侧的Filters，可以展开更详细的过滤项，模型类型选择 LoRA。要注意的是，LoRA的模型需要和导入的 Stable Diffusion 模型版本匹配，否则工作流无法成功执行。我在这边选择的是 SD1.5版本。</p>
+<img src="/2025/01/12/ComfyUI-lora/civitai-lora.png" class="" title="civitai-lora">
+
+<p>选择你喜欢的模型，下载到 *ComfyUI\models\loras* 路径下，重启 ComfyUI 加载界面即可使用。LoRA 的文件格式通常为.safetensors 或.pt。为了便于管理版本，你可以对文件重命名，加上对应的SD版本。如果在 models 文件夹下没有找到 loras 文件夹，直接自己新建一个就可以。</p>
+<h2 id="在工作流中引入LoRA"><a href="#在工作流中引入LoRA" class="headerlink" title="在工作流中引入LoRA"></a>在工作流中引入LoRA</h2><p>假设你现在已经下载好了 LoRA 模型，那我们该如何改造工作流，让它生效呢？很简单，以最基础的文生图工作流为例，下图是一个基础的文生图工作流。接下来，我们将对它进行一点小小的改造。</p>
+<img src="/2025/01/12/ComfyUI-lora/text2Img.png" class="" title="text2Img">
+
+<p>首先，我们双击空白处，添加一个 <strong>Load LoRA</strong> 节点。如果你找不到这个节点，可以升级 ComfyUI 的版本，或者安装对应的插件。</p>
+<img src="/2025/01/12/ComfyUI-lora/load-lora.png" class="" title="load-lora">
+
+<p>可以看到，LoRA 节点的左侧输入是 model 和 clip，右侧输出也是 model 和 clip。它就像一个画风滤镜，对我们输入的模型进行了风格化过滤。</p>
+<img src="/2025/01/12/ComfyUI-lora/LoRA.png" class="" title="LoRA">
+
+<p>因此，我们直接把 Checkpoint 节点右侧的 model 和 clip 输入到 LoRA 节点中即可。然后，我们将原本直接输出到 prompt节点和 KSampler 节点的 model、clip 替换成从 LoRA 节点输出的内容，就得到了一个引入了 LoRA 模型的工作流。点击执行，可以看到，同样的prompt，但是我们得到了一个画风相当不同的图像。</p>
+<img src="/2025/01/12/ComfyUI-lora/text2ImgWithLora.png" class="" title="text2ImgWithLora">
+
+<p>怎么样？是不是非常简单易用且高效呢？细心的朋友或许还注意到，前文 LoRA节点的注释中，还提到多个 LoRA 节点可以连接在一起，其实就是将前一个 LoRA 节点的输出，输入到下一个 LoRA 节点中，就像流水线一样，实现更加精细的画面控制。</p>
+<hr>
+<p>以上就是《ComfyUI 中使用 LoRA 模型全攻略》的所有内容啦，感谢你的阅读。或许你还听说过，一个与 LoRA 功能相近的AI绘图神器，叫做 IP-Adapter，又被称为 “一图 LoRA”。那么，它的原理和功能是什么，又该如何使用呢？且听下回分解。</p>
 
     
 
+    
+    <div class="page-reward">
+      <a href="javascript:void(0);" class="page-reward-btn tooltip-top" target="_self">
+        <div class="tooltip tooltip-east">
+          <span class="tooltip-item">
+            赏
+          </span>
+          <span class="tooltip-content">
+            <span class="tooltip-text">
+              <span class="tooltip-inner">
+                <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i
+                    class="icon icon-quo-right"></i></p>
+                <div class="reward-box">
+                  
+                  <div class="reward-box-item">
+                    <img class="reward-img" src="/img/alipay.jpg">
+                    <span class="reward-type">支付宝</span>
+                  </div>
+                  
+                  
+                  <div class="reward-box-item">
+                    <img class="reward-img" src="/img/wechat_pay.jpg">
+                    <span class="reward-type">微信</span>
+                  </div>
+                  
+                </div>
+              </span>
+            </span>
+          </span>
+        </div>
+      </a>
+    </div>
+    
+
+    
+    <div class="declare"> 
+      <ul class="post-copyright">
+        <li>
+          <strong>本文作者：</strong>
+          Berry
+        </li>
+        <li>
+          <strong>本文链接：</strong>
+          <a href="https://wuxinberry.github.io/2025/01/12/ComfyUI-lora/" title="ComfyUI 中使用 LoRA 模型全攻略" target="_blank">https://wuxinberry.github.io/2025/01/12/ComfyUI-lora/</a>
+        </li>
+        
+        <li>
+          <strong>版权声明： </strong>
+          
+          本博客所有文章除特别声明外，均采用 <a href="https://github.com/JoeyBling/hexo-theme-yilia-plus/blob/master/LICENSE" rel="external nofollow" target="_blank">MIT</a> 许可协议。转载请注明出处！
+        </li>
+        
+      </ul>
+    </div>
     
 
   </div>
@@ -278,16 +374,76 @@
     
 
     
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2025/01/12/ComfyUI-lora/">展开全文 >></a>
-    </p>
+
     
+    
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <!-- <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a> -->
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://wuxinberry.github.io/2025/01/12/ComfyUI-lora/" alt="微信分享二维码"> -->
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
 
     
     <div class="clearfix"></div>
   </div>
   </div>
 </article>
+
+
+<nav id="article-nav">
+  
+  
+    <a href="/2025/01/05/%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%973/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">萌新友好！【WordPress】搭建属于你的个人网站（三）</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -302,604 +458,56 @@
         </div>
         
         
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-建站指南3" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2025/01/05/%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%973/" target="_blank">萌新友好！【WordPress】搭建属于你的个人网站（三）</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2025/01/05/%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%973/" class="archive-article-date">
-        <time datetime="2025-01-05T08:00:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-01-05</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <p>这是一份搭建属于你自己的个人网站的指南。如果你对于建立一个个人网站有兴趣，却不知道如何开展一系列的工作，那么请往下阅读。【建站指南】系列一共有三篇文章，其中，第一篇，介绍了为什么要搭建一个个人网站、快速建站的常用方式及优劣对比。第二、三篇将分别展开介绍GitHub+Hexo的建站方式和WordPress建站方式。本篇为第三篇，将展开介绍如何使用 <strong>WordPress</strong> 搭建你的个人博客网站。</p>
-<h2 id="零、一些准备工作"><a href="#零、一些准备工作" class="headerlink" title="零、一些准备工作"></a>零、一些准备工作</h2><h3 id="准备服务器"><a href="#准备服务器" class="headerlink" title="准备服务器"></a>准备服务器</h3><p>想要搭建属于你的个人独立站，首先，会需要一台服务器。我们的网站将部署、运行在这台服务器上。服务器可以是你本地的某一台机器，或者是云服务器。考虑到大多数人的情况，我推荐你在建站初期，先使用云服务器。正如我在建站指南第一篇中推荐的，云服务器使用、维护、扩容都相当便捷，比我们自己花心思维护一台机器要方便得多。</p>
-<p>云服务器的厂商最好和域名厂商一致，这样后续做域名认证、解析等会更方便。本篇将以阿里云为例（其他云也是大致类似的操作），展开建站的详细指南。</p>
-<p>在选择服务器的时候，切记选择 Linux &#x2F;CentOS 版本，这对我们后续安装 WordPress 更友好。</p>
-<p>在选择服务器地区的时候，如果选择了大陆的服务器，则后续如果想通过域名访问，还需要冗长的备案流程；选择香港或者海外的话，就可以跳过这些流程。不过，如果你想要在大陆接入支付宝等支付业务，不是放一个二维码让你的顾客扫码支付，而是接入支付宝的接口，那么就必须在大陆备案。关于服务器地区的选择，你可以自行取舍。
-    
-    <a class="article-more-a" href="/2025/01/05/%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%973/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">建站</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">教程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2025/01/05/%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%973/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#LoRA%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%8E%9F%E7%90%86"><span class="toc-number">1.</span> <span class="toc-text">LoRA模型的原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LoRA%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%AE%89%E8%A3%85"><span class="toc-number">2.</span> <span class="toc-text">LoRA模型的安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9C%A8%E5%B7%A5%E4%BD%9C%E6%B5%81%E4%B8%AD%E5%BC%95%E5%85%A5LoRA"><span class="toc-number">3.</span> <span class="toc-text">在工作流中引入LoRA</span></a></li></ol>
+                    </div>
+                </span>
             </div>
         </div>
         
-        
     </div>
 </aside>
 
 
 
 
-  
-    <article id="post-ComfyUI-tips" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2024/12/25/ComfyUI-tips/" target="_blank">ComfyUI踩坑记录，一些帮助你少走弯路的小技巧</a>
-  
-    </h1>
-  
 
 
-  
-  
-<a href="/2024/12/25/ComfyUI-tips/" class="archive-article-date">
-        <time datetime="2024-12-25T06:40:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-12-25</time>
-</a>
 
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <p>每一个使用 ComfyUI 或者其他 AI 绘图应用的人，尤其是初学者，大概率都有所体会：想要一张完全符合预期的图，总是耗费相当长的时间。你需要反复地换模型、调整参数、修改 prompt，几个小时过去，最终才能在上百张图中筛选出一张差强人意的图片。这和 “让 AI 解放你的生产力” 的口号实在是大相径庭。本篇博客，整理了作者本人在使用 ComfyUI 过程中踩过的一些坑，整理出来的一些实践小技巧，相信能够帮助你快速度过初学者的尴尬期，迅速提高出图效率和质量。</p>
-<h2 id="关于-Checkpoint-模型选取"><a href="#关于-Checkpoint-模型选取" class="headerlink" title="关于 Checkpoint 模型选取"></a>关于 Checkpoint 模型选取</h2><h3 id="SD-版本选取"><a href="#SD-版本选取" class="headerlink" title="SD 版本选取"></a>SD 版本选取</h3><p>从最早期的 Stable Diffusion v1.5 到 现如今的 Stable Diffusion XL，SD模型已经有多个应用中的版本。它们有着各自的特点和适用的场景，根据需要选择最适合的模型，能够帮助你提高出图的效率。话不多说，下面就是我整理的 SD 模型对比表格。
-    
-    <a class="article-more-a" href="/2024/12/25/ComfyUI-tips/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">AIGC</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">ComfyUI</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Stable Diffusion</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2024/12/25/ComfyUI-tips/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
 
 
 
 
   
-    <article id="post-ComfyUI基础原理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
+  <div id="gitment-ctn"></div>
   
+    <!-- 中文 -->
+    <link rel="stylesheet" href="/lib/gitment.css">
+    <script src="/lib/gitment.js"></script>
   
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2024/12/23/ComfyUI%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86/" target="_blank">AI绘图，是如何从算力到画面的</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2024/12/23/ComfyUI%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86/" class="archive-article-date">
-        <time datetime="2024-12-23T13:34:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-12-23</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <p>现如今，AI绘图软件风靡互联网。使用AI绘图，你只要输入几个词语，动动手指就可以生成一张图片。你是否好奇这背后的逻辑？SD是什么？潜空间又是什么？AI 究竟是如何将算力转化为那些鲜活的图片的？如果你对此感到好奇，那么请往下阅读。本文将以最简明易懂的方式，阐释 AI 的基础原理。了解其中的流程和原理，能够帮助你更好地使用AI绘图工具，更高效地调整AI绘图的参数，更有目的性地选择对应的模型。</p>
-<h2 id="AI绘图的过程"><a href="#AI绘图的过程" class="headerlink" title="AI绘图的过程"></a>AI绘图的过程</h2><p>首先，让我们来了解一下 AI绘图的基本流程，它到底是怎么运作的？不同的 AI 绘图软件，提供的界面、交互方式或许有很大差别，但是本质都是一样的。让我们从最简单的开始，以 ComfyUI 最基础的一个文生图流程为例。</p>
-<img src="/2024/12/23/ComfyUI%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86/Text2Img.png" class="" title="Text2Img">
-
-<p>或许你会感到奇怪，Load Checkpoint 为什么要载入模型？为什么输入 Prompt 的节点，却被称为 CLIP Text Encoder？为什么在 KSampler 之后，Save Image之前，还需要有一个 VAE Decoder？不要着急，我们先提炼这张图中显示的，AI绘图的基础流程。
-    
-    <a class="article-more-a" href="/2024/12/23/ComfyUI%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">AIGC</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">ComfyUI</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Stable Diffusion</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2024/12/23/ComfyUI%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
+  <script>
+    <!-- id: "ComfyUI 中使用 LoRA 模型全攻略" -->
+    var gitment = new Gitment({
+      id: "20250112182115",
+      owner: 'Wuxinberry',
+      repo: 'blog_comments',
+      oauth: {
+        client_id: 'Ov23linQcyh9hypoAT9t',
+        client_secret: 'aa9da44b5100641bc5144e38c22465ca48640297',
+      },
+    })
+    gitment.render('gitment-ctn')
+  </script>
 
 
   
-    <article id="post-建站指南2" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2024/12/21/%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%972/" target="_blank">萌新友好！【GitHub+Hexo】搭建属于你的个人网站（二）</a>
-  
-    </h1>
-  
 
-
-  
-  
-<a href="/2024/12/21/%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%972/" class="archive-article-date">
-        <time datetime="2024-12-21T08:46:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-12-21</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <p>这是一份搭建属于你自己的个人网站的指南。如果你对于建立一个个人网站有兴趣，却不知道如何开展一系列的工作，那么请往下阅读。【建站指南】系列一共有三篇文章，其中，第一篇，介绍了为什么要搭建一个个人网站、快速建站的常用方式及优劣对比。第二、三篇将分别展开介绍GitHub+Hexo的建站方式和WordPress建站方式。本篇为第二篇，将展开介绍如何使用 <strong>GitHub + Hexo</strong> 搭建你的个人博客网站。</p>
-<h2 id="零、一些准备工作"><a href="#零、一些准备工作" class="headerlink" title="零、一些准备工作"></a>零、一些准备工作</h2><p>你可能是一个完全零基础的小白，甚至不知道 GitHub 是什么，没有 GitHub 账号，如果你有兴趣了解，那么可以移步我的版本管理工具介绍博客进行了解。当然，不了解这些，对于我们搭建博客也没有影响，你只需要做一些基础的准备工作即可。</p>
-<ul>
-<li>GitHub 账号</li>
-<li>配置 Git 环境</li>
-<li>安装 Node.js</li>
-</ul>
-<p>如果这三步你都已经完成，那么可以直接跳到下一章节。
-    
-    <a class="article-more-a" href="/2024/12/21/%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%972/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">建站</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">教程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2024/12/21/%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%972/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-建站指南1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2024/12/21/%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%971/" target="_blank">萌新友好！搭建属于你的个人网站（一）</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2024/12/21/%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%971/" class="archive-article-date">
-        <time datetime="2024-12-21T08:00:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-12-21</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <p>这是一份搭建属于你自己的个人网站的指南。如果你对于建立一个个人网站有兴趣，却不知道如何开展一系列的工作，那么请往下阅读。【建站指南】系列一共有三篇文章，其中，第一篇，也就是本篇，将介绍为什么要搭建一个个人网站、快速建站的常用方式及优劣对比。第二、三篇将分别展开介绍GitHub+Hexo的建站方式和WordPress建站方式（挖坑待填）。如果你已经有自己选定的建站方式，可以跳转另外两篇指南，获得一些实际操作上的指导。</p>
-<h2 id="一、为什么要搭建”个人“网站"><a href="#一、为什么要搭建”个人“网站" class="headerlink" title="一、为什么要搭建”个人“网站"></a>一、为什么要搭建”个人“网站</h2><p>如果你是为了经营公司、开展贸易等业务内容，当你的业务量到达一定范围，创建一个代表公司或是工作室的网站，能够帮助你更好地展现自己提供的服务，以及现如今取得的成果。同时，在搜索时代，你的网站也能够为你的公司、品牌带来更多的曝光，吸引潜在客户的注意力。毋庸置疑，当你有自己的业务需要经营时，一个属于你自己的网站能为你带来不少收益。</p>
-<p>而对于大多数人而言，搭建一个个人网站，既能作为个人博客，记录、分享学习成果和随笔，又能够作为个人作品集展示渠道，作为一份线上简历，附在简历的最后，这样你就能够获得远超一张A4纸的篇幅、图文并茂、有交互性的自我介绍的机会，让招聘方更全面地了解你。又或者，你只是想在这篇互联网上给自己划一小块自留地，这也是个很不错的选择。</p>
-<h2 id="二、搭建个人网站的常用方法"><a href="#二、搭建个人网站的常用方法" class="headerlink" title="二、搭建个人网站的常用方法"></a>二、搭建个人网站的常用方法</h2><p>本系列介绍的建站方法，是一些常用、快速的建站方式，更适合功能相对通用的网站，例如个人博客、外贸建站等，通过一些模板和组件即可实现我们想要的效果。不同于我们平常使用的一些大型商用网站，由于功能复杂、定制化要求高、访问量巨大，这些网站的建立与部署都会采用符合其生产规格的方式进行，网站的开发与维护工作也是交由一大批产品经理、程序员和测试来完成。它们不属于我们讨论的范畴。如果你想要一个这样的网站，那最好的方式还是组建一个开发团队。
-    
-    <a class="article-more-a" href="/2024/12/21/%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%971/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">建站</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">教程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2024/12/21/%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%971/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-ComfyUI入门" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2024/04/17/ComfyUI%E5%85%A5%E9%97%A8/" target="_blank">AI绘图神器：ComfyUI零基础入门指南（一）</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2024/04/17/ComfyUI%E5%85%A5%E9%97%A8/" class="archive-article-date">
-        <time datetime="2024-04-17T10:01:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-04-17</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <p>这是一份 ComfyUI 的零基础入门指南。文本将介绍如何从零开始使用 ComfyUI，生成所需要的素材。本文注重实操，如果你对AI绘图的原理感兴趣，可以移步我的另一篇博客<a href="https://wuxinberry.github.io/2024/12/23/ComfyUI%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86/">《AI绘图，是如何从算力到画面的》</a>。了解一下 AI 生图的基本原理，也有助于我们选取模型、编写 prompt，调整参数。</p>
-<p>或许一开始你觉得生成的图片差强人意，但是随着你逐渐进阶，只需要传几张风格图，输入一些指令，ComfyUI 分分钟就可以帮助你生成足以商用的广告图、海报、Logo 甚至是视频，为你节省大量的时间和资金成本。还在等什么，来，试试看！</p>
-<h2 id="ComfyUI-简介"><a href="#ComfyUI-简介" class="headerlink" title="ComfyUI 简介"></a>ComfyUI 简介</h2><p>如果你还不知道什么是ComfyUI，那么，最简单的介绍就是 ComfyUI 是一款 AIGC 工具，主要功能是输入图文、视频等，产出图片或视频。</p>
-<p>市面上有许多生成式的AI工具。为什么要选择 ComfyUI 呢？相较于原生的 Stable Diffusion、Midjourney 等 AIGC 工具，SD Web UI 和 ComfyUI 将模型与工具分离。简单理解就是<strong>更容易实现自定义配置，有着更高的上限</strong>，更生成我们想要的风格的作品。</p>
-<p>SD Web UI 和 ComfyUI 都对SD的工作流进行了拆分，WebUI 仍然是传统网页页面的形式，虽然能够自由输入、调整模型、安装插件，但是如果想要将输出作为下一个环节的输入，就需要切换页面，ComfyUI 则以节点为单位，<strong>更加自由</strong>，能够以类似于拼乐高的形式搭建AI生图的工作流程。</p>
-<h2 id="ComfyUI-安装"><a href="#ComfyUI-安装" class="headerlink" title="ComfyUI 安装"></a>ComfyUI 安装</h2><p>ComfyUI 的安装很简单，参考 <a target="_blank" rel="noopener" href="https://github.com/comfyanonymous/ComfyUI">ComfyUI</a> 的GitHub主页，按照指定的方式进行安装即可。</p>
-<p>虽然现在有很多的整合包、一键启动包，但是我仍然推荐使用 Git 进行本地安装，因为这样更新会更加方便。</p>
-<p>在安装以前，有一点需要提醒的是，AI生图对算力的需求比较高，通常我们会用到配备有独立显卡的计算机。当然，ComfyUI 也支持使用 CPU 来计算，但是那样一来，出图的效率就会降低到 30%-40%。
-    
-    <a class="article-more-a" href="/2024/04/17/ComfyUI%E5%85%A5%E9%97%A8/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">AIGC</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">ComfyUI</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Stable Diffusion</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2024/04/17/ComfyUI%E5%85%A5%E9%97%A8/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-  
 
 
           </div>
@@ -939,8 +547,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,

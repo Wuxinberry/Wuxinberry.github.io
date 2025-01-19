@@ -10,12 +10,12 @@
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="现如今，AI绘图软件风靡互联网。使用AI绘图，你只要输入几个词语，动动手指就可以生成一张图片。你是否好奇这背后的逻辑？SD是什么？潜空间又是什么？AI 究竟是如何将算力转化为那些鲜活的图片的？如果你对此感到好奇，那么请往下阅读。本文将以最简明易懂的方式，阐释 AI 的基础原理。了解其中的流程和原理，能够帮助你更好地使用AI绘图工具，更高效地调整AI绘图的参数，更有目的性地选择对应的模型。 AI绘图">
+  <meta name="description" content="ComfyUI 相关博客目录： AI绘图神器：ComfyUI零基础入门指南（一） ComfyUI踩坑记录，一些帮助你少走弯路的小技巧 ComfyUI 中使用 LoRA 模型全攻略 AI绘图，是如何从算力到画面的 现如今，AI绘图软件风靡互联网。使用AI绘图，你只要输入几个词语，动动手指就可以生成一张图片。你是否好奇这背后的逻辑？SD是什么？潜空间又是什么？AI 究竟是如何将算力转化为那些鲜活的图片">
 <meta property="og:type" content="article">
 <meta property="og:title" content="AI绘图，是如何从算力到画面的">
 <meta property="og:url" content="https://wuxinberry.github.io/2024/12/23/ComfyUI%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86/index.html">
 <meta property="og:site_name" content="Berry&#39;s Blog">
-<meta property="og:description" content="现如今，AI绘图软件风靡互联网。使用AI绘图，你只要输入几个词语，动动手指就可以生成一张图片。你是否好奇这背后的逻辑？SD是什么？潜空间又是什么？AI 究竟是如何将算力转化为那些鲜活的图片的？如果你对此感到好奇，那么请往下阅读。本文将以最简明易懂的方式，阐释 AI 的基础原理。了解其中的流程和原理，能够帮助你更好地使用AI绘图工具，更高效地调整AI绘图的参数，更有目的性地选择对应的模型。 AI绘图">
+<meta property="og:description" content="ComfyUI 相关博客目录： AI绘图神器：ComfyUI零基础入门指南（一） ComfyUI踩坑记录，一些帮助你少走弯路的小技巧 ComfyUI 中使用 LoRA 模型全攻略 AI绘图，是如何从算力到画面的 现如今，AI绘图软件风靡互联网。使用AI绘图，你只要输入几个词语，动动手指就可以生成一张图片。你是否好奇这背后的逻辑？SD是什么？潜空间又是什么？AI 究竟是如何将算力转化为那些鲜活的图片">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://wuxinberry.github.io/2024/12/23/ComfyUI%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86/Text2Img.png">
 <meta property="og:image" content="https://wuxinberry.github.io/2024/12/23/ComfyUI%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86/auto-encoder.png">
@@ -24,7 +24,7 @@
 <meta property="og:image" content="https://wuxinberry.github.io/2024/12/23/ComfyUI%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86/clip-img.png">
 <meta property="og:image" content="https://wuxinberry.github.io/2024/12/23/ComfyUI%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86/openai-clip.png">
 <meta property="article:published_time" content="2024-12-23T13:34:17.000Z">
-<meta property="article:modified_time" content="2024-12-24T12:47:52.232Z">
+<meta property="article:modified_time" content="2025-01-19T07:57:32.543Z">
 <meta property="article:author" content="Berry">
 <meta property="article:tag" content="AIGC">
 <meta property="article:tag" content="ComfyUI">
@@ -245,7 +245,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">2.4k字</span>
+      <span class="post-count">2.5k字</span>
     </span>
   </span>
 
@@ -265,7 +265,12 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <p>现如今，AI绘图软件风靡互联网。使用AI绘图，你只要输入几个词语，动动手指就可以生成一张图片。你是否好奇这背后的逻辑？SD是什么？潜空间又是什么？AI 究竟是如何将算力转化为那些鲜活的图片的？如果你对此感到好奇，那么请往下阅读。本文将以最简明易懂的方式，阐释 AI 的基础原理。了解其中的流程和原理，能够帮助你更好地使用AI绘图工具，更高效地调整AI绘图的参数，更有目的性地选择对应的模型。</p>
+    <p>ComfyUI 相关博客目录：</p>
+<p><a href="https://wuxinberry.github.io/2024/04/17/ComfyUI%E5%85%A5%E9%97%A8/">AI绘图神器：ComfyUI零基础入门指南（一）</a></p>
+<p><a href="https://wuxinberry.github.io/2024/12/25/ComfyUI-tips/">ComfyUI踩坑记录，一些帮助你少走弯路的小技巧</a></p>
+<p><a href="https://wuxinberry.github.io/2025/01/12/ComfyUI-lora/">ComfyUI 中使用 LoRA 模型全攻略</a></p>
+<p><a href="https://wuxinberry.github.io/2024/12/23/ComfyUI%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86/">AI绘图，是如何从算力到画面的</a></p>
+<p>现如今，AI绘图软件风靡互联网。使用AI绘图，你只要输入几个词语，动动手指就可以生成一张图片。你是否好奇这背后的逻辑？SD是什么？潜空间又是什么？AI 究竟是如何将算力转化为那些鲜活的图片的？如果你对此感到好奇，那么请往下阅读。本文将以最简明易懂的方式，阐释 AI 的基础原理。了解其中的流程和原理，能够帮助你更好地使用AI绘图工具，更高效地调整AI绘图的参数，更有目的性地选择对应的模型。</p>
 <h2 id="AI绘图的过程"><a href="#AI绘图的过程" class="headerlink" title="AI绘图的过程"></a>AI绘图的过程</h2><p>首先，让我们来了解一下 AI绘图的基本流程，它到底是怎么运作的？不同的 AI 绘图软件，提供的界面、交互方式或许有很大差别，但是本质都是一样的。让我们从最简单的开始，以 ComfyUI 最基础的一个文生图流程为例。</p>
 <img src="/2024/12/23/ComfyUI%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86/Text2Img.png" class="" title="Text2Img">
 
@@ -680,6 +685,14 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Stable Diffusion</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Prompt-Engineering</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">提示词工程</a>
               </li>
              
               <li class="article-tag-list-item">

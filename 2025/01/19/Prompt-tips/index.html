@@ -6,31 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://wuxinberry.github.io">
-  <title>萌新友好！【WordPress】搭建属于你的个人网站（三） | Berry&#39;s Blog</title>
+  <title>Prompt Engineering 提示词工程的时间技巧（一） | Berry&#39;s Blog</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="这是一份搭建属于你自己的个人网站的指南。如果你对于建立一个个人网站有兴趣，却不知道如何开展一系列的工作，那么请往下阅读。【建站指南】系列一共有三篇文章，其中，第一篇，介绍了为什么要搭建一个个人网站、快速建站的常用方式及优劣对比。第二、三篇将分别展开介绍GitHub+Hexo的建站方式和WordPress建站方式。本篇为第三篇，将展开介绍如何使用 WordPress 搭建你的个人博客网站。 零、一些">
+  <meta name="description" content="当下，人工智能飞速发展，以 ChatGPT 为代表的大预言模型崭露头角后，诸如豆包、月之暗面、通义千问等生成式指令调优AI工具蓬勃发展。AI+各行各业成为了当下不可逆转的趋势，提示词工程（Prompt Engineering）成为了一项关键技能。本篇博客将介绍提示词工程的一些技巧，这些技巧不仅能帮助开发人员快速构建生成式AI应用，还可以帮助其他 AI 应用的使用者，撰写属于自己的提示词模板，调教出">
 <meta property="og:type" content="article">
-<meta property="og:title" content="萌新友好！【WordPress】搭建属于你的个人网站（三）">
-<meta property="og:url" content="https://wuxinberry.github.io/2025/01/05/%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%973/index.html">
+<meta property="og:title" content="Prompt Engineering 提示词工程的时间技巧（一）">
+<meta property="og:url" content="https://wuxinberry.github.io/2025/01/19/Prompt-tips/index.html">
 <meta property="og:site_name" content="Berry&#39;s Blog">
-<meta property="og:description" content="这是一份搭建属于你自己的个人网站的指南。如果你对于建立一个个人网站有兴趣，却不知道如何开展一系列的工作，那么请往下阅读。【建站指南】系列一共有三篇文章，其中，第一篇，介绍了为什么要搭建一个个人网站、快速建站的常用方式及优劣对比。第二、三篇将分别展开介绍GitHub+Hexo的建站方式和WordPress建站方式。本篇为第三篇，将展开介绍如何使用 WordPress 搭建你的个人博客网站。 零、一些">
+<meta property="og:description" content="当下，人工智能飞速发展，以 ChatGPT 为代表的大预言模型崭露头角后，诸如豆包、月之暗面、通义千问等生成式指令调优AI工具蓬勃发展。AI+各行各业成为了当下不可逆转的趋势，提示词工程（Prompt Engineering）成为了一项关键技能。本篇博客将介绍提示词工程的一些技巧，这些技巧不仅能帮助开发人员快速构建生成式AI应用，还可以帮助其他 AI 应用的使用者，撰写属于自己的提示词模板，调教出">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://wuxinberry.github.io/2025/01/05/%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%973/%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF%E5%AE%89%E8%A3%85%E6%8F%90%E7%A4%BA.png">
-<meta property="og:image" content="https://wuxinberry.github.io/2025/01/05/%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%973/%E5%AE%89%E5%85%A8%E7%BB%84%E9%85%8D%E7%BD%AE%E5%85%A5%E5%8F%A3.png">
-<meta property="og:image" content="https://wuxinberry.github.io/2025/01/05/%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%973/%E6%B7%BB%E5%8A%A0%E7%AB%99%E7%82%B91.png">
-<meta property="og:image" content="https://wuxinberry.github.io/2025/01/05/%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%973/%E6%B7%BB%E5%8A%A0%E7%BD%91%E7%AB%992.png">
-<meta property="og:image" content="https://wuxinberry.github.io/2025/01/05/%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%973/%E6%A0%B9%E7%9B%AE%E5%BD%95.png">
-<meta property="og:image" content="https://wuxinberry.github.io/2025/01/05/%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%973/WP%E4%B8%BB%E7%95%8C%E9%9D%A2.png">
-<meta property="og:image" content="https://wuxinberry.github.io/2025/01/05/%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%973/BerryWeb.png">
-<meta property="article:published_time" content="2025-01-05T08:00:05.000Z">
-<meta property="article:modified_time" content="2025-01-05T09:28:23.847Z">
+<meta property="article:published_time" content="2025-01-19T06:13:46.000Z">
+<meta property="article:modified_time" content="2025-01-19T07:57:47.502Z">
 <meta property="article:author" content="Berry">
-<meta property="article:tag" content="建站">
-<meta property="article:tag" content="教程">
+<meta property="article:tag" content="AIGC">
+<meta property="article:tag" content="Prompt-Engineering">
+<meta property="article:tag" content="提示词工程">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://wuxinberry.github.io/2025/01/05/%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%973/%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF%E5%AE%89%E8%A3%85%E6%8F%90%E7%A4%BA.png">
   
     <link rel="alternative" href="/atom.xml" title="Berry&#39;s Blog" type="application/atom+xml">
   
@@ -212,14 +205,14 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-建站指南3" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Prompt-tips" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
   
   
     <h1 class="article-title" itemprop="name">
-      萌新友好！【WordPress】搭建属于你的个人网站（三）
+      Prompt Engineering 提示词工程的时间技巧（一）
     </h1>
   
 
@@ -231,8 +224,8 @@
               <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
         </span>
 
-<a href="/2025/01/05/%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%973/" class="archive-article-date">
-        <time datetime="2025-01-05T08:00:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-01-05</time>
+<a href="/2025/01/19/Prompt-tips/" class="archive-article-date">
+        <time datetime="2025-01-19T06:13:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-01-19</time>
 </a>
 
   
@@ -245,7 +238,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">2.5k字</span>
+      <span class="post-count">3.6k字</span>
     </span>
   </span>
 
@@ -254,7 +247,7 @@
     <span class="post-meta-item-icon">
       <i class="icon-book icon"></i>
       <span class="post-meta-item-text"> 阅读时长≈</span>
-      <span class="post-count">8分</span>
+      <span class="post-count">15分</span>
     </span>
   </span>
 </div>
@@ -265,58 +258,58 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <p>这是一份搭建属于你自己的个人网站的指南。如果你对于建立一个个人网站有兴趣，却不知道如何开展一系列的工作，那么请往下阅读。【建站指南】系列一共有三篇文章，其中，第一篇，介绍了为什么要搭建一个个人网站、快速建站的常用方式及优劣对比。第二、三篇将分别展开介绍GitHub+Hexo的建站方式和WordPress建站方式。本篇为第三篇，将展开介绍如何使用 <strong>WordPress</strong> 搭建你的个人博客网站。</p>
-<h2 id="零、一些准备工作"><a href="#零、一些准备工作" class="headerlink" title="零、一些准备工作"></a>零、一些准备工作</h2><h3 id="准备服务器"><a href="#准备服务器" class="headerlink" title="准备服务器"></a>准备服务器</h3><p>想要搭建属于你的个人独立站，首先，会需要一台服务器。我们的网站将部署、运行在这台服务器上。服务器可以是你本地的某一台机器，或者是云服务器。考虑到大多数人的情况，我推荐你在建站初期，先使用云服务器。正如我在建站指南第一篇中推荐的，云服务器使用、维护、扩容都相当便捷，比我们自己花心思维护一台机器要方便得多。</p>
-<p>云服务器的厂商最好和域名厂商一致，这样后续做域名认证、解析等会更方便。本篇将以阿里云为例（其他云也是大致类似的操作），展开建站的详细指南。</p>
-<p>在选择服务器的时候，切记选择 Linux &#x2F;CentOS 版本，这对我们后续安装 WordPress 更友好。</p>
-<p>在选择服务器地区的时候，如果选择了大陆的服务器，则后续如果想通过域名访问，还需要冗长的备案流程；选择香港或者海外的话，就可以跳过这些流程。不过，如果你想要在大陆接入支付宝等支付业务，不是放一个二维码让你的顾客扫码支付，而是接入支付宝的接口，那么就必须在大陆备案。关于服务器地区的选择，你可以自行取舍。<span id="more"></span></p>
-<h3 id="域名"><a href="#域名" class="headerlink" title="域名"></a>域名</h3><p>首先要想好你的域名，然后去域名服务商提供的网站查询，这个域名是否被他人占用。在这里推荐使用 .com .org等较为官方的域名后缀，虽然这些后缀的域名价格会相对贵，但是这会让你的网站看起来更可靠。</p>
-<p>购买了域名以后，你还需要坐一系列的工作才能让它生效，包括域名实名认证、备案、DNS解析等，直接按照域名服务商的提示来操作即可。</p>
-<h3 id="注册宝塔账号"><a href="#注册宝塔账号" class="headerlink" title="注册宝塔账号"></a>注册宝塔账号</h3><p>什么是宝塔？宝塔面板是一个相当好用的工具。我们在使用云服务器时，大多时候都会用到它。它为我们提供了图形化操作云服务器的界面，比起敲命令行，宝塔面板使用起来更简洁。同时，它还提供了很多其他的功能，比如一键部署环境、防火墙、CPU监控等等。</p>
-<p>你可以点击这里 <a target="_blank" rel="noopener" href="https://www.bt.cn/">https://www.bt.cn/</a> 进行注册。记得保管好你的账号密码。</p>
-<h3 id="安装宝塔面板"><a href="#安装宝塔面板" class="headerlink" title="安装宝塔面板"></a>安装宝塔面板</h3><p>注册好宝塔帐号以后，让我们来为我们的服务器安装宝塔面板吧。</p>
-<p>首先，启动我们的服务器。如果是云服务器，通常会有一个启动按钮，通过远程连接，你可以进入到控制台并登录。接下来，输入以下指令，下载宝塔面板并安装。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">wget -O install.sh http://download.bt.cn/install/install-ubuntu_6.0.sh &amp;&amp; <span class="built_in">sudo</span> bash install.sh</span></span><br></pre></td></tr></table></figure>
+    <p>当下，人工智能飞速发展，以 ChatGPT 为代表的大预言模型崭露头角后，诸如豆包、月之暗面、通义千问等生成式指令调优AI工具蓬勃发展。AI+各行各业成为了当下不可逆转的趋势，提示词工程（Prompt Engineering）成为了一项关键技能。本篇博客将介绍提示词工程的一些技巧，这些技巧不仅能帮助开发人员快速构建生成式AI应用，还可以帮助其他 AI 应用的使用者，撰写属于自己的提示词模板，调教出更符合自身需求的 AI 助理。</p>
+<p>注：本博客主要总结了 DeepLearning AI 的公开课程内容，也可以理解为是该公开课程的笔记。如果你有足够的时间和条件，强烈建议直接访问文末的课程链接亲自学习，因为这样，你还可以在官网的 Jupyter Notebook 上一边听课，一边调试、实践。</p>
+<h2 id="0-为什么要学习提示词工程？"><a href="#0-为什么要学习提示词工程？" class="headerlink" title="0. 为什么要学习提示词工程？"></a>0. 为什么要学习提示词工程？</h2><p>不同于过去的基础大预言模型 Base LLM，当下的指令调优大语言模型 Instruction Tuned LLM，它更聪明，可以遵循用户的指令来进行预测，给出结果。如果你需要它给出一些方案，你可以告知已有的条件、决策方式、希望达成的目的等。如果你想要它撰写文章，除了主题、大纲以外，你还可以指定文字风格、篇幅，要求它阅读哪些参考文献等等。因此，学好提示词的使用，能够帮助我们和 AI 更好地共同完成任务。尤其是一些复杂的场景、要求比较多的任务，更需要我们组织有条理的提示词，来帮助 LLM 理解任务的含义。</p>
+<p>学习了提示词工程以后，即使不用做编写基于 LLM 的 AI 软件，你也可以通过抽象出一系列的提示词模板，只需要更换部分词语内容，完成相似的任务，提升你的工作、学习效率。</p>
+<h2 id="指导原则-Guidelines"><a href="#指导原则-Guidelines" class="headerlink" title="指导原则 Guidelines"></a>指导原则 Guidelines</h2><p>本章节将从最基础的指导原则开始，介绍如何清晰、有效地给 LLM 下达指令。</p>
+<p>如果你已经搭建了调用 LLM 应用的环境，那么可以一边阅读一边实践。不同的 LLM 环境需求和接口调用不尽相同，因此，在这里就不给出具体的指令了，只需要参考你使用的 LLM 文档就好。  即使没有环境也没关系，可以去 DeepLearning AI 的官网上使用 Jupyter Notebook，那里已经帮你安装、配置好了环境，还为你准备了 OpenAI 的调用 key，方便你学习。</p>
+<p>话不多说，我们开始吧！</p>
+<p>首先，指导有两个原则：</p>
+<ol>
+<li><strong>编写清晰而具体的提示</strong></li>
+<li><strong>给模型思考的时间</strong></li>
+</ol>
+<p>针对这两个原则，分别有对应的提示词技巧。</p>
+<h3 id="指导原则1：编写清晰而具体的提示"><a href="#指导原则1：编写清晰而具体的提示" class="headerlink" title="指导原则1：编写清晰而具体的提示"></a>指导原则1：编写清晰而具体的提示</h3><h4 id="策略1：使用分隔符"><a href="#策略1：使用分隔符" class="headerlink" title="策略1：使用分隔符"></a>策略1：使用分隔符</h4><p>我们可以使用分隔符，将我们想要输入的文本清晰地分割开来，比如下文，使用 &#96;&#96;&#96; 我们想要 LLM 阅读、总结的文本括起来，给 LLM 更清晰的指令。这样，LLM不容易被你提供的大量文本混淆，即使你提供的文本是一段数学应用题目，它也会给出总结，而不是被误导，求解这道应用题的答案。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">text = <span class="string">f&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">这是一段你希望LLM进行总结陈述的文字。</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line">prompt = <span class="string">f&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">Summarize the text delimited by triple backticks into a single sentence.</span></span><br><span class="line"><span class="string">```<span class="subst">&#123;text&#125;</span>```</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line">response = get_completion(prompt)</span><br><span class="line"><span class="built_in">print</span>(response) </span><br></pre></td></tr></table></figure>
 
-<p>等待宝塔面板安装完成后，会看到如下提示：</p>
-<img src="/2025/01/05/%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%973/%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF%E5%AE%89%E8%A3%85%E6%8F%90%E7%A4%BA.png" class="" title="宝塔面板安装提示">
+<h5 id="防止注入"><a href="#防止注入" class="headerlink" title="防止注入"></a>防止注入</h5><p>同时，使用分隔符还可以避免用户注入，防止输入一些危险的、冲突的指令。这在信息安全中常常用到，比如防范SQL注入等。<span id="more"></span></p>
+<h5 id="分隔符的类型"><a href="#分隔符的类型" class="headerlink" title="分隔符的类型"></a>分隔符的类型</h5><p>分隔符可以有很多种，只要在提示词中明确指出即可，例如三重双引号”””、单引号’’’、XML&lt;&gt;标记等等。</p>
+<h4 id="策略2：结构化的输出"><a href="#策略2：结构化的输出" class="headerlink" title="策略2：结构化的输出"></a>策略2：结构化的输出</h4><p>在开发软件的过程中，结构化的输出更有利于我们对返回的结果数据进行进一步的处理，例如以表格、数组、JSON等格式陈列，能够让我们直接输入到下一个函数方法中，又或者只需要复制粘贴就可以放到我们的 PPT 汇报中，而不需要再去整理数据格式。你可以在提示词中指定你想要的结果格式，例如 JSON，同时指定其中 key值的内容。 </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">prompt = <span class="string">f&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">Generate a list of three made-up book titles along \ </span></span><br><span class="line"><span class="string">with their authors and genres. </span></span><br><span class="line"><span class="string">Provide them in JSON format with the following keys: </span></span><br><span class="line"><span class="string">book_id, title, author, genre.</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line">response = get_completion(prompt)</span><br><span class="line"><span class="built_in">print</span>(response)</span><br></pre></td></tr></table></figure>
 
-<p>这里显示了宝塔后台的地址和账号密码，可以保存记录一下。同时，我们需要按照提示所说的，“在安全组放行8888端口”，否则我们仍然无法访问面板。首先，进入到我们的云服务器控制台，即服务器实例主页，点击右侧的“查看更多”，找到“安全组配置”。</p>
-<img src="/2025/01/05/%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%973/%E5%AE%89%E5%85%A8%E7%BB%84%E9%85%8D%E7%BD%AE%E5%85%A5%E5%8F%A3.png" class="" title="安全组配置入口">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 生成结果如下</span></span><br><span class="line">[</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">&quot;book_id&quot;</span>: <span class="number">1</span>,</span><br><span class="line">        <span class="string">&quot;title&quot;</span>: <span class="string">&quot;The Midnight Garden&quot;</span>,</span><br><span class="line">        <span class="string">&quot;author&quot;</span>: <span class="string">&quot;Elena Rivers&quot;</span>,</span><br><span class="line">        <span class="string">&quot;genre&quot;</span>: <span class="string">&quot;Fantasy&quot;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">&quot;book_id&quot;</span>: <span class="number">2</span>,</span><br><span class="line">        <span class="string">&quot;title&quot;</span>: <span class="string">&quot;Echoes of the Past&quot;</span>,</span><br><span class="line">        <span class="string">&quot;author&quot;</span>: <span class="string">&quot;Nathan Black&quot;</span>,</span><br><span class="line">        <span class="string">&quot;genre&quot;</span>: <span class="string">&quot;Mystery&quot;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">&quot;book_id&quot;</span>: <span class="number">3</span>,</span><br><span class="line">        <span class="string">&quot;title&quot;</span>: <span class="string">&quot;Whispers in the Wind&quot;</span>,</span><br><span class="line">        <span class="string">&quot;author&quot;</span>: <span class="string">&quot;Samantha Reed&quot;</span>,</span><br><span class="line">        <span class="string">&quot;genre&quot;</span>: <span class="string">&quot;Romance&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
 
-<p>点击快速创建规则，会弹出一个面板，默认勾选了一些常用端口，我们需要在自定义端口处加上 “8888&#x2F;8888”。之后，点击确定，就完成了安全组端口的放行。</p>
-<p>更详细的安全组操作，可以参考这篇博客 <a target="_blank" rel="noopener" href="http://tencent.yundashi168.com/331.html">如何设置阿里云服务器安全组？阿里云安全组规则详细解说</a></p>
-<p>现在，我们可以在浏览器中，输入我们的外网面板地址 http:&#x2F;&#x2F;外网地址:8888，访问宝塔面板啦。访问的时候，会要求我们输入账号密码进行登录，首次登录成功后，记得修改账号密码，来提升账号的安全性。</p>
-<h2 id="一、环境配置"><a href="#一、环境配置" class="headerlink" title="一、环境配置"></a>一、环境配置</h2><p>怎么又是环境配置？</p>
-<h3 id="安装-LNMP"><a href="#安装-LNMP" class="headerlink" title="安装 LNMP"></a>安装 LNMP</h3><p>不要头疼，有了宝塔面板以后，环境配置变得非常方便。通常情况下，首次登录，宝塔的后台就会弹出面板，推荐安装套件。我们选择LNMP即可，它的含义是 Linux + Nginx + Mysql + PHP，这也是我们WP要用到的内容。点击一键安装之后，我们就可以去做一些其他的事情，比如账户绑定、实名认证等。你可以在左侧“账户管理”的地方找到相关操作的入口，在这里就不加展开了。</p>
-<h3 id="添加站点"><a href="#添加站点" class="headerlink" title="添加站点"></a>添加站点</h3><p>等待我们的环境配置完毕以后，我们就可以来安装 WP 的建站程序了。</p>
-<p>首先，点击左侧菜单栏的“网站”，找到绿色的“添加站点”按钮并点击。</p>
-<img src="/2025/01/05/%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%973/%E6%B7%BB%E5%8A%A0%E7%AB%99%E7%82%B91.png" class="" title="添加站点1">
+<p>在这里，不得不承认，使用提示词的时候用英文会更合适，因为很多规范化的格式都是英文表达的，如果使用多语言混合的提示词，可能会增加 LLM 的理解成本，何况中文真的是一种非常容易产生歧义的语言。当然，使用国内的一些 LLM，这样的误解或许会少一些。</p>
+<h4 id="策略3：要求LLM检查是否满足条件"><a href="#策略3：要求LLM检查是否满足条件" class="headerlink" title="策略3：要求LLM检查是否满足条件"></a>策略3：要求LLM检查是否满足条件</h4><p>有时候，我们提供的文本不一定能满足我们希望 LLM 完成的任务条件。因此，可以要求 LLM 在执行任务前，检查是否满足条件，如果满足再执行，不满足的话就停止。这样做可以减少一些算力浪费，还可以避免一些边界情况、意外的错误等。</p>
+<p>例如下方提供的两段输入，很显然，只有第一段文本包含了指令步骤，因此，在执行第二段时就会返回 No steps provided.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">text_1 = <span class="string">f&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">制作一杯茶很简单！首先你要……其次……再然后……最后……大功告成！</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line">text_2 = <span class="string">f&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">这是一个阳光明媚的早晨……</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line">prompt = <span class="string">f&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">You will be provided with text delimited by triple quotes. </span></span><br><span class="line"><span class="string">If it contains a sequence of instructions, re-write those instructions in the following format:</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Step 1 - ...</span></span><br><span class="line"><span class="string">Step 2 - …</span></span><br><span class="line"><span class="string">…</span></span><br><span class="line"><span class="string">Step N - …</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">If the text does not contain a sequence of instructions, then simply write \&quot;No steps provided.\&quot;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">\&quot;\&quot;\&quot;<span class="subst">&#123;text_2&#125;</span>\&quot;\&quot;\&quot;</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line">response = get_completion(prompt)</span><br><span class="line"><span class="built_in">print</span>(response)</span><br></pre></td></tr></table></figure>
 
-<p>这时会弹出一个面板，看上去有很多内容，但实际上很简单。在域名一栏，我们就填入自己的网站域名，FTP设置的地方，填写用户名和密码（虽然之后可以随意修改，但还是劝你记录一下），数据库选择 Mysql，utf-8，并设置用户名和密码。完成以后，点击提交即可。</p>
-<img src="/2025/01/05/%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%973/%E6%B7%BB%E5%8A%A0%E7%BD%91%E7%AB%992.png" class="" title="添加网站2">
+<h4 id="策略4：少样本提示-few-shot-prompt"><a href="#策略4：少样本提示-few-shot-prompt" class="headerlink" title="策略4：少样本提示 few-shot prompt"></a>策略4：少样本提示 few-shot prompt</h4><p>如果我们想要 LLM 更精确地理解我们的用意，我们可以提供少量的示例，来告知它，我们期望的回复究竟是什么样的。比如我们想要指定某种风格的回复，就可以先提供一个样本，让 LLM 参考。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">prompt = <span class="string">f&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">你的任务是用一致的风格进行回复。</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&lt;child&gt;: 教我耐心.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&lt;grandparent&gt;: The river that carves the deepest valley flows from a modest spring; the grandest symphony originates from a single note; the most intricate tapestry begins with a solitary thread.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&lt;child&gt;: 教我韧性。</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line">response = get_completion(prompt)</span><br><span class="line"><span class="built_in">print</span>(response)</span><br></pre></td></tr></table></figure>
 
-<p>添加站点完成以后，我们可以点击左侧的“文件”，查看是否已经有对应的站点根目录。</p>
-<img src="/2025/01/05/%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%973/%E6%A0%B9%E7%9B%AE%E5%BD%95.png" class="" title="根目录">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;grandparent&gt;: Resilience <span class="keyword">is</span> like a tree that bends <span class="keyword">with</span> the wind but never breaks. It <span class="keyword">is</span> the ability to bounce back <span class="keyword">from</span> adversity <span class="keyword">and</span> keep moving forward, even when things get tough. Just like a tree that grows stronger <span class="keyword">with</span> each storm it weathers, resilience <span class="keyword">is</span> a quality that can be developed <span class="keyword">and</span> strengthened over time.</span><br></pre></td></tr></table></figure>
 
+<p>可以看到，回复也会像我们提供的示例那样，给出很多排比和比喻的内容。</p>
+<hr>
+<h3 id="指导原则2：给模型思考的时间"><a href="#指导原则2：给模型思考的时间" class="headerlink" title="指导原则2：给模型思考的时间"></a>指导原则2：给模型思考的时间</h3><p>如果一个任务比较复杂、困难，或者需要的回复比较长，例如写一篇篇幅较长的文章，LLM 可能会为了及时响应你的请求，匆匆忙忙就给出结论。而这样匆忙之下得出的结论，往往不尽人意，很有可能是错误的，有失偏颇的。因此，对于一些 LLM 无法短时间内完成的任务，有一定困难的任务，我们可以显式地指示 LLM，花更长的时间进行思考，而不必急于响应。这一点和人类相似，通常来说，花更多的时间去思考，得到的结果总是会相对好一些。</p>
+<h4 id="策略1：指定任务的执行步骤"><a href="#策略1：指定任务的执行步骤" class="headerlink" title="策略1：指定任务的执行步骤"></a>策略1：指定任务的执行步骤</h4><p>在完成一个复杂或庞大的任务时，我们第一时间想到的，就是任务拆解。对于 LLM，这一方法也同样奏效，我们可以尝试将一个复杂的任务，拆解成一小步、一小步的小任务，指示 LLM 逐步完成。例如下面提供的例子。其中prompt_1 没有要求结构化的输出，prompt_2则在任务拆解的基础上，要求了逐步的结构化输出。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">text = <span class="string">f&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">In a charming village, siblings Jack and Jill set out on \ </span></span><br><span class="line"><span class="string">a quest to fetch water from a hilltop \ </span></span><br><span class="line"><span class="string">well. As they climbed, singing joyfully, misfortune \ </span></span><br><span class="line"><span class="string">struck—Jack tripped on a stone and tumbled \ </span></span><br><span class="line"><span class="string">down the hill, with Jill following suit. \ </span></span><br><span class="line"><span class="string">Though slightly battered, the pair returned home to \ </span></span><br><span class="line"><span class="string">comforting embraces. Despite the mishap, \ </span></span><br><span class="line"><span class="string">their adventurous spirits remained undimmed, and they \ </span></span><br><span class="line"><span class="string">continued exploring with delight.</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="comment"># example 1</span></span><br><span class="line">prompt_1 = <span class="string">f&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">Perform the following actions: </span></span><br><span class="line"><span class="string">1 - Summarize the following text delimited by triple backticks with 1 sentence.</span></span><br><span class="line"><span class="string">2 - Translate the summary into French.</span></span><br><span class="line"><span class="string">3 - List each name in the French summary.</span></span><br><span class="line"><span class="string">4 - Output a json object that contains the following keys: french_summary, num_names.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Separate your answers with line breaks.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Text:</span></span><br><span class="line"><span class="string">```<span class="subst">&#123;text&#125;</span>```</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">prompt_2 = <span class="string">f&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">Your task is to perform the following actions: </span></span><br><span class="line"><span class="string">1 - Summarize the following text delimited by &lt;&gt; with 1 sentence.</span></span><br><span class="line"><span class="string">2 - Translate the summary into French.</span></span><br><span class="line"><span class="string">3 - List each name in the French summary.</span></span><br><span class="line"><span class="string">4 - Output a json object that contains the following keys: french_summary, num_names.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Use the following format:</span></span><br><span class="line"><span class="string">Text: &lt;text to summarize&gt;</span></span><br><span class="line"><span class="string">Summary: &lt;summary&gt;</span></span><br><span class="line"><span class="string">Translation: &lt;summary translation&gt;</span></span><br><span class="line"><span class="string">Names: &lt;list of names in summary&gt;</span></span><br><span class="line"><span class="string">Output JSON: &lt;json with summary and num_names&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Text: &lt;<span class="subst">&#123;text&#125;</span>&gt;</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">response = get_completion(prompt_1)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Completion for prompt 1:&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(response)</span><br></pre></td></tr></table></figure>
 
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Completion for prompt 1:</span></span><br><span class="line"><span class="number">1</span> - Jack <span class="keyword">and</span> Jill, siblings <span class="keyword">from</span> a charming village, go on a quest to fetch water <span class="keyword">from</span> a hilltop well, but encounter misfortune along the way.</span><br><span class="line"></span><br><span class="line"><span class="number">2</span> - Jack et Jill, frère et sœur d<span class="string">&#x27;un charmant village, partent en quête d&#x27;</span>eau d<span class="string">&#x27;un puits au sommet d&#x27;</span>une colline, mais rencontrent des malheurs en chemin.</span><br><span class="line"></span><br><span class="line"><span class="number">3</span> - Jack, Jill</span><br><span class="line"></span><br><span class="line"><span class="number">4</span> - </span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;french_summary&quot;</span>: <span class="string">&quot;Jack et Jill, frère et sœur d&#x27;un charmant village, partent en quête d&#x27;eau d&#x27;un puits au sommet d&#x27;une colline, mais rencontrent des malheurs en chemin.&quot;</span>,</span><br><span class="line">  <span class="string">&quot;num_names&quot;</span>: <span class="number">2</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="二、安装-WordPress"><a href="#二、安装-WordPress" class="headerlink" title="二、安装 WordPress"></a>二、安装 WordPress</h2><p>接下来，我们要上传 WordPress 的程序安装包。我们可以去 <a target="_blank" rel="noopener" href="https://wordpress.org/download/">Download – WordPress.org</a> 下载最新的版本。下载到本地以后，我们会得到一个 .zip 的压缩包，直接上传到上文的根目录中即可。上传完成后，解压这个安装包。解压完成以后，我们进入到 wordpress 文件夹中，将其中的文件全部剪切，移动到我们网站的根目录下。以图中为例，就是移动到 www&#x2F;wwwroot&#x2F;beryminset.com 下。这样我们就不用另外修改 Nginx的路径配置了。</p>
-<p>如果你已经完成了域名解析，那么此时，你应该已经可以通过域名来访问了。如果没有，或者你的服务器在大陆，还在等待备案审核，也没关系，我们在浏览器中输入服务器的外网IP地址 <a target="_blank" rel="noopener" href="http://ip地址/wp-admin%EF%BC%8C%E6%AD%A4%E6%97%B6%E4%BC%9A%E6%8F%90%E7%A4%BA%E4%BD%A0%E5%BC%80%E5%A7%8B%E5%AE%89%E8%A3%85">http://IP地址/wp-admin，此时会提示你开始安装</a> WordPress。按照网页上内容的提示，一步一步安装即可。记得保存你的用户名和密码。安装完毕后，我们就会进入到 WordPress 的后台。</p>
-<img src="/2025/01/05/%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%973/WP%E4%B8%BB%E7%95%8C%E9%9D%A2.png" class="" title="WP主界面">
+<p>虽然的确是逐步完成了我们的指令，但是输出不够结构化，与下方的输出对比，显然，下面的输出更让人一目了然，也更易于通过代码传递。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Completion for prompt 2:</span></span><br><span class="line">Summary: Jack <span class="keyword">and</span> Jill, siblings, go on a quest to fetch water <span class="keyword">from</span> a hilltop well, but encounter misfortune along the way.</span><br><span class="line"></span><br><span class="line">Translation: Jack et Jill, frère et sœur, partent en quête d<span class="string">&#x27;eau d&#x27;</span>un puits au sommet d<span class="string">&#x27;une colline, mais rencontrent des malheurs en chemin.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Names: Jack, Jill</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Output JSON: </span></span><br><span class="line"><span class="string">&#123;</span></span><br><span class="line"><span class="string">  &quot;french_summary&quot;: &quot;Jack et Jill, frère et sœur, partent en quête d&#x27;</span>eau d<span class="string">&#x27;un puits au sommet d&#x27;</span>une colline, mais rencontrent des malheurs en chemin.<span class="string">&quot;,</span></span><br><span class="line"><span class="string">  &quot;</span>num_names<span class="string">&quot;: 2</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
 
-<p>锵锵，此时，什么也不用做，直接在浏览器中访问我们的域名或IP，应该就可以看到我们的初始网站啦。你显示的内容与我的网站示意图会不一样，这是正常的。</p>
-<img src="/2025/01/05/%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%973/BerryWeb.png" class="" title="BerryWeb">
+<h4 id="策略2：在得出结论前，指示-LLM-先自己寻找解决方案"><a href="#策略2：在得出结论前，指示-LLM-先自己寻找解决方案" class="headerlink" title="策略2：在得出结论前，指示 LLM 先自己寻找解决方案"></a>策略2：在得出结论前，指示 LLM 先自己寻找解决方案</h4><p>给出一道应用题，同时给出一位学生的解题思路，LLM很可能就会顺着学生的思路去解决这个问题。就和我们大多数人一样，一不留神就会被隐蔽的、错误的想法带跑。为了保证结果的正确性，我们可以指示 LLM 先判断给出的方法是否正确，如果不正确，则先制定自己的解决方案，然后再对问题进行求解。</p>
+<p>例如下面提供的例子。这个例子场景就比较复杂了，因此在提示词中充分应用了分隔符，防止 LLM 误解。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">prompt = <span class="string">f&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">Your task is to determine if the student&#x27;s solution is correct or not.</span></span><br><span class="line"><span class="string">To solve the problem do the following:</span></span><br><span class="line"><span class="string">- First, work out your own solution to the problem. </span></span><br><span class="line"><span class="string">- Then compare your solution to the student&#x27;s solution and evaluate if the student&#x27;s solution is correct or not. Don&#x27;t decide if the student&#x27;s solution is correct until </span></span><br><span class="line"><span class="string">you have done the problem yourself.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Use the following format:</span></span><br><span class="line"><span class="string">Question:</span></span><br><span class="line"><span class="string">```</span></span><br><span class="line"><span class="string">question here</span></span><br><span class="line"><span class="string">```</span></span><br><span class="line"><span class="string">Student&#x27;s solution:</span></span><br><span class="line"><span class="string">```</span></span><br><span class="line"><span class="string">student&#x27;s solution here</span></span><br><span class="line"><span class="string">```</span></span><br><span class="line"><span class="string">Actual solution:</span></span><br><span class="line"><span class="string">```</span></span><br><span class="line"><span class="string">steps to work out the solution and your solution here</span></span><br><span class="line"><span class="string">```</span></span><br><span class="line"><span class="string">Is the student&#x27;s solution the same as actual solution just calculated:</span></span><br><span class="line"><span class="string">```</span></span><br><span class="line"><span class="string">yes or no</span></span><br><span class="line"><span class="string">```</span></span><br><span class="line"><span class="string">Student grade:</span></span><br><span class="line"><span class="string">```</span></span><br><span class="line"><span class="string">correct or incorrect</span></span><br><span class="line"><span class="string">```</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Question:</span></span><br><span class="line"><span class="string">```</span></span><br><span class="line"><span class="string">I&#x27;m building a solar power installation and I need help working out the financials. </span></span><br><span class="line"><span class="string">- Land costs $100 / square foot</span></span><br><span class="line"><span class="string">- I can buy solar panels for $250 / square foot</span></span><br><span class="line"><span class="string">- I negotiated a contract for maintenance that will cost me a flat $100k per year, and an additional $10 / square foot</span></span><br><span class="line"><span class="string">What is the total cost for the first year of operations as a function of the number of square feet.</span></span><br><span class="line"><span class="string">``` </span></span><br><span class="line"><span class="string">Student&#x27;s solution:</span></span><br><span class="line"><span class="string">```</span></span><br><span class="line"><span class="string">Let x be the size of the installation in square feet.</span></span><br><span class="line"><span class="string">Costs:</span></span><br><span class="line"><span class="string">1. Land cost: 100x</span></span><br><span class="line"><span class="string">2. Solar panel cost: 250x</span></span><br><span class="line"><span class="string">3. Maintenance cost: 100,000 + 100x</span></span><br><span class="line"><span class="string">Total cost: 100x + 250x + 100,000 + 100x = 450x + 100,000</span></span><br><span class="line"><span class="string">```</span></span><br><span class="line"><span class="string">Actual solution:</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line">response = get_completion(prompt)</span><br><span class="line"><span class="built_in">print</span>(response) </span><br></pre></td></tr></table></figure>
 
-
-
-<h2 id="三、WordPress-装饰"><a href="#三、WordPress-装饰" class="headerlink" title="三、WordPress 装饰"></a>三、WordPress 装饰</h2><p>如果只是像初始界面显示的那样，或许无法满足你的定制需求。不过没关系，我们可以点击左侧菜单栏的<strong>插件</strong>，寻找我们心仪的主题并安装。WP 中有很多精美并且免费的主题插件。在安装主题之前，建议先去对应的主题主页浏览一下大概的效果，这个主题究竟是更适合电商、作品集还是博客。最好是选定一个主题下载安装，而不是一次下载多个，因为多个主题文件会占用更多的存储空间，影响到我们的网业性能。我使用的是 Puock 主题，这个主题还是比较适合博客的（如上图所示）。通常，我们安装完主题以后，可以点击对应的主题 tab 进一步进行 DIY。WP的插件生态相当丰富，从安全性、搜索优化到支付、时间轴显示、数据统计、主题等等，我们想要的功能基本上都可以通过安装插件来实现，不需要自己开发。</p>
-<p>在菜单栏的左侧，“文章”即我们平常写博客的地方，也是我们最常用的tab。“媒体”允许我们上传一些图片、视频等资源，在文章中进行引用。“页面”则不用多说，可以用来添加、修改如主页、关于我们的页面等。</p>
-<p>至此，我们的 WordPress 网站就搭建完成啦~</p>
-<h2 id="后续"><a href="#后续" class="headerlink" title="后续"></a>后续</h2><p>关于 WordPress 的使用，还有很多技巧，WP大学中有很多学习资源。如果你希望自己的网站看上去更酷炫，可以去WP大学上更进一步地学习。同时，还有诸如网站数据备份、迁移等，如果你有需要，也可以利用宝塔面板的强大功能，对网站进行数据备份和一键迁移，本博客就不详细展开了。</p>
-<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a target="_blank" rel="noopener" href="http://tencent.yundashi168.com/327.html">基于阿里云服务器搭建宝塔面板教程最全详解（图文）</a></p>
-<p><a target="_blank" rel="noopener" href="http://tencent.yundashi168.com/558.html">宝塔面板添加WordPress站点详细图文教程</a></p>
-<p><a target="_blank" rel="noopener" href="http://tencent.yundashi168.com/652.html">基于宝塔面板成功配置网站SSL安全证书(支持https访问)</a></p>
+<p>使用数学应用题或许会让你觉得不太实用，怎么会有人提供一个错误的方法，然后又让 LLM 判断，再请它制定一个正确的解决方案呢？但是，其实这个场景在我们的生活中非常常见。例如，编程过程中，你可以告诉它你正在实现的算法或是函数功能，并在 student solution 中提供自己的代码，请求 LLM 对你的代码进行 review。review 的方向也不一定是功能的正确性，还可以让它指点代码的可拓展性、可读性、性能优化等方面。如果是GPT-4的话，不仅代码正确率高，而且还能够提供详细的解析，是一个非常好的 coding pair搭档。</p>
+<h3 id="减少-LLM-的幻觉-欺骗"><a href="#减少-LLM-的幻觉-欺骗" class="headerlink" title="减少 LLM 的幻觉&#x2F;欺骗"></a>减少 LLM 的幻觉&#x2F;欺骗</h3><p>常使用 AI 的各位都知道，AI 常常骗人。比如让它提供某个领域的综述，它会提供一些看上去很逼真但是实际上根本不存在的内容。为了避免这一点，我们可以要求 LLM 在提供内容时，同时提供它的参考出处，这样，即使它想编造参考文献，我们也很容易验证是不是被欺骗了。或者，我们可以在对话过程中，就提供已经经过我们自身确认的文本资料、参考链接等，确保 LLM 不会自己胡编乱造。</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a target="_blank" rel="noopener" href="https://learn.deeplearning.ai/courses/chatgpt-prompt-eng/lesson/1/introduction">ChatGPT Prompt Engineering for Developers - DeepLearning.AI</a></p>
+<p>B站可以找到搬运翻译的中文版本👆：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Bo4y1A7FU/?share_source=copy_web">《吴恩达 x OpenAI Prompt课程》</a></p>
 
     
 
@@ -363,7 +356,7 @@
         </li>
         <li>
           <strong>本文链接：</strong>
-          <a href="https://wuxinberry.github.io/2025/01/05/建站指南3/" title="萌新友好！【WordPress】搭建属于你的个人网站（三）" target="_blank">https://wuxinberry.github.io/2025/01/05/建站指南3/</a>
+          <a href="https://wuxinberry.github.io/2025/01/19/Prompt-tips/" title="Prompt Engineering 提示词工程的时间技巧（一）" target="_blank">https://wuxinberry.github.io/2025/01/19/Prompt-tips/</a>
         </li>
         
         <li>
@@ -385,11 +378,15 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">建站</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">AIGC</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">教程</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Prompt-Engineering</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">提示词工程</a>
         		</li>
       		
 		</ul>
@@ -445,7 +442,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://wuxinberry.github.io/2025/01/05/%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%973/" alt="微信分享二维码"> -->
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://wuxinberry.github.io/2025/01/19/Prompt-tips/" alt="微信分享二维码"> -->
     </div>
 </div>
 
@@ -460,18 +457,9 @@
 
 <nav id="article-nav">
   
-    <a href="/2025/01/12/ComfyUI-lora/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          ComfyUI 中使用 LoRA 模型全攻略
-        
-      </div>
-    </a>
   
-  
-    <a href="/2024/12/25/ComfyUI-tips/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">ComfyUI踩坑记录，一些帮助你少走弯路的小技巧</div>
+    <a href="/2025/01/12/ComfyUI-lora/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">ComfyUI 中使用 LoRA 模型全攻略</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -498,7 +486,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9B%B6%E3%80%81%E4%B8%80%E4%BA%9B%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="toc-number">1.</span> <span class="toc-text">零、一些准备工作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%86%E5%A4%87%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-number">1.1.</span> <span class="toc-text">准备服务器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%9F%E5%90%8D"><span class="toc-number">1.2.</span> <span class="toc-text">域名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E5%86%8C%E5%AE%9D%E5%A1%94%E8%B4%A6%E5%8F%B7"><span class="toc-number">1.3.</span> <span class="toc-text">注册宝塔账号</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF"><span class="toc-number">1.4.</span> <span class="toc-text">安装宝塔面板</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="toc-number">2.</span> <span class="toc-text">一、环境配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-LNMP"><span class="toc-number">2.1.</span> <span class="toc-text">安装 LNMP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E7%AB%99%E7%82%B9"><span class="toc-number">2.2.</span> <span class="toc-text">添加站点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%AE%89%E8%A3%85-WordPress"><span class="toc-number">3.</span> <span class="toc-text">二、安装 WordPress</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81WordPress-%E8%A3%85%E9%A5%B0"><span class="toc-number">4.</span> <span class="toc-text">三、WordPress 装饰</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%8E%E7%BB%AD"><span class="toc-number">5.</span> <span class="toc-text">后续</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-number">5.1.</span> <span class="toc-text">参考</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0-%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%AD%A6%E4%B9%A0%E6%8F%90%E7%A4%BA%E8%AF%8D%E5%B7%A5%E7%A8%8B%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">0. 为什么要学习提示词工程？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8C%87%E5%AF%BC%E5%8E%9F%E5%88%99-Guidelines"><span class="toc-number">2.</span> <span class="toc-text">指导原则 Guidelines</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%87%E5%AF%BC%E5%8E%9F%E5%88%991%EF%BC%9A%E7%BC%96%E5%86%99%E6%B8%85%E6%99%B0%E8%80%8C%E5%85%B7%E4%BD%93%E7%9A%84%E6%8F%90%E7%A4%BA"><span class="toc-number">2.1.</span> <span class="toc-text">指导原则1：编写清晰而具体的提示</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AD%96%E7%95%A51%EF%BC%9A%E4%BD%BF%E7%94%A8%E5%88%86%E9%9A%94%E7%AC%A6"><span class="toc-number">2.1.1.</span> <span class="toc-text">策略1：使用分隔符</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%98%B2%E6%AD%A2%E6%B3%A8%E5%85%A5"><span class="toc-number">2.1.1.1.</span> <span class="toc-text">防止注入</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%88%86%E9%9A%94%E7%AC%A6%E7%9A%84%E7%B1%BB%E5%9E%8B"><span class="toc-number">2.1.1.2.</span> <span class="toc-text">分隔符的类型</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AD%96%E7%95%A52%EF%BC%9A%E7%BB%93%E6%9E%84%E5%8C%96%E7%9A%84%E8%BE%93%E5%87%BA"><span class="toc-number">2.1.2.</span> <span class="toc-text">策略2：结构化的输出</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AD%96%E7%95%A53%EF%BC%9A%E8%A6%81%E6%B1%82LLM%E6%A3%80%E6%9F%A5%E6%98%AF%E5%90%A6%E6%BB%A1%E8%B6%B3%E6%9D%A1%E4%BB%B6"><span class="toc-number">2.1.3.</span> <span class="toc-text">策略3：要求LLM检查是否满足条件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AD%96%E7%95%A54%EF%BC%9A%E5%B0%91%E6%A0%B7%E6%9C%AC%E6%8F%90%E7%A4%BA-few-shot-prompt"><span class="toc-number">2.1.4.</span> <span class="toc-text">策略4：少样本提示 few-shot prompt</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%87%E5%AF%BC%E5%8E%9F%E5%88%992%EF%BC%9A%E7%BB%99%E6%A8%A1%E5%9E%8B%E6%80%9D%E8%80%83%E7%9A%84%E6%97%B6%E9%97%B4"><span class="toc-number">2.2.</span> <span class="toc-text">指导原则2：给模型思考的时间</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AD%96%E7%95%A51%EF%BC%9A%E6%8C%87%E5%AE%9A%E4%BB%BB%E5%8A%A1%E7%9A%84%E6%89%A7%E8%A1%8C%E6%AD%A5%E9%AA%A4"><span class="toc-number">2.2.1.</span> <span class="toc-text">策略1：指定任务的执行步骤</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AD%96%E7%95%A52%EF%BC%9A%E5%9C%A8%E5%BE%97%E5%87%BA%E7%BB%93%E8%AE%BA%E5%89%8D%EF%BC%8C%E6%8C%87%E7%A4%BA-LLM-%E5%85%88%E8%87%AA%E5%B7%B1%E5%AF%BB%E6%89%BE%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-number">2.2.2.</span> <span class="toc-text">策略2：在得出结论前，指示 LLM 先自己寻找解决方案</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%8F%E5%B0%91-LLM-%E7%9A%84%E5%B9%BB%E8%A7%89-%E6%AC%BA%E9%AA%97"><span class="toc-number">2.3.</span> <span class="toc-text">减少 LLM 的幻觉&#x2F;欺骗</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">3.</span> <span class="toc-text">参考资料</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -525,9 +513,9 @@
     <script src="/lib/gitment.js"></script>
   
   <script>
-    <!-- id: "萌新友好！【WordPress】搭建属于你的个人网站（三）" -->
+    <!-- id: "Prompt Engineering 提示词工程的时间技巧（一）" -->
     var gitment = new Gitment({
-      id: "20250105160005",
+      id: "20250119141346",
       owner: 'Wuxinberry',
       repo: 'blog_comments',
       oauth: {

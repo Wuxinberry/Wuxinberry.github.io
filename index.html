@@ -208,6 +208,108 @@
             
 
   
+    <article id="post-Prompt-tips4" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2025/02/09/Prompt-tips4/" target="_blank">Prompt Engineering 提示词工程的实践技巧（四）</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2025/02/09/Prompt-tips4/" class="archive-article-date">
+        <time datetime="2025-02-09T07:36:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-02-09</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <p>本篇博客主要总结了 DeepLearning AI 公开课程 <em>Prompt Engineering 提示词工程</em> 第五章节 Inferring 推理的内容，也可以理解为该章节的笔记。</p>
+<p>输入一些文本，让模型帮助我们完成推理的工作，如提取标签、名字，梳理文本情感等。看起来和之前的输入文本，让模型提取其中的关键信息撰写文章有些类似，不过实际应用中，prompt 还是会有一些不同。</p>
+<h2 id="1-文本情绪分类"><a href="#1-文本情绪分类" class="headerlink" title="1. 文本情绪分类"></a>1. 文本情绪分类</h2><p>传统的机器学习工作流中，要实现文本情绪分类，必须收集标签数据集、训练模型并部署，推断等。对于个人开发者而言，这样的过程工作量大，很繁杂，并不是很合适。LLM将我们从这些繁琐的工作中解放出来，可以通过几个简短的 prompt 就完成这些工作。</p>
+<p>在上一个章节中，我们会采用如下的 prompt 来指示 LLM，让它提取文本。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">lamp_review = <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">Needed a nice lamp for my bedroom, and this one had additional storage and not too high of a price point. Got it fast. The string to our lamp broke during the transit and the company happily sent over a new one. Came within a few days as well. It was easy to put together. I had a missing part, so I contacted their support and they very quickly got me the missing piece! Lumina seems to me to be a great company that cares about their customers and products!!</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line">prompt = <span class="string">f&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">What is the sentiment of the following product review, which is delimited with triple backticks?</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Review text: &#x27;&#x27;&#x27;<span class="subst">&#123;lamp_review&#125;</span>&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="comment">## 输出</span></span><br><span class="line">The sentiment of the review <span class="keyword">is</span> positive. The reviewer <span class="keyword">is</span> satisfied <span class="keyword">with</span> the lamp they purchased, mentioning the additional storage, reasonable price, fast delivery, good customer service, <span class="keyword">and</span> ease of assembly. They also praise the company <span class="keyword">for</span> caring about their customers <span class="keyword">and</span> products.</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，虽然正确提取了信息，但是不够凝练。对prompt做一些改变，要求输出更凝练：
+    
+    <a class="article-more-a" href="/2025/02/09/Prompt-tips4/#more">more >></a>
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">AIGC</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Prompt-Engineering</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">提示词工程</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2025/02/09/Prompt-tips4/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Prompt-tips3" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1119,114 +1221,10 @@
 
 
   
-    <article id="post-ComfyUI入门" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
   
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2024/04/17/ComfyUI%E5%85%A5%E9%97%A8/" target="_blank">AI绘图神器：ComfyUI零基础入门指南（一）</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2024/04/17/ComfyUI%E5%85%A5%E9%97%A8/" class="archive-article-date">
-        <time datetime="2024-04-17T10:01:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-04-17</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <p>ComfyUI 相关博客目录：</p>
-<p><a href="https://wuxinberry.github.io/2024/04/17/ComfyUI%E5%85%A5%E9%97%A8/">AI绘图神器：ComfyUI零基础入门指南（一）</a></p>
-<p><a href="https://wuxinberry.github.io/2024/12/25/ComfyUI-tips/">ComfyUI踩坑记录，一些帮助你少走弯路的小技巧</a></p>
-<p><a href="https://wuxinberry.github.io/2025/01/12/ComfyUI-lora/">ComfyUI 中使用 LoRA 模型全攻略</a></p>
-<p><a href="https://wuxinberry.github.io/2024/12/23/ComfyUI%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86/">AI绘图，是如何从算力到画面的</a></p>
-<p>这是一份 ComfyUI 的零基础入门指南。文本将介绍如何从零开始使用 ComfyUI，生成所需要的素材。本文注重实操，如果你对AI绘图的原理感兴趣，可以移步我的另一篇博客<a href="https://wuxinberry.github.io/2024/12/23/ComfyUI%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86/">《AI绘图，是如何从算力到画面的》</a>。了解一下 AI 生图的基本原理，也有助于我们选取模型、编写 prompt，调整参数。</p>
-<p>或许一开始你觉得生成的图片差强人意，但是随着你逐渐进阶，只需要传几张风格图，输入一些指令，ComfyUI 分分钟就可以帮助你生成足以商用的广告图、海报、Logo 甚至是视频，为你节省大量的时间和资金成本。还在等什么，来，试试看！</p>
-<h2 id="ComfyUI-简介"><a href="#ComfyUI-简介" class="headerlink" title="ComfyUI 简介"></a>ComfyUI 简介</h2><p>如果你还不知道什么是ComfyUI，那么，最简单的介绍就是 ComfyUI 是一款 AIGC 工具，主要功能是输入图文、视频等，产出图片或视频。</p>
-<p>市面上有许多生成式的AI工具。为什么要选择 ComfyUI 呢？相较于原生的 Stable Diffusion、Midjourney 等 AIGC 工具，SD Web UI 和 ComfyUI 将模型与工具分离。简单理解就是<strong>更容易实现自定义配置，有着更高的上限</strong>，更生成我们想要的风格的作品。</p>
-<p>SD Web UI 和 ComfyUI 都对SD的工作流进行了拆分，WebUI 仍然是传统网页页面的形式，虽然能够自由输入、调整模型、安装插件，但是如果想要将输出作为下一个环节的输入，就需要切换页面，ComfyUI 则以节点为单位，<strong>更加自由</strong>，能够以类似于拼乐高的形式搭建AI生图的工作流程。</p>
-<h2 id="ComfyUI-安装"><a href="#ComfyUI-安装" class="headerlink" title="ComfyUI 安装"></a>ComfyUI 安装</h2><p>ComfyUI 的安装很简单，参考 <a target="_blank" rel="noopener" href="https://github.com/comfyanonymous/ComfyUI">ComfyUI</a> 的GitHub主页，按照指定的方式进行安装即可。</p>
-<p>虽然现在有很多的整合包、一键启动包，但是我仍然推荐使用 Git 进行本地安装，因为这样更新会更加方便。</p>
-<p>在安装以前，有一点需要提醒的是，AI生图对算力的需求比较高，通常我们会用到配备有独立显卡的计算机。当然，ComfyUI 也支持使用 CPU 来计算，但是那样一来，出图的效率就会降低到 30%-40%。
-    
-    <a class="article-more-a" href="/2024/04/17/ComfyUI%E5%85%A5%E9%97%A8/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">AIGC</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">ComfyUI</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Stable Diffusion</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2024/04/17/ComfyUI%E5%85%A5%E9%97%A8/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    </nav>
   
 
 

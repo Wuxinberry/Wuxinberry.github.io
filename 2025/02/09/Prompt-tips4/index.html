@@ -6,19 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://wuxinberry.github.io">
-  <title>Tag: 提示词工程 | Berry&#39;s Blog</title>
+  <title>Prompt Engineering 提示词工程的实践技巧（四） | Berry&#39;s Blog</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="目前是游戏行业服务器端工程师，一个空闲时摄影、游戏、电影什么都爱捣鼓捣鼓的00后">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Berry&#39;s Blog">
-<meta property="og:url" content="https://wuxinberry.github.io/tags/%E6%8F%90%E7%A4%BA%E8%AF%8D%E5%B7%A5%E7%A8%8B/index.html">
+  <meta name="description" content="本篇博客主要总结了 DeepLearning AI 公开课程 Prompt Engineering 提示词工程 第五章节 Inferring 推理的内容，也可以理解为该章节的笔记。 输入一些文本，让模型帮助我们完成推理的工作，如提取标签、名字，梳理文本情感等。看起来和之前的输入文本，让模型提取其中的关键信息撰写文章有些类似，不过实际应用中，prompt 还是会有一些不同。 1. 文本情绪分类传统的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Prompt Engineering 提示词工程的实践技巧（四）">
+<meta property="og:url" content="https://wuxinberry.github.io/2025/02/09/Prompt-tips4/index.html">
 <meta property="og:site_name" content="Berry&#39;s Blog">
-<meta property="og:description" content="目前是游戏行业服务器端工程师，一个空闲时摄影、游戏、电影什么都爱捣鼓捣鼓的00后">
+<meta property="og:description" content="本篇博客主要总结了 DeepLearning AI 公开课程 Prompt Engineering 提示词工程 第五章节 Inferring 推理的内容，也可以理解为该章节的笔记。 输入一些文本，让模型帮助我们完成推理的工作，如提取标签、名字，梳理文本情感等。看起来和之前的输入文本，让模型提取其中的关键信息撰写文章有些类似，不过实际应用中，prompt 还是会有一些不同。 1. 文本情绪分类传统的">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-02-09T07:36:31.000Z">
+<meta property="article:modified_time" content="2025-02-09T08:34:19.706Z">
 <meta property="article:author" content="Berry">
-<meta property="article:tag" content="后端&#x2F;游戏&#x2F;">
+<meta property="article:tag" content="AIGC">
+<meta property="article:tag" content="Prompt-Engineering">
+<meta property="article:tag" content="提示词工程">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Berry&#39;s Blog" type="application/atom+xml">
@@ -201,41 +205,167 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-Prompt-tips4" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
   
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2025" class="archive-year">2025</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
+    <h1 class="article-title" itemprop="name">
+      Prompt Engineering 提示词工程的实践技巧（四）
+    </h1>
+  
+
+
+  
+  
+        
+        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
+
 <a href="/2025/02/09/Prompt-tips4/" class="archive-article-date">
         <time datetime="2025-02-09T07:36:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-02-09</time>
 </a>
 
+  
+  
+    
+<div style="margin-top:10px;">
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <!-- fonts.scss -->
+      <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
+      <i class="icon-statistics"></i>
+      <span class="post-meta-item-text"> 字数统计:</span>
+      <span class="post-count">1.9k字</span>
+    </span>
+  </span>
+
+  <span class="post-time">
+    &nbsp; | &nbsp;
+    <span class="post-meta-item-icon">
+      <i class="icon-book icon"></i>
+      <span class="post-meta-item-text"> 阅读时长≈</span>
+      <span class="post-count">8分</span>
+    </span>
+  </span>
+</div>
+
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <p>本篇博客主要总结了 DeepLearning AI 公开课程 <em>Prompt Engineering 提示词工程</em> 第五章节 Inferring 推理的内容，也可以理解为该章节的笔记。</p>
+<p>输入一些文本，让模型帮助我们完成推理的工作，如提取标签、名字，梳理文本情感等。看起来和之前的输入文本，让模型提取其中的关键信息撰写文章有些类似，不过实际应用中，prompt 还是会有一些不同。</p>
+<h2 id="1-文本情绪分类"><a href="#1-文本情绪分类" class="headerlink" title="1. 文本情绪分类"></a>1. 文本情绪分类</h2><p>传统的机器学习工作流中，要实现文本情绪分类，必须收集标签数据集、训练模型并部署，推断等。对于个人开发者而言，这样的过程工作量大，很繁杂，并不是很合适。LLM将我们从这些繁琐的工作中解放出来，可以通过几个简短的 prompt 就完成这些工作。</p>
+<p>在上一个章节中，我们会采用如下的 prompt 来指示 LLM，让它提取文本。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">lamp_review = <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">Needed a nice lamp for my bedroom, and this one had additional storage and not too high of a price point. Got it fast. The string to our lamp broke during the transit and the company happily sent over a new one. Came within a few days as well. It was easy to put together. I had a missing part, so I contacted their support and they very quickly got me the missing piece! Lumina seems to me to be a great company that cares about their customers and products!!</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line">prompt = <span class="string">f&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">What is the sentiment of the following product review, which is delimited with triple backticks?</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Review text: &#x27;&#x27;&#x27;<span class="subst">&#123;lamp_review&#125;</span>&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="comment">## 输出</span></span><br><span class="line">The sentiment of the review <span class="keyword">is</span> positive. The reviewer <span class="keyword">is</span> satisfied <span class="keyword">with</span> the lamp they purchased, mentioning the additional storage, reasonable price, fast delivery, good customer service, <span class="keyword">and</span> ease of assembly. They also praise the company <span class="keyword">for</span> caring about their customers <span class="keyword">and</span> products.</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，虽然正确提取了信息，但是不够凝练。对prompt做一些改变，要求输出更凝练：<span id="more"></span></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">prompt = <span class="string">f&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">What is the sentiment of the following product review, </span></span><br><span class="line"><span class="string">which is delimited with triple backticks?</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Give your answer as a single word, either &quot;positive&quot; or &quot;negative&quot;.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Review text: &#x27;&#x27;&#x27;<span class="subst">&#123;lamp_review&#125;</span>&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="comment">## 输出</span></span><br><span class="line">Positive</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，要求LLM对情感进行二元分类，并给出固定的选项，可以让回复更标准，更易于在程序之间传递。</p>
+<h2 id="2-文本情绪识别"><a href="#2-文本情绪识别" class="headerlink" title="2. 文本情绪识别"></a>2. 文本情绪识别</h2><p>更进一步，为了更细致地了解文本中包含的情绪，我们可以让LLM将文本中的多种情绪概括成一个词语列表，如下所示：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">prompt = <span class="string">f&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">Identify a list of emotions that the writer of the following review is expressing. Include no more than five items in the list. Format your answer as a list of lower-case words separated by commas.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Review text: &#x27;&#x27;&#x27;<span class="subst">&#123;lamp_review&#125;</span>&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="comment">## 输出</span></span><br><span class="line">happy, satisfied, grateful, impressed, content</span><br></pre></td></tr></table></figure>
+
+<p>和前面我们要求 LLM 判断这段文本的态度类似，我们可以要求 LLM 帮助我们识别出特别不满的情绪，并返回 YES 或 NO。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">prompt = <span class="string">f&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">Is the writer of the following review expressing anger? The review is delimited with triple backticks. Give your answer as either yes or no.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Review text: &#x27;&#x27;&#x27;<span class="subst">&#123;lamp_review&#125;</span>&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="comment">## 输出</span></span><br><span class="line">No</span><br></pre></td></tr></table></figure>
+
+<p> 我们还可以让 LLM 帮助我们提取评论中涉及的产品和制造商，并以JSON的格式返回。这在批量处理用户评价、反馈时常常用到。例如在游戏中，收集某个活动期间玩家的公平发言，并分析是否有对某个活动极其不满的情绪，我们就可以让 LLM 提取表达不满的玩家所提到的活动名字。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">prompt = <span class="string">f&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">Identify the following items from the review text: </span></span><br><span class="line"><span class="string">- Item purchased by reviewer</span></span><br><span class="line"><span class="string">- Company that made the item</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">The review is delimited with triple backticks. Format your response as a JSON object with </span></span><br><span class="line"><span class="string">&quot;Item&quot; and &quot;Brand&quot; as the keys. If the information isn&#x27;t present, use &quot;unknown&quot; as the value. Make your response as short as possible.</span></span><br><span class="line"><span class="string">  </span></span><br><span class="line"><span class="string">Review text: &#x27;&#x27;&#x27;<span class="subst">&#123;lamp_review&#125;</span>&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="comment">## 输出</span></span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;Item&quot;</span>: <span class="string">&quot;lamp&quot;</span>,</span><br><span class="line">  <span class="string">&quot;Brand&quot;</span>: <span class="string">&quot;Lumina&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-一次性处理多个任务"><a href="#3-一次性处理多个任务" class="headerlink" title="3. 一次性处理多个任务"></a>3. 一次性处理多个任务</h2><p>将prompt整合，我们可以将上述的多个任务，通过一次请求完成。在指示中，一定要足够清晰、明确，比如指出返回的选项、数据类型，要求返回JSON，并指明 key 值。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">prompt = <span class="string">f&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">Identify the following items from the review text: </span></span><br><span class="line"><span class="string">- Sentiment (positive or negative)</span></span><br><span class="line"><span class="string">- Is the reviewer expressing anger? (true or false)</span></span><br><span class="line"><span class="string">- Item purchased by reviewer</span></span><br><span class="line"><span class="string">- Company that made the item</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">The review is delimited with triple backticks. Format your response as a JSON object with &quot;Sentiment&quot;, &quot;Anger&quot;, &quot;Item&quot; and &quot;Brand&quot; as the keys.If the information isn&#x27;t present, use &quot;unknown&quot; as the value. Make your response as short as possible. Format the Anger value as a boolean.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Review text: &#x27;&#x27;&#x27;<span class="subst">&#123;lamp_review&#125;</span>&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="comment">## 输出</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">&quot;Sentiment&quot;</span>: <span class="string">&quot;positive&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Anger&quot;</span>: false,</span><br><span class="line">    <span class="string">&quot;Item&quot;</span>: <span class="string">&quot;lamp&quot;</span>, <span class="comment"># 视频中展示的输出比我自己运行得到的要更详细一些</span></span><br><span class="line">    <span class="string">&quot;Brand&quot;</span>: <span class="string">&quot;Lumina&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="4-文本主题推断"><a href="#4-文本主题推断" class="headerlink" title="4. 文本主题推断"></a>4. 文本主题推断</h2><p>LLM 的另一个技能是推断主题。</p>
+<h3 id="提炼文本主题"><a href="#提炼文本主题" class="headerlink" title="提炼文本主题"></a>提炼文本主题</h3><p>输入一段长文本，我们可以要求 LLM 确定这段文本所讨论的主题。我们可以指定 LLM 提炼几个主题，每个主题用一到两个单词描述，以逗号分隔的列表来表示。由于示例文本比较长，在此不另外列出，实际上，用什么样的文本作为输入并不是很重要。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">prompt = <span class="string">f&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">Determine five topics that are being discussed in the following text, which is delimited by triple backticks.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Make each item one or two words long. </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Format your response as a list of items separated by commas.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Text sample: &#x27;&#x27;&#x27;<span class="subst">&#123;story&#125;</span>&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="comment">## 输出</span></span><br><span class="line">government survey, job satisfaction, NASA, Social Security Administration, employee concerns</span><br><span class="line"></span><br><span class="line"><span class="comment">## 使用split输出</span></span><br><span class="line">response.split(sep=<span class="string">&#x27;,&#x27;</span>)</span><br><span class="line">[<span class="string">&#x27;government survey&#x27;</span>, <span class="string">&#x27; job satisfaction&#x27;</span>, <span class="string">&#x27; NASA&#x27;</span>, <span class="string">&#x27; Social Security Administration&#x27;</span>, <span class="string">&#x27; employee concerns&#x27;</span>]</span><br></pre></td></tr></table></figure>
+
+<h3 id="文本主题索引"><a href="#文本主题索引" class="headerlink" title="文本主题索引"></a>文本主题索引</h3><p>既然 LLM 能够提取出一段文本中的主题，那么反过来，我们也可以让 LLM 判断，某个主题是否为文本的主题之一。</p>
+<p>首先，我们要整理出我们关心的主题 list。将这个主题 list 和文本都输入给 LLM，要求 LLM 根据主题是否相关，以 0&#x2F;1 的形式表示结果。可以注意到，在prompt中，我们将 topic_list 的格式转化为了一个逗号分隔的文本形式。因为我们不能直接将python定义的数组嵌入 prompt 中。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">topic_list = [<span class="string">&quot;nasa&quot;</span>, <span class="string">&quot;local government&quot;</span>, <span class="string">&quot;engineering&quot;</span>, <span class="string">&quot;employee satisfaction&quot;</span>, <span class="string">&quot;federal government&quot;</span>]</span><br><span class="line"></span><br><span class="line">prompt = <span class="string">f&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">Determine whether each item in the following list of topics is a topic in the text below, which is delimited with triple backticks.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Give your answer as follows: item from the list: 0 or 1</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">List of topics: <span class="subst">&#123;<span class="string">&quot;, &quot;</span>.join(topic_list)&#125;</span></span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Text sample: &#x27;&#x27;&#x27;<span class="subst">&#123;story&#125;</span>&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="comment">## 输出</span></span><br><span class="line">nasa: <span class="number">1</span></span><br><span class="line">local government: <span class="number">0</span></span><br><span class="line">engineering: <span class="number">0</span></span><br><span class="line">employee satisfaction: <span class="number">1</span></span><br><span class="line">federal government: <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>这个文本主题推断的技能，还可以稍加包装，用作文章提醒。例如，定义一个你感兴趣的主题 list，就像前文的 topic_list一样，每次有新增的文章发布时，就执行一遍上面的操作。在拿到返回值以后，根据返回的 0&#x2F;1，判断是否要给用户发送提醒。这其实就可以成为文章订阅机制的一部分。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">topic_dict = &#123;i.split(<span class="string">&#x27;: &#x27;</span>)[<span class="number">0</span>]: <span class="built_in">int</span>(i.split(<span class="string">&#x27;: &#x27;</span>)[<span class="number">1</span>]) <span class="keyword">for</span> i <span class="keyword">in</span> response.split(sep=<span class="string">&#x27;\n&#x27;</span>)&#125;</span><br><span class="line"><span class="keyword">if</span> topic_dict[<span class="string">&#x27;nasa&#x27;</span>] == <span class="number">1</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;ALERT: New NASA story!&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a target="_blank" rel="noopener" href="https://learn.deeplearning.ai/courses/chatgpt-prompt-eng/lesson/1/introduction">ChatGPT Prompt Engineering for Developers - DeepLearning.AI</a></p>
+<p>B站可以找到搬运翻译的中文版本👆：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Bo4y1A7FU/?share_source=copy_web">《吴恩达 x OpenAI Prompt课程》</a></p>
+
+    
+
+    
+    <div class="page-reward">
+      <a href="javascript:void(0);" class="page-reward-btn tooltip-top" target="_self">
+        <div class="tooltip tooltip-east">
+          <span class="tooltip-item">
+            赏
+          </span>
+          <span class="tooltip-content">
+            <span class="tooltip-text">
+              <span class="tooltip-inner">
+                <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i
+                    class="icon icon-quo-right"></i></p>
+                <div class="reward-box">
+                  
+                  <div class="reward-box-item">
+                    <img class="reward-img" src="/img/alipay.jpg">
+                    <span class="reward-type">支付宝</span>
+                  </div>
+                  
+                  
+                  <div class="reward-box-item">
+                    <img class="reward-img" src="/img/wechat_pay.jpg">
+                    <span class="reward-type">微信</span>
+                  </div>
+                  
+                </div>
+              </span>
+            </span>
+          </span>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2025/02/09/Prompt-tips4/" target="_blank">Prompt Engineering 提示词工程的实践技巧（四）</a>
-  
-    </h1>
-  
+      </a>
+    </div>
+    
 
-
-        <div class="article-info info-on-right">
+    
+    <div class="declare"> 
+      <ul class="post-copyright">
+        <li>
+          <strong>本文作者：</strong>
+          Berry
+        </li>
+        <li>
+          <strong>本文链接：</strong>
+          <a href="https://wuxinberry.github.io/2025/02/09/Prompt-tips4/" title="Prompt Engineering 提示词工程的实践技巧（四）" target="_blank">https://wuxinberry.github.io/2025/02/09/Prompt-tips4/</a>
+        </li>
+        
+        <li>
+          <strong>版权声明： </strong>
           
+          本博客所有文章除特别声明外，均采用 <a href="https://github.com/JoeyBling/hexo-theme-yilia-plus/blob/master/LICENSE" rel="external nofollow" target="_blank">MIT</a> 许可协议。转载请注明出处！
+        </li>
+        
+      </ul>
+    </div>
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -255,172 +385,143 @@
 		</ul>
 	</div>
 
-          
+    
 
+    
+
+    
+    
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <!-- <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a> -->
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://wuxinberry.github.io/2025/02/09/Prompt-tips4/" alt="微信分享二维码"> -->
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+
+    
+    <div class="clearfix"></div>
+  </div>
   </div>
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2025/01/21/Prompt-tips3/" class="archive-article-date">
-        <time datetime="2025-01-21T06:29:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-01-21</time>
-</a>
 
+
+<nav id="article-nav">
+  
+  
+    <a href="/2025/01/21/Prompt-tips3/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Prompt Engineering 提示词工程的实践技巧（三）</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2025/01/21/Prompt-tips3/" target="_blank">Prompt Engineering 提示词工程的实践技巧（三）</a>
-  
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">AIGC</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Prompt-Engineering</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">提示词工程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%96%87%E6%9C%AC%E6%83%85%E7%BB%AA%E5%88%86%E7%B1%BB"><span class="toc-number">1.</span> <span class="toc-text">1. 文本情绪分类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%96%87%E6%9C%AC%E6%83%85%E7%BB%AA%E8%AF%86%E5%88%AB"><span class="toc-number">2.</span> <span class="toc-text">2. 文本情绪识别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E4%B8%80%E6%AC%A1%E6%80%A7%E5%A4%84%E7%90%86%E5%A4%9A%E4%B8%AA%E4%BB%BB%E5%8A%A1"><span class="toc-number">3.</span> <span class="toc-text">3. 一次性处理多个任务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E6%96%87%E6%9C%AC%E4%B8%BB%E9%A2%98%E6%8E%A8%E6%96%AD"><span class="toc-number">4.</span> <span class="toc-text">4. 文本主题推断</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%90%E7%82%BC%E6%96%87%E6%9C%AC%E4%B8%BB%E9%A2%98"><span class="toc-number">4.1.</span> <span class="toc-text">提炼文本主题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E6%9C%AC%E4%B8%BB%E9%A2%98%E7%B4%A2%E5%BC%95"><span class="toc-number">4.2.</span> <span class="toc-text">文本主题索引</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">5.</span> <span class="toc-text">参考资料</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2025/01/20/Prompt-tips2/" class="archive-article-date">
-        <time datetime="2025-01-20T06:33:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-01-20</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2025/01/20/Prompt-tips2/" target="_blank">Prompt Engineering 提示词工程的实践技巧（二）</a>
-  
-    </h1>
-  
+        
+    </div>
+</aside>
 
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">AIGC</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Prompt-Engineering</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">提示词工程</a>
-        		</li>
-      		
-		</ul>
-	</div>
 
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2025/01/19/Prompt-tips/" class="archive-article-date">
-        <time datetime="2025-01-19T06:13:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-01-19</time>
-</a>
 
-        </div>
-    	 
+
+
+
+
+
+
   
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2025/01/19/Prompt-tips/" target="_blank">Prompt Engineering 提示词工程的实践技巧（一）</a>
+  <div id="gitment-ctn"></div>
   
-    </h1>
+    <!-- 中文 -->
+    <link rel="stylesheet" href="/lib/gitment.css">
+    <script src="/lib/gitment.js"></script>
+  
+  <script>
+    <!-- id: "Prompt Engineering 提示词工程的实践技巧（四）" -->
+    var gitment = new Gitment({
+      id: "20250209153631",
+      owner: 'Wuxinberry',
+      repo: 'blog_comments',
+      oauth: {
+        client_id: 'Ov23linQcyh9hypoAT9t',
+        client_secret: 'aa9da44b5100641bc5144e38c22465ca48640297',
+      },
+    })
+    gitment.render('gitment-ctn')
+  </script>
+
+
   
 
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">AIGC</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Prompt-Engineering</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">提示词工程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -461,9 +562,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: true,
 		toc_hide_index: true,

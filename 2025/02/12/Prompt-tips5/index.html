@@ -6,20 +6,27 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://wuxinberry.github.io">
-  <title>Archives | Berry&#39;s Blog</title>
+  <title>Prompt Engineering 提示词工程的实践技巧（五） | Berry&#39;s Blog</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="目前是游戏行业服务器端工程师，一个空闲时摄影、游戏、电影什么都爱捣鼓捣鼓的00后">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Berry&#39;s Blog">
-<meta property="og:url" content="https://wuxinberry.github.io/archives/page/2/index.html">
+  <meta name="description" content="本篇博客主要总结了 DeepLearning AI 公开课程 Prompt Engineering 提示词工程 第六章节 Transfering 转换的内容，也可以理解为该章节的笔记。 在这个章节，我们将学习如何使用 LLM 帮助我们完成翻译、拼写和语法检查、语气调整、格式转化等文本任务。虽然现在已经有很多很强大的翻译软件，但是当应用到特定领域的时候，我们还是会需要根据自己的应用需求，构建特定的翻">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Prompt Engineering 提示词工程的实践技巧（五）">
+<meta property="og:url" content="https://wuxinberry.github.io/2025/02/12/Prompt-tips5/index.html">
 <meta property="og:site_name" content="Berry&#39;s Blog">
-<meta property="og:description" content="目前是游戏行业服务器端工程师，一个空闲时摄影、游戏、电影什么都爱捣鼓捣鼓的00后">
+<meta property="og:description" content="本篇博客主要总结了 DeepLearning AI 公开课程 Prompt Engineering 提示词工程 第六章节 Transfering 转换的内容，也可以理解为该章节的笔记。 在这个章节，我们将学习如何使用 LLM 帮助我们完成翻译、拼写和语法检查、语气调整、格式转化等文本任务。虽然现在已经有很多很强大的翻译软件，但是当应用到特定领域的时候，我们还是会需要根据自己的应用需求，构建特定的翻">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://wuxinberry.github.io/.%5CPrompt-tips5%5Chtml-table.png">
+<meta property="og:image" content="https://wuxinberry.github.io/.%5CPrompt-tips5%5Credlines.png">
+<meta property="article:published_time" content="2025-02-12T08:02:36.000Z">
+<meta property="article:modified_time" content="2025-02-12T09:28:36.161Z">
 <meta property="article:author" content="Berry">
-<meta property="article:tag" content="后端&#x2F;游戏&#x2F;">
+<meta property="article:tag" content="AIGC">
+<meta property="article:tag" content="Prompt-Engineering">
+<meta property="article:tag" content="提示词工程">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wuxinberry.github.io/.%5CPrompt-tips5%5Chtml-table.png">
   
     <link rel="alternative" href="/atom.xml" title="Berry&#39;s Blog" type="application/atom+xml">
   
@@ -201,88 +208,171 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-Prompt-tips5" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2024" class="archive-year">2024</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2024/12/21/%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%971/" class="archive-article-date">
-        <time datetime="2024-12-21T08:00:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-12-21</time>
-</a>
-
-        </div>
-    	 
+      <header class="article-header">
   
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2024/12/21/%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%971/" target="_blank">萌新友好！搭建属于你的个人网站（一）</a>
   
+    <h1 class="article-title" itemprop="name">
+      Prompt Engineering 提示词工程的实践技巧（五）
     </h1>
   
 
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">建站</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">教程</a>
-        		</li>
-      		
-		</ul>
-	</div>
+  
+  
+        
+        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
 
-          
+<a href="/2025/02/12/Prompt-tips5/" class="archive-article-date">
+        <time datetime="2025-02-12T08:02:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-02-12</time>
+</a>
 
+  
+  
+    
+<div style="margin-top:10px;">
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <!-- fonts.scss -->
+      <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
+      <i class="icon-statistics"></i>
+      <span class="post-meta-item-text"> 字数统计:</span>
+      <span class="post-count">2.4k字</span>
+    </span>
+  </span>
+
+  <span class="post-time">
+    &nbsp; | &nbsp;
+    <span class="post-meta-item-icon">
+      <i class="icon-book icon"></i>
+      <span class="post-meta-item-text"> 阅读时长≈</span>
+      <span class="post-count">11分</span>
+    </span>
+  </span>
+</div>
+
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <p>本篇博客主要总结了 DeepLearning AI 公开课程 <em>Prompt Engineering 提示词工程</em> 第六章节 Transfering 转换的内容，也可以理解为该章节的笔记。</p>
+<p>在这个章节，我们将学习如何使用 LLM 帮助我们完成翻译、拼写和语法检查、语气调整、格式转化等文本任务。虽然现在已经有很多很强大的翻译软件，但是当应用到特定领域的时候，我们还是会需要根据自己的应用需求，构建特定的翻译应用。例如某个电影或者游戏文本的翻译，其中可能会涉及很多设定上的词语需要约定，如果直接使用通用的翻译软件，会得到四不像的翻译结果。</p>
+<h2 id="1-翻译-Translation"><a href="#1-翻译-Translation" class="headerlink" title="1. 翻译 Translation"></a>1. 翻译 Translation</h2><p>LLM 大多是多语言训练的，因此能很好地胜任翻译工作。例如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">prompt = <span class="string">f&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">Translate the following English text to Spanish: ```Hi, I would like to order a blender```</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="comment">## 输出</span></span><br><span class="line">Hola, me gustaría ordenar una licuadora.</span><br></pre></td></tr></table></figure>
+
+<p>或者让 LLM 帮助识别语言：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">prompt = <span class="string">f&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">Tell me which language this is: ```Combien coûte le lampadaire?```</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="comment">## 输出</span></span><br><span class="line">This <span class="keyword">is</span> French.</span><br></pre></td></tr></table></figure>
+
+<p>或者，指示模型同时翻译成多种语言。在这里，示例中的提示词要求 LLM 翻译成法语、西班牙语和海盗英语。<span id="more"></span></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">prompt = <span class="string">f&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">Translate the following  text to French and Spanish and English pirate: ```I want to order a basketball```</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="comment">## 输出</span></span><br><span class="line">French: Je veux commander un ballon de basket</span><br><span class="line">Spanish: Quiero ordenar un balón de baloncesto</span><br><span class="line">English: I want to order a basketball</span><br></pre></td></tr></table></figure>
+
+<p>还可以指示 LLM 翻译成正式和非正式的西班牙语。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">prompt = <span class="string">f&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">Translate the following text to Spanish in both the formal and informal forms: &#x27;Would you like to order a pillow?&#x27;</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="comment">## 输出</span></span><br><span class="line">Formal: ¿Le gustaría ordenar una almohada?</span><br><span class="line">Informal: ¿Te gustaría ordenar una almohada?</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-通用翻译-Universal-Translation"><a href="#2-通用翻译-Universal-Translation" class="headerlink" title="2. 通用翻译 Universal Translation"></a>2. 通用翻译 Universal Translation</h2><p>假设我们需要实现多种语言的相互翻译。那么，只需对上述的 prompt 稍加改进，加上一个循环操作，就可以实现。如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">user_messages = [</span><br><span class="line">  <span class="string">&quot;La performance du système est plus lente que d&#x27;habitude.&quot;</span>,  <span class="comment"># System performance is slower than normal         </span></span><br><span class="line">  <span class="string">&quot;Mi monitor tiene píxeles que no se iluminan.&quot;</span>,              <span class="comment"># My monitor has pixels that are not lighting</span></span><br><span class="line">  <span class="string">&quot;Il mio mouse non funziona&quot;</span>,                                 <span class="comment"># My mouse is not working</span></span><br><span class="line">  <span class="string">&quot;Mój klawisz Ctrl jest zepsuty&quot;</span>,                             <span class="comment"># My keyboard has a broken control key</span></span><br><span class="line">  <span class="string">&quot;我的屏幕在闪烁&quot;</span>                                               <span class="comment"># My screen is flashing</span></span><br><span class="line">] </span><br><span class="line"></span><br><span class="line"><span class="comment">## Universal Translation</span></span><br><span class="line"><span class="keyword">for</span> issue <span class="keyword">in</span> user_messages:</span><br><span class="line">    prompt = <span class="string">f&quot;Tell me what language this is in a single word: ```<span class="subst">&#123;issue&#125;</span>```&quot;</span></span><br><span class="line">    lang = get_completion(prompt)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;Original message (<span class="subst">&#123;lang&#125;</span>): <span class="subst">&#123;issue&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line">    prompt = <span class="string">f&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    Translate the following  text to English \</span></span><br><span class="line"><span class="string">    and Korean: ```<span class="subst">&#123;issue&#125;</span>```</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    response = get_completion(prompt)</span><br><span class="line">    <span class="built_in">print</span>(response, <span class="string">&quot;\n&quot;</span>)</span><br><span class="line">    </span><br><span class="line"><span class="comment">## 输出</span></span><br><span class="line">Original message (French): La performance du système est plus lente que d<span class="string">&#x27;habitude.</span></span><br><span class="line"><span class="string">English: &quot;The system performance is slower than usual.&quot;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Korean: &quot;시스템 성능이 평소보다 느립니다.&quot; </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Original message (Spanish): Mi monitor tiene píxeles que no se iluminan.</span></span><br><span class="line"><span class="string">English: &quot;My monitor has pixels that do not light up.&quot;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Korean: &quot;내 모니터에는 빛나지 않는 픽셀이 있습니다.&quot; </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Original message (Italian): Il mio mouse non funziona</span></span><br><span class="line"><span class="string">English: My mouse is not working</span></span><br><span class="line"><span class="string">Korean: 내 마우스가 작동하지 않습니다 </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Original message (Polish): Mój klawisz Ctrl jest zepsuty</span></span><br><span class="line"><span class="string">English: My Ctrl key is broken</span></span><br><span class="line"><span class="string">Korean: 제 Ctrl 키가 고장 났어요 </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Original message (Chinese): 我的屏幕在闪烁</span></span><br><span class="line"><span class="string">English: My screen is flickering</span></span><br><span class="line"><span class="string">Korean: 내 화면이 깜박거립니다 </span></span><br></pre></td></tr></table></figure>
+
+<p>结合之前章节所学的内容，我们还可以指示 LLM 以 JSON的格式返回，这种格式更容易在代码之间传递。</p>
+<h2 id="3-语气和风格变换-Tone-Transformation"><a href="#3-语气和风格变换-Tone-Transformation" class="headerlink" title="3. 语气和风格变换 Tone Transformation"></a>3. 语气和风格变换 Tone Transformation</h2><p>LLM 可以使用不同的语气来输出内容，例如 DeepSeek 很擅长犀利的语气，豆包很擅长诙谐的语气。通常，我们写论文用到的语气会更学术化，写通知的语气会更官方，日常聊天的时候则会更随意一些，写小说的时候我们会希望语言华丽或朴素一些。我们可以在 prompt 中指示 LLM 以我们要求的语气进行翻译或者写作。</p>
+<p>如下的例子中，我们指示 LLM 将给出的文本从俚语翻译成商业信件。可以看到，结果很好，不仅语气明显更正式了，连信件的格式也规范给出了。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">prompt = <span class="string">f&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">Translate the following from slang to a business letter: </span></span><br><span class="line"><span class="string">&#x27;Dude, This is Joe, check out this spec on this standing lamp.&#x27;</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="comment">## 输出</span></span><br><span class="line">Dear Sir/Madam,</span><br><span class="line"></span><br><span class="line">I am writing to bring to your attention the specifications of a standing lamp that I believe may be of interest to you. </span><br><span class="line"></span><br><span class="line">Sincerely,</span><br><span class="line">Joe</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="4-文本格式转换-Format-Conversation"><a href="#4-文本格式转换-Format-Conversation" class="headerlink" title="4. 文本格式转换 Format Conversation"></a>4. 文本格式转换 Format Conversation</h2><p>LLM 可以支持在不同的格式之间进行转换，例如 JSON，HTML，markdown，XML等。我们只需要描述输入和输出的格式，并给出需要转换的文本数据就可以。</p>
+<p>在下方的例子中可以看到，我们给出了一个 JSON 格式的数据，LLM帮助我们转换成了一个 HTML 的 table。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">data_json = &#123; <span class="string">&quot;resturant employees&quot;</span> :[ </span><br><span class="line">    &#123;<span class="string">&quot;name&quot;</span>:<span class="string">&quot;Shyam&quot;</span>, <span class="string">&quot;email&quot;</span>:<span class="string">&quot;shyamjaiswal@gmail.com&quot;</span>&#125;,</span><br><span class="line">    &#123;<span class="string">&quot;name&quot;</span>:<span class="string">&quot;Bob&quot;</span>, <span class="string">&quot;email&quot;</span>:<span class="string">&quot;bob32@gmail.com&quot;</span>&#125;,</span><br><span class="line">    &#123;<span class="string">&quot;name&quot;</span>:<span class="string">&quot;Jai&quot;</span>, <span class="string">&quot;email&quot;</span>:<span class="string">&quot;jai87@gmail.com&quot;</span>&#125;</span><br><span class="line">]&#125;</span><br><span class="line"></span><br><span class="line">prompt = <span class="string">f&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">Translate the following python dictionary from JSON to an HTML table with column headers and title: <span class="subst">&#123;data_json&#125;</span></span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="comment">## 输出</span></span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;title&gt;Restaurant Employees&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;table&gt;</span><br><span class="line">        &lt;tr&gt;</span><br><span class="line">            &lt;th&gt;Name&lt;/th&gt;</span><br><span class="line">            &lt;th&gt;Email&lt;/th&gt;</span><br><span class="line">        &lt;/tr&gt;</span><br><span class="line">        &lt;tr&gt;</span><br><span class="line">            &lt;td&gt;Shyam&lt;/td&gt;</span><br><span class="line">            &lt;td&gt;shyamjaiswal@gmail.com&lt;/td&gt;</span><br><span class="line">        &lt;/tr&gt;</span><br><span class="line">        &lt;tr&gt;</span><br><span class="line">            &lt;td&gt;Bob&lt;/td&gt;</span><br><span class="line">            &lt;td&gt;bob32@gmail.com&lt;/td&gt;</span><br><span class="line">        &lt;/tr&gt;</span><br><span class="line">        &lt;tr&gt;</span><br><span class="line">            &lt;td&gt;Jai&lt;/td&gt;</span><br><span class="line">            &lt;td&gt;jai87@gmail.com&lt;/td&gt;</span><br><span class="line">        &lt;/tr&gt;</span><br><span class="line">    &lt;/table&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<p>在 jupyter notebook 可视化这段 HTML代码，可以看到如下图所示，非常工整。</p>
+<p><img src="/.%5CPrompt-tips5%5Chtml-table.png" alt="html-table"></p>
+<h2 id="5-拼写-语法检查"><a href="#5-拼写-语法检查" class="headerlink" title="5. 拼写&#x2F;语法检查"></a>5. 拼写&#x2F;语法检查</h2><p>拼写和语法检查是一个非常实用的功能，在需要使用非母语进行沟通时，可以借助 LLM 的帮助，对文本进行修正或润色。</p>
+<p>第一个示例中，给出一些有语法或拼写错误的句子，循环遍历，要求 LLM 对文本进行校对并纠正。这里的关键词是 “Proofread and correct”。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">text = [ </span><br><span class="line">  <span class="string">&quot;The girl with the black and white puppies have a ball.&quot;</span>,  <span class="comment"># The girl has a ball.</span></span><br><span class="line">  <span class="string">&quot;Yolanda has her notebook.&quot;</span>, <span class="comment"># ok</span></span><br><span class="line">  <span class="string">&quot;Its going to be a long day. Does the car need it’s oil changed?&quot;</span>,  <span class="comment"># Homonyms</span></span><br><span class="line">  <span class="string">&quot;Their goes my freedom. There going to bring they’re suitcases.&quot;</span>,  <span class="comment"># Homonyms</span></span><br><span class="line">  <span class="string">&quot;Your going to need you’re notebook.&quot;</span>,  <span class="comment"># Homonyms</span></span><br><span class="line">  <span class="string">&quot;That medicine effects my ability to sleep. Have you heard of the butterfly affect?&quot;</span>, <span class="comment"># Homonyms</span></span><br><span class="line">  <span class="string">&quot;This phrase is to cherck chatGPT for speling abilitty&quot;</span>  <span class="comment"># spelling</span></span><br><span class="line">]</span><br><span class="line"><span class="keyword">for</span> t <span class="keyword">in</span> text:</span><br><span class="line">    prompt = <span class="string">f&quot;&quot;&quot;Proofread and correct the following text and rewrite the corrected version. If you don&#x27;t find</span></span><br><span class="line"><span class="string">    and errors, just say &quot;No errors found&quot;. Don&#x27;t use any punctuation around the text:</span></span><br><span class="line"><span class="string">    ```<span class="subst">&#123;t&#125;</span>```&quot;&quot;&quot;</span></span><br><span class="line">    response = get_completion(prompt)</span><br><span class="line">    <span class="built_in">print</span>(response)</span><br><span class="line"><span class="comment">## 输出</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">The girl with the black and white puppies has a ball.</span></span><br><span class="line"><span class="string">No errors found</span></span><br><span class="line"><span class="string">No errors found.</span></span><br><span class="line"><span class="string">Their goes my freedom. There going to bring they’re suitcases.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">No errors found.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Rewritten:</span></span><br><span class="line"><span class="string">Their goes my freedom. There going to bring their suitcases.</span></span><br><span class="line"><span class="string">You&#x27;re going to need your notebook.</span></span><br><span class="line"><span class="string">No errors found.</span></span><br><span class="line"><span class="string">No errors found</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>或者，直接输入一段长评，拜托 LLM 帮助校正。可以看到输出的内容句子结构完整了，也修正了一些拼写错误。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">text = <span class="string">f&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">Got this for my daughter for her birthday cuz she keeps taking mine from my room. Yes, adults also like pandas too. She takes it everywhere with her, and it&#x27;s super soft and cute. One of the ears is a bit lower than the other, and I don&#x27;t think that was designed to be asymmetrical. It&#x27;s a bit small for what I paid for it though. I think there might be other options that are bigger for the same price. It arrived a day earlier than expected, so I got to play with it myself before I gave it to my daughter.</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line">prompt = <span class="string">f&quot;proofread and correct this review: ```<span class="subst">&#123;text&#125;</span>```&quot;</span></span><br><span class="line"><span class="comment">## 输出</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">I got this for my daughter for her birthday because she keeps taking mine from my room. Yes, adults also like pandas too. She takes it everywhere with her, and it&#x27;s super soft and cute. One of the ears is a bit lower than the other, and I don&#x27;t think that was designed to be asymmetrical. It&#x27;s a bit small for what I paid for it though. I think there might be other options that are bigger for the same price. It arrived a day earlier than expected, so I got to play with it myself before I gave it to my daughter.</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>为了让前后的差异更直观，我们可以借助 python redlines 来对比前后文本的差异：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> redlines <span class="keyword">import</span> Redlines</span><br><span class="line"></span><br><span class="line">diff = Redlines(text,response)</span><br><span class="line">display(Markdown(diff.output_markdown))</span><br></pre></td></tr></table></figure>
+
+<p><img src="/.%5CPrompt-tips5%5Credlines.png" alt="redlines"></p>
+<p>我们还可以指示 LLM 在校对修正文本的基础上，改写语气，并要求符合 APA 风格（一种论文撰写风格），以markdown的格式返回。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">prompt = <span class="string">f&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">proofread and correct this review. Make it more compelling. </span></span><br><span class="line"><span class="string">Ensure it follows APA style guide and targets an advanced reader. </span></span><br><span class="line"><span class="string">Output in markdown format.</span></span><br><span class="line"><span class="string">Text: ```<span class="subst">&#123;text&#125;</span>```</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line">display(Markdown(response))</span><br><span class="line"><span class="comment">## 输出</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">I purchased this adorable panda plush as a birthday gift for my daughter, as she kept borrowing mine from my room. It&#x27;s not just for kids - even adults can appreciate the charm of this cuddly companion. My daughter absolutely adores it and takes it everywhere with her, thanks to its irresistibly soft and cute design. However, I did notice a slight asymmetry in the ears, which I believe was not intentional. Additionally, considering the price, I found the size to be a bit smaller than expected. I suspect there are larger options available for the same cost. Despite this, I was pleasantly surprised when it arrived a day earlier than anticipated, allowing me to enjoy its company before passing it on to my daughter. This panda plush is a delightful gift choice, perfect for anyone who appreciates quality and cuteness in a stuffed animal.</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>不过，虽然这里输出的语气已经比较正式，但是距离标准的APA风格还是有一段差距。比较好的返回效果应该是 Intro、Description、Props、Cons、Conclusion等分类分点阐述的。我重新运行了好几次返回都还是这样，不及视频里给出的示例预期。</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a target="_blank" rel="noopener" href="https://learn.deeplearning.ai/courses/chatgpt-prompt-eng/lesson/1/introduction">ChatGPT Prompt Engineering for Developers - DeepLearning.AI</a></p>
+<p>B站可以找到搬运翻译的中文版本👆：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Bo4y1A7FU/?share_source=copy_web">《吴恩达 x OpenAI Prompt课程》</a></p>
+
+    
+
+    
+    <div class="page-reward">
+      <a href="javascript:void(0);" class="page-reward-btn tooltip-top" target="_self">
+        <div class="tooltip tooltip-east">
+          <span class="tooltip-item">
+            赏
+          </span>
+          <span class="tooltip-content">
+            <span class="tooltip-text">
+              <span class="tooltip-inner">
+                <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i
+                    class="icon icon-quo-right"></i></p>
+                <div class="reward-box">
+                  
+                  <div class="reward-box-item">
+                    <img class="reward-img" src="/img/alipay.jpg">
+                    <span class="reward-type">支付宝</span>
+                  </div>
+                  
+                  
+                  <div class="reward-box-item">
+                    <img class="reward-img" src="/img/wechat_pay.jpg">
+                    <span class="reward-type">微信</span>
+                  </div>
+                  
+                </div>
+              </span>
+            </span>
+          </span>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </a>
+    </div>
+    
+
+    
+    <div class="declare"> 
+      <ul class="post-copyright">
+        <li>
+          <strong>本文作者：</strong>
+          Berry
+        </li>
+        <li>
+          <strong>本文链接：</strong>
+          <a href="https://wuxinberry.github.io/2025/02/12/Prompt-tips5/" title="Prompt Engineering 提示词工程的实践技巧（五）" target="_blank">https://wuxinberry.github.io/2025/02/12/Prompt-tips5/</a>
+        </li>
+        
+        <li>
+          <strong>版权声明： </strong>
+          
+          本博客所有文章除特别声明外，均采用 <a href="https://github.com/JoeyBling/hexo-theme-yilia-plus/blob/master/LICENSE" rel="external nofollow" target="_blank">MIT</a> 许可协议。转载请注明出处！
+        </li>
+        
+      </ul>
+    </div>
+    
+
   </div>
-</article>
-  
+  <div class="article-info article-info-index">
     
     
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2024/04/17/ComfyUI%E5%85%A5%E9%97%A8/" class="archive-article-date">
-        <time datetime="2024-04-17T10:01:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-04-17</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2024/04/17/ComfyUI%E5%85%A5%E9%97%A8/" target="_blank">AI绘图神器：ComfyUI零基础入门指南（一）</a>
-  
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -292,33 +382,153 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">ComfyUI</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Prompt-Engineering</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Stable Diffusion</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">提示词工程</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
+    
 
     
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/">&laquo; Prev</a><a class="page-number" href="/archives/">1</a><span class="page-number current">2</span>
-    </nav>
+
+    
+    
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <!-- <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a> -->
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://wuxinberry.github.io/2025/02/12/Prompt-tips5/" alt="微信分享二维码"> -->
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+
+<nav id="article-nav">
   
+  
+    <a href="/2025/02/09/Prompt-tips4/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Prompt Engineering 提示词工程的实践技巧（四）</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E7%BF%BB%E8%AF%91-Translation"><span class="toc-number">1.</span> <span class="toc-text">1. 翻译 Translation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E9%80%9A%E7%94%A8%E7%BF%BB%E8%AF%91-Universal-Translation"><span class="toc-number">2.</span> <span class="toc-text">2. 通用翻译 Universal Translation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E8%AF%AD%E6%B0%94%E5%92%8C%E9%A3%8E%E6%A0%BC%E5%8F%98%E6%8D%A2-Tone-Transformation"><span class="toc-number">3.</span> <span class="toc-text">3. 语气和风格变换 Tone Transformation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E6%96%87%E6%9C%AC%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2-Format-Conversation"><span class="toc-number">4.</span> <span class="toc-text">4. 文本格式转换 Format Conversation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E6%8B%BC%E5%86%99-%E8%AF%AD%E6%B3%95%E6%A3%80%E6%9F%A5"><span class="toc-number">5.</span> <span class="toc-text">5. 拼写&#x2F;语法检查</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">6.</span> <span class="toc-text">参考资料</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
+
+
+
+
+
+
+
+
+  
+  <div id="gitment-ctn"></div>
+  
+    <!-- 中文 -->
+    <link rel="stylesheet" href="/lib/gitment.css">
+    <script src="/lib/gitment.js"></script>
+  
+  <script>
+    <!-- id: "Prompt Engineering 提示词工程的实践技巧（五）" -->
+    var gitment = new Gitment({
+      id: "20250212160236",
+      owner: 'Wuxinberry',
+      repo: 'blog_comments',
+      oauth: {
+        client_id: 'Ov23linQcyh9hypoAT9t',
+        client_secret: 'aa9da44b5100641bc5144e38c22465ca48640297',
+      },
+    })
+    gitment.render('gitment-ctn')
+  </script>
+
+
+  
+
 
 
           </div>
@@ -359,8 +569,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: true,

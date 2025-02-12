@@ -237,7 +237,7 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <p>本篇博客主要总结了 DeepLearning AI 公开课程 <em>Prompt Engineering 提示词工程</em> 第六章节 Transfering 转换的内容，也可以理解为该章节的笔记。</p>
+    <p>本篇博客主要总结了 DeepLearning AI 公开课程 <em>Prompt Engineering 提示词工程</em> 第六章节 Transferring 转换的内容，也可以理解为该章节的笔记。</p>
 <p>在这个章节，我们将学习如何使用 LLM 帮助我们完成翻译、拼写和语法检查、语气调整、格式转化等文本任务。虽然现在已经有很多很强大的翻译软件，但是当应用到特定领域的时候，我们还是会需要根据自己的应用需求，构建特定的翻译应用。例如某个电影或者游戏文本的翻译，其中可能会涉及很多设定上的词语需要约定，如果直接使用通用的翻译软件，会得到四不像的翻译结果。</p>
 <h2 id="1-翻译-Translation"><a href="#1-翻译-Translation" class="headerlink" title="1. 翻译 Translation"></a>1. 翻译 Translation</h2><p>LLM 大多是多语言训练的，因此能很好地胜任翻译工作。例如：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">prompt = <span class="string">f&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">Translate the following English text to Spanish: ```Hi, I would like to order a blender```</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="comment">## 输出</span></span><br><span class="line">Hola, me gustaría ordenar una licuadora.</span><br></pre></td></tr></table></figure>

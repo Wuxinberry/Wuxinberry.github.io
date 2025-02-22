@@ -208,6 +208,105 @@
             
 
   
+    <article id="post-Prompt-tips6" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2025/02/22/Prompt-tips6/" target="_blank">Prompt Engineering 提示词工程的实践技巧（六）</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2025/02/22/Prompt-tips6/" class="archive-article-date">
+        <time datetime="2025-02-22T05:52:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-02-22</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <p>本篇博客主要总结了 DeepLearning AI 公开课程 <em>Prompt Engineering 提示词工程</em> 第七章节 Expanding 扩充任务的内容，也可以理解为该章节的笔记。</p>
+<p>扩充任务，顾名思义，就是给出一段文本，可以是主题或说明等，让 LLM 生成一段更长的文本，例如一篇文章、一份邮件。本章节还将引入一个模型参数，temperature 温度。这个参数允许我们调节模型的多样性程度。</p>
+<h2 id="0-环境准备"><a href="#0-环境准备" class="headerlink" title="0. 环境准备"></a>0. 环境准备</h2><p>之前的章节中，我们都没有单独列出调用 openai 的环境准备，因为它们都很简单，并且如果是要调用不同的大模型，API各有不同。因此，为了专注于 prompt ，之前的几个章节都将 setup 的环节略过了。但是在这个章节，我们将引入一个新的参数，temperature，来增加模型输出的多元化程度，因此在这里特地列出，和其他章节作一个区分。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> openai</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> dotenv <span class="keyword">import</span> load_dotenv, find_dotenv</span><br><span class="line">_ = load_dotenv(find_dotenv()) <span class="comment"># read local .env file</span></span><br><span class="line"></span><br><span class="line">openai.api_key  = os.getenv(<span class="string">&#x27;OPENAI_API_KEY&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_completion</span>(<span class="params">prompt, model=<span class="string">&quot;gpt-3.5-turbo&quot;</span>,temperature=<span class="number">0</span></span>): <span class="comment"># Andrew mentioned that the prompt/ completion paradigm is preferable for this class</span></span><br><span class="line">    messages = [&#123;<span class="string">&quot;role&quot;</span>: <span class="string">&quot;user&quot;</span>, <span class="string">&quot;content&quot;</span>: prompt&#125;]</span><br><span class="line">    response = openai.ChatCompletion.create(</span><br><span class="line">        model=model,</span><br><span class="line">        messages=messages,</span><br><span class="line">        temperature=temperature, <span class="comment"># this is the degree of randomness of the model&#x27;s output</span></span><br><span class="line">    )</span><br><span class="line">    <span class="keyword">return</span> response.choices[<span class="number">0</span>].message[<span class="string">&quot;content&quot;</span>]</span><br></pre></td></tr></table></figure>
+    
+    <a class="article-more-a" href="/2025/02/22/Prompt-tips6/#more">more >></a>
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">AIGC</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Prompt-Engineering</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">提示词工程</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2025/02/22/Prompt-tips6/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Prompt-tips5" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1102,105 +1201,6 @@
     
     <p class="article-more-link">
       <a class="article-more-a" href="/2024/12/23/ComfyUI%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-建站指南2" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2024/12/21/%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%972/" target="_blank">萌新友好！【GitHub+Hexo】搭建属于你的个人网站（二）</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2024/12/21/%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%972/" class="archive-article-date">
-        <time datetime="2024-12-21T08:46:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-12-21</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <p>这是一份搭建属于你自己的个人网站的指南。如果你对于建立一个个人网站有兴趣，却不知道如何开展一系列的工作，那么请往下阅读。【建站指南】系列一共有三篇文章，其中，第一篇，介绍了为什么要搭建一个个人网站、快速建站的常用方式及优劣对比。第二、三篇将分别展开介绍<a href="https://wuxinberry.github.io/2024/12/21/%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%972/">GitHub+Hexo的建站方式</a>和<a href="https://wuxinberry.github.io/2025/01/05/%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%973/">WordPress建站方式</a>。本篇为第二篇，将展开介绍如何使用 <strong>GitHub + Hexo</strong> 搭建你的个人博客网站。</p>
-<h2 id="零、一些准备工作"><a href="#零、一些准备工作" class="headerlink" title="零、一些准备工作"></a>零、一些准备工作</h2><p>你可能是一个完全零基础的小白，甚至不知道 GitHub 是什么，没有 GitHub 账号，如果你有兴趣了解，那么可以移步我的版本管理工具介绍博客进行了解。当然，不了解这些，对于我们搭建博客也没有影响，你只需要做一些基础的准备工作即可。</p>
-<ul>
-<li>GitHub 账号</li>
-<li>配置 Git 环境</li>
-<li>安装 Node.js</li>
-</ul>
-<p>如果这三步你都已经完成，那么可以直接跳到下一章节。
-    
-    <a class="article-more-a" href="/2024/12/21/%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%972/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">建站</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">教程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2024/12/21/%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%972/">展开全文 >></a>
     </p>
     
 

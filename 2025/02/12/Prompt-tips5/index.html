@@ -10,17 +10,17 @@
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="Prompt Engineering 提示词工程笔记汇总 第一、二章：编写指示的几个指导原则 第三章：迭代 Iterative 第四章：摘要 Summarizing 第五章：推理 Inferring 第六章：转化 Transferring 第七章：扩充 Expanding 第八章：聊天机器人 ChatBot 本篇博客主要总结了 DeepLearning AI 公开课程 Prompt Enginee">
+  <meta name="description" content="本篇博客主要总结了 DeepLearning AI 公开课程 Prompt Engineering 提示词工程 第六章节 Transferring 转换的内容，也可以理解为该章节的笔记。 在这个章节，我们将学习如何使用 LLM 帮助我们完成翻译、拼写和语法检查、语气调整、格式转化等文本任务。虽然现在已经有很多很强大的翻译软件，但是当应用到特定领域的时候，我们还是会需要根据自己的应用需求，构建特定的">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Prompt Engineering 提示词工程的实践技巧（五）">
 <meta property="og:url" content="https://wuxinberry.github.io/2025/02/12/Prompt-tips5/index.html">
 <meta property="og:site_name" content="Berry&#39;s Blog">
-<meta property="og:description" content="Prompt Engineering 提示词工程笔记汇总 第一、二章：编写指示的几个指导原则 第三章：迭代 Iterative 第四章：摘要 Summarizing 第五章：推理 Inferring 第六章：转化 Transferring 第七章：扩充 Expanding 第八章：聊天机器人 ChatBot 本篇博客主要总结了 DeepLearning AI 公开课程 Prompt Enginee">
+<meta property="og:description" content="本篇博客主要总结了 DeepLearning AI 公开课程 Prompt Engineering 提示词工程 第六章节 Transferring 转换的内容，也可以理解为该章节的笔记。 在这个章节，我们将学习如何使用 LLM 帮助我们完成翻译、拼写和语法检查、语气调整、格式转化等文本任务。虽然现在已经有很多很强大的翻译软件，但是当应用到特定领域的时候，我们还是会需要根据自己的应用需求，构建特定的">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://wuxinberry.github.io/.%5CPrompt-tips5%5Chtml-table.png">
 <meta property="og:image" content="https://wuxinberry.github.io/.%5CPrompt-tips5%5Credlines.png">
 <meta property="article:published_time" content="2025-02-12T08:02:36.000Z">
-<meta property="article:modified_time" content="2025-03-02T07:32:15.418Z">
+<meta property="article:modified_time" content="2025-03-02T07:35:35.078Z">
 <meta property="article:author" content="Berry">
 <meta property="article:tag" content="AIGC">
 <meta property="article:tag" content="Prompt-Engineering">
@@ -261,15 +261,7 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <p>Prompt Engineering 提示词工程笔记汇总</p>
-<p><a href="https://wuxinberry.github.io/2025/01/19/Prompt-tips/">第一、二章：编写指示的几个指导原则</a></p>
-<p><a href="https://wuxinberry.github.io/2025/01/20/Prompt-tips2/">第三章：迭代 Iterative</a></p>
-<p><a href="https://wuxinberry.github.io/2025/01/21/Prompt-tips3/">第四章：摘要 Summarizing</a></p>
-<p><a href="https://wuxinberry.github.io/2025/02/09/Prompt-tips4/">第五章：推理 Inferring</a></p>
-<p><a href="https://wuxinberry.github.io/2025/02/12/Prompt-tips5/">第六章：转化 Transferring</a></p>
-<p><a href="https://wuxinberry.github.io/2025/02/22/Prompt-tips6/">第七章：扩充 Expanding</a></p>
-<p><a href="https://wuxinberry.github.io/2025/03/02/Prompt-tips7/">第八章：聊天机器人 ChatBot</a></p>
-<p>本篇博客主要总结了 DeepLearning AI 公开课程 <em>Prompt Engineering 提示词工程</em> 第六章节 Transferring 转换的内容，也可以理解为该章节的笔记。</p>
+    <p>本篇博客主要总结了 DeepLearning AI 公开课程 <em>Prompt Engineering 提示词工程</em> 第六章节 Transferring 转换的内容，也可以理解为该章节的笔记。</p>
 <p>在这个章节，我们将学习如何使用 LLM 帮助我们完成翻译、拼写和语法检查、语气调整、格式转化等文本任务。虽然现在已经有很多很强大的翻译软件，但是当应用到特定领域的时候，我们还是会需要根据自己的应用需求，构建特定的翻译应用。例如某个电影或者游戏文本的翻译，其中可能会涉及很多设定上的词语需要约定，如果直接使用通用的翻译软件，会得到四不像的翻译结果。</p>
 <h2 id="1-翻译-Translation"><a href="#1-翻译-Translation" class="headerlink" title="1. 翻译 Translation"></a>1. 翻译 Translation</h2><p>LLM 大多是多语言训练的，因此能很好地胜任翻译工作。例如：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">prompt = <span class="string">f&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">Translate the following English text to Spanish: ```Hi, I would like to order a blender```</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="comment">## 输出</span></span><br><span class="line">Hola, me gustaría ordenar una licuadora.</span><br></pre></td></tr></table></figure>
@@ -316,6 +308,16 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">prompt = <span class="string">f&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">proofread and correct this review. Make it more compelling. </span></span><br><span class="line"><span class="string">Ensure it follows APA style guide and targets an advanced reader. </span></span><br><span class="line"><span class="string">Output in markdown format.</span></span><br><span class="line"><span class="string">Text: ```<span class="subst">&#123;text&#125;</span>```</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line">display(Markdown(response))</span><br><span class="line"><span class="comment">## 输出</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">I purchased this adorable panda plush as a birthday gift for my daughter, as she kept borrowing mine from my room. It&#x27;s not just for kids - even adults can appreciate the charm of this cuddly companion. My daughter absolutely adores it and takes it everywhere with her, thanks to its irresistibly soft and cute design. However, I did notice a slight asymmetry in the ears, which I believe was not intentional. Additionally, considering the price, I found the size to be a bit smaller than expected. I suspect there are larger options available for the same cost. Despite this, I was pleasantly surprised when it arrived a day earlier than anticipated, allowing me to enjoy its company before passing it on to my daughter. This panda plush is a delightful gift choice, perfect for anyone who appreciates quality and cuteness in a stuffed animal.</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
 
 <p>不过，虽然这里输出的语气已经比较正式，但是距离标准的APA风格还是有一段差距。比较好的返回效果应该是 Intro、Description、Props、Cons、Conclusion等分类分点阐述的。我重新运行了好几次返回都还是这样，不及视频里给出的示例预期。</p>
+<p>Prompt Engineering 提示词工程笔记汇总</p>
+<ul>
+<li><a href="https://wuxinberry.github.io/2025/01/19/Prompt-tips/">第一、二章：编写指示的几个指导原则</a></li>
+<li><a href="https://wuxinberry.github.io/2025/01/20/Prompt-tips2/">第三章：迭代 Iterative</a></li>
+<li><a href="https://wuxinberry.github.io/2025/01/21/Prompt-tips3/">第四章：摘要 Summarizing</a></li>
+<li><a href="https://wuxinberry.github.io/2025/02/09/Prompt-tips4/">第五章：推理 Inferring</a></li>
+<li><a href="https://wuxinberry.github.io/2025/02/12/Prompt-tips5/">第六章：转化 Transferring</a></li>
+<li><a href="https://wuxinberry.github.io/2025/02/22/Prompt-tips6/">第七章：扩充 Expanding</a></li>
+<li><a href="https://wuxinberry.github.io/2025/03/02/Prompt-tips7/">第八章：聊天机器人 ChatBot</a></li>
+</ul>
 <h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a target="_blank" rel="noopener" href="https://learn.deeplearning.ai/courses/chatgpt-prompt-eng/lesson/1/introduction">ChatGPT Prompt Engineering for Developers - DeepLearning.AI</a></p>
 <p>B站可以找到搬运翻译的中文版本👆：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Bo4y1A7FU/?share_source=copy_web">《吴恩达 x OpenAI Prompt课程》</a></p>
 

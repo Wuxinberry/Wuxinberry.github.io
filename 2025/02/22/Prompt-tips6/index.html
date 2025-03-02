@@ -10,16 +10,16 @@
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="Prompt Engineering 提示词工程笔记汇总 第一、二章：编写指示的几个指导原则 第三章：迭代 Iterative 第四章：摘要 Summarizing 第五章：推理 Inferring 第六章：转化 Transferring 第七章：扩充 Expanding 第八章：聊天机器人 ChatBot 本篇博客主要总结了 DeepLearning AI 公开课程 Prompt Enginee">
+  <meta name="description" content="本篇博客主要总结了 DeepLearning AI 公开课程 Prompt Engineering 提示词工程 第七章节 Expanding 扩充任务的内容，也可以理解为该章节的笔记。 扩充任务，顾名思义，就是给出一段文本，可以是主题或说明等，让 LLM 生成一段更长的文本，例如一篇文章、一份邮件。本章节还将引入一个模型参数，temperature 温度。这个参数允许我们调节模型的多样性程度。 0">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Prompt Engineering 提示词工程的实践技巧（六）">
 <meta property="og:url" content="https://wuxinberry.github.io/2025/02/22/Prompt-tips6/index.html">
 <meta property="og:site_name" content="Berry&#39;s Blog">
-<meta property="og:description" content="Prompt Engineering 提示词工程笔记汇总 第一、二章：编写指示的几个指导原则 第三章：迭代 Iterative 第四章：摘要 Summarizing 第五章：推理 Inferring 第六章：转化 Transferring 第七章：扩充 Expanding 第八章：聊天机器人 ChatBot 本篇博客主要总结了 DeepLearning AI 公开课程 Prompt Enginee">
+<meta property="og:description" content="本篇博客主要总结了 DeepLearning AI 公开课程 Prompt Engineering 提示词工程 第七章节 Expanding 扩充任务的内容，也可以理解为该章节的笔记。 扩充任务，顾名思义，就是给出一段文本，可以是主题或说明等，让 LLM 生成一段更长的文本，例如一篇文章、一份邮件。本章节还将引入一个模型参数，temperature 温度。这个参数允许我们调节模型的多样性程度。 0">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://wuxinberry.github.io/2025/02/22/Prompt-tips6/param-temperature.png">
 <meta property="article:published_time" content="2025-02-22T05:52:45.000Z">
-<meta property="article:modified_time" content="2025-03-02T07:32:19.842Z">
+<meta property="article:modified_time" content="2025-03-02T07:35:27.556Z">
 <meta property="article:author" content="Berry">
 <meta property="article:tag" content="AIGC">
 <meta property="article:tag" content="Prompt-Engineering">
@@ -260,15 +260,7 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <p>Prompt Engineering 提示词工程笔记汇总</p>
-<p><a href="https://wuxinberry.github.io/2025/01/19/Prompt-tips/">第一、二章：编写指示的几个指导原则</a></p>
-<p><a href="https://wuxinberry.github.io/2025/01/20/Prompt-tips2/">第三章：迭代 Iterative</a></p>
-<p><a href="https://wuxinberry.github.io/2025/01/21/Prompt-tips3/">第四章：摘要 Summarizing</a></p>
-<p><a href="https://wuxinberry.github.io/2025/02/09/Prompt-tips4/">第五章：推理 Inferring</a></p>
-<p><a href="https://wuxinberry.github.io/2025/02/12/Prompt-tips5/">第六章：转化 Transferring</a></p>
-<p><a href="https://wuxinberry.github.io/2025/02/22/Prompt-tips6/">第七章：扩充 Expanding</a></p>
-<p><a href="https://wuxinberry.github.io/2025/03/02/Prompt-tips7/">第八章：聊天机器人 ChatBot</a></p>
-<p>本篇博客主要总结了 DeepLearning AI 公开课程 <em>Prompt Engineering 提示词工程</em> 第七章节 Expanding 扩充任务的内容，也可以理解为该章节的笔记。</p>
+    <p>本篇博客主要总结了 DeepLearning AI 公开课程 <em>Prompt Engineering 提示词工程</em> 第七章节 Expanding 扩充任务的内容，也可以理解为该章节的笔记。</p>
 <p>扩充任务，顾名思义，就是给出一段文本，可以是主题或说明等，让 LLM 生成一段更长的文本，例如一篇文章、一份邮件。本章节还将引入一个模型参数，temperature 温度。这个参数允许我们调节模型的多样性程度。</p>
 <h2 id="0-环境准备"><a href="#0-环境准备" class="headerlink" title="0. 环境准备"></a>0. 环境准备</h2><p>之前的章节中，我们都没有单独列出调用 openai 的环境准备，因为它们都很简单，并且如果是要调用不同的大模型，API各有不同。因此，为了专注于 prompt ，之前的几个章节都将 setup 的环节略过了。但是在这个章节，我们将引入一个新的参数，temperature，来增加模型输出的多元化程度，因此在这里特地列出，和其他章节作一个区分。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> openai</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> dotenv <span class="keyword">import</span> load_dotenv, find_dotenv</span><br><span class="line">_ = load_dotenv(find_dotenv()) <span class="comment"># read local .env file</span></span><br><span class="line"></span><br><span class="line">openai.api_key  = os.getenv(<span class="string">&#x27;OPENAI_API_KEY&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_completion</span>(<span class="params">prompt, model=<span class="string">&quot;gpt-3.5-turbo&quot;</span>,temperature=<span class="number">0</span></span>): <span class="comment"># Andrew mentioned that the prompt/ completion paradigm is preferable for this class</span></span><br><span class="line">    messages = [&#123;<span class="string">&quot;role&quot;</span>: <span class="string">&quot;user&quot;</span>, <span class="string">&quot;content&quot;</span>: prompt&#125;]</span><br><span class="line">    response = openai.ChatCompletion.create(</span><br><span class="line">        model=model,</span><br><span class="line">        messages=messages,</span><br><span class="line">        temperature=temperature, <span class="comment"># this is the degree of randomness of the model&#x27;s output</span></span><br><span class="line">    )</span><br><span class="line">    <span class="keyword">return</span> response.choices[<span class="number">0</span>].message[<span class="string">&quot;content&quot;</span>]</span><br></pre></td></tr></table></figure>
@@ -288,6 +280,16 @@
 <img src="/2025/02/22/Prompt-tips6/param-temperature.png" class="" title="param-temperature">
 
 <p>当我们需要构建一个可预测的、可靠的系统时，维持默认的设定，temperature &#x3D; 0即可。但如果希望模型更有创造性，更天马行空一点， 获得更多样的输出，就可以调高 temperature 参数。在之前的章节中，我们使用的都是默认设置，即 temperature &#x3D; 0。你也可以尝试对它赋值，并重新运行一模一样的 prompt，看看输出发生了哪些变化。</p>
+<p>Prompt Engineering 提示词工程笔记汇总</p>
+<ul>
+<li><a href="https://wuxinberry.github.io/2025/01/19/Prompt-tips/">第一、二章：编写指示的几个指导原则</a></li>
+<li><a href="https://wuxinberry.github.io/2025/01/20/Prompt-tips2/">第三章：迭代 Iterative</a></li>
+<li><a href="https://wuxinberry.github.io/2025/01/21/Prompt-tips3/">第四章：摘要 Summarizing</a></li>
+<li><a href="https://wuxinberry.github.io/2025/02/09/Prompt-tips4/">第五章：推理 Inferring</a></li>
+<li><a href="https://wuxinberry.github.io/2025/02/12/Prompt-tips5/">第六章：转化 Transferring</a></li>
+<li><a href="https://wuxinberry.github.io/2025/02/22/Prompt-tips6/">第七章：扩充 Expanding</a></li>
+<li><a href="https://wuxinberry.github.io/2025/03/02/Prompt-tips7/">第八章：聊天机器人 ChatBot</a></li>
+</ul>
 <h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a target="_blank" rel="noopener" href="https://learn.deeplearning.ai/courses/chatgpt-prompt-eng/lesson/1/introduction">ChatGPT Prompt Engineering for Developers - DeepLearning.AI</a></p>
 <p>B站可以找到搬运翻译的中文版本👆：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Bo4y1A7FU/?share_source=copy_web">《吴恩达 x OpenAI Prompt课程》</a></p>
 

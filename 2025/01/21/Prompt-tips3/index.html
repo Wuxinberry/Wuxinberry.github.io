@@ -10,15 +10,15 @@
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="本篇博客主要总结了 DeepLearning AI 公开课程 Prompt Engineering 提示词工程 第四章节 Summarizing 摘要的内容，也可以理解为该章节的笔记。 当下，有很多文本内容需要我们阅读，让 LLM 帮助我们总结摘要，可以提高我们的信息摄取效率。所谓的摘要任务，不仅仅是给出一段长文，要求它总结主旨，还可以有很多类似的工作，例如给出大量的评论数据，要求 LLM 帮助我">
+  <meta name="description" content="Prompt Engineering 提示词工程笔记汇总 第一、二章：编写指示的几个指导原则 第三章：迭代 Iterative 第四章：摘要 Summarizing 第五章：推理 Inferring 第六章：转化 Transferring 第七章：扩充 Expanding 第八章：聊天机器人 ChatBot 本篇博客主要总结了 DeepLearning AI 公开课程 Prompt Enginee">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Prompt Engineering 提示词工程的实践技巧（三）">
 <meta property="og:url" content="https://wuxinberry.github.io/2025/01/21/Prompt-tips3/index.html">
 <meta property="og:site_name" content="Berry&#39;s Blog">
-<meta property="og:description" content="本篇博客主要总结了 DeepLearning AI 公开课程 Prompt Engineering 提示词工程 第四章节 Summarizing 摘要的内容，也可以理解为该章节的笔记。 当下，有很多文本内容需要我们阅读，让 LLM 帮助我们总结摘要，可以提高我们的信息摄取效率。所谓的摘要任务，不仅仅是给出一段长文，要求它总结主旨，还可以有很多类似的工作，例如给出大量的评论数据，要求 LLM 帮助我">
+<meta property="og:description" content="Prompt Engineering 提示词工程笔记汇总 第一、二章：编写指示的几个指导原则 第三章：迭代 Iterative 第四章：摘要 Summarizing 第五章：推理 Inferring 第六章：转化 Transferring 第七章：扩充 Expanding 第八章：聊天机器人 ChatBot 本篇博客主要总结了 DeepLearning AI 公开课程 Prompt Enginee">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-01-21T06:29:12.000Z">
-<meta property="article:modified_time" content="2025-01-21T08:56:53.423Z">
+<meta property="article:modified_time" content="2025-03-02T07:32:06.708Z">
 <meta property="article:author" content="Berry">
 <meta property="article:tag" content="AIGC">
 <meta property="article:tag" content="Prompt-Engineering">
@@ -258,7 +258,15 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <p>本篇博客主要总结了 DeepLearning AI 公开课程 <em>Prompt Engineering 提示词工程</em> 第四章节 Summarizing 摘要的内容，也可以理解为该章节的笔记。</p>
+    <p>Prompt Engineering 提示词工程笔记汇总</p>
+<p><a href="https://wuxinberry.github.io/2025/01/19/Prompt-tips/">第一、二章：编写指示的几个指导原则</a></p>
+<p><a href="https://wuxinberry.github.io/2025/01/20/Prompt-tips2/">第三章：迭代 Iterative</a></p>
+<p><a href="https://wuxinberry.github.io/2025/01/21/Prompt-tips3/">第四章：摘要 Summarizing</a></p>
+<p><a href="https://wuxinberry.github.io/2025/02/09/Prompt-tips4/">第五章：推理 Inferring</a></p>
+<p><a href="https://wuxinberry.github.io/2025/02/12/Prompt-tips5/">第六章：转化 Transferring</a></p>
+<p><a href="https://wuxinberry.github.io/2025/02/22/Prompt-tips6/">第七章：扩充 Expanding</a></p>
+<p><a href="https://wuxinberry.github.io/2025/03/02/Prompt-tips7/">第八章：聊天机器人 ChatBot</a></p>
+<p>本篇博客主要总结了 DeepLearning AI 公开课程 <em>Prompt Engineering 提示词工程</em> 第四章节 Summarizing 摘要的内容，也可以理解为该章节的笔记。</p>
 <p>当下，有很多文本内容需要我们阅读，让 LLM 帮助我们总结摘要，可以提高我们的信息摄取效率。所谓的摘要任务，不仅仅是给出一段长文，要求它总结主旨，还可以有很多类似的工作，例如给出大量的评论数据，要求 LLM 帮助我们提取其中的反馈建议，又或者要求 LLM 只提取你关心的那部分信息，而不是对全文做一个笼统的概括。善用提示词，因此，让 LLM 帮助你完成数据的阅读和信息提取，可以节省大量的时间和精力。</p>
 <h2 id="1-生成指定信息的摘要"><a href="#1-生成指定信息的摘要" class="headerlink" title="1. 生成指定信息的摘要"></a>1. 生成指定信息的摘要</h2><p>给出一段文字，让 LLM 进行总结。这件事我们在上一个章节中已经做了很多遍。我们已经可以对输出的篇幅、重点关注的方面、输出的格式等做出要求。本章节的内容与上一章有些类似，也是为了让 LLM 生成更满足我们实际需求的文本。<span id="more"></span></p>
 <p>首先来看这样一段产品评论。这个购买者买了一个熊猫毛绒玩具作为女儿的生日礼物，女儿非常喜欢，去哪儿都带着它。它柔软、可爱，长得友善等等。</p>

@@ -208,6 +208,115 @@
             
 
   
+    <article id="post-Prompt-tips7" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2025/03/02/Prompt-tips7/" target="_blank">Prompt Engineering 提示词工程的实践技巧（七）</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2025/03/02/Prompt-tips7/" class="archive-article-date">
+        <time datetime="2025-03-02T06:37:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-03-02</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <p>Prompt Engineering 提示词工程笔记汇总</p>
+<p><a href="https://wuxinberry.github.io/2025/01/19/Prompt-tips/">第一、二章：编写指示的几个指导原则</a></p>
+<p><a href="https://wuxinberry.github.io/2025/01/20/Prompt-tips2/">第三章：迭代 Iterative</a></p>
+<p><a href="https://wuxinberry.github.io/2025/01/21/Prompt-tips3/">第四章：摘要 Summarizing</a></p>
+<p><a href="https://wuxinberry.github.io/2025/02/09/Prompt-tips4/">第五章：推理 Inferring</a></p>
+<p><a href="https://wuxinberry.github.io/2025/02/12/Prompt-tips5/">第六章：转化 Transferring</a></p>
+<p><a href="https://wuxinberry.github.io/2025/02/22/Prompt-tips6/">第七章：扩充 Expanding</a></p>
+<p><a href="https://wuxinberry.github.io/2025/03/02/Prompt-tips7/">第八章：聊天机器人 ChatBot</a></p>
+<p>本篇博客主要总结了 DeepLearning AI 公开课程 <em>Prompt Engineering 提示词工程</em> 第八章节 ChatBot 聊天机器人的内容，也可以理解为该章节的笔记。</p>
+<p>现在我们常用的大预言模型工具，如豆包，deepseek，ChatGPT等，都是以聊天机器人的形式提供服务。用户可以在web页面与AI创建一组对话。在之前几章的基础上，可以发现，调用 LLM 的API并构建一个自定义的聊天机器人，并不是一件难事。在这个章节，我们将学习如何做一个聊天机器人。</p>
+<h2 id="1-聊天格式的设计"><a href="#1-聊天格式的设计" class="headerlink" title="1. 聊天格式的设计"></a>1. 聊天格式的设计</h2><p>首先，我们需要设计聊天格式。定义如下两个辅助函数，可以看到，第一个辅助函数就和我们在之前几章使用得差不多，而第二个函数则封装得更完备一些，直接以messages为输入，而不是prompt，这更有利于我们输入多组对话，让整个对话看起来更有连续性。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">get_completion</span>(<span class="params">prompt, model=<span class="string">&quot;gpt-3.5-turbo&quot;</span></span>):</span><br><span class="line">    messages = [&#123;<span class="string">&quot;role&quot;</span>: <span class="string">&quot;user&quot;</span>, <span class="string">&quot;content&quot;</span>: prompt&#125;]</span><br><span class="line">    response = openai.ChatCompletion.create(</span><br><span class="line">        model=model,</span><br><span class="line">        messages=messages,</span><br><span class="line">        temperature=<span class="number">0</span>, <span class="comment"># 默认温度值</span></span><br><span class="line">    )</span><br><span class="line">    <span class="keyword">return</span> response.choices[<span class="number">0</span>].message[<span class="string">&quot;content&quot;</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_completion_from_messages</span>(<span class="params">messages, model=<span class="string">&quot;gpt-3.5-turbo&quot;</span>, temperature=<span class="number">0</span></span>):</span><br><span class="line">    response = openai.ChatCompletion.create(</span><br><span class="line">        model=model,</span><br><span class="line">        messages=messages,</span><br><span class="line">        temperature=temperature, <span class="comment"># 默认温度值</span></span><br><span class="line">    )</span><br><span class="line">    <span class="built_in">print</span>(<span class="built_in">str</span>(response.choices[<span class="number">0</span>].message))</span><br><span class="line">    <span class="keyword">return</span> response.choices[<span class="number">0</span>].message[<span class="string">&quot;content&quot;</span>]</span><br></pre></td></tr></table></figure>
+
+<p>值得注意的是 messages 中的 <em>role</em> 的作用。以下面的一组 messages 示例，这组对话中有三个角色，分别是系统，用户和助理。通常，用户就是使用大语言模型的人，助理则是 LLM 扮演的角色，系统作为一个更高级的第三方，充当画外音的角色，用来组建聊天框架，在用户感知不到的地方引导“助理“的回复。
+    
+    <a class="article-more-a" href="/2025/03/02/Prompt-tips7/#more">more >></a>
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">AIGC</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Prompt-Engineering</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">提示词工程</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2025/03/02/Prompt-tips7/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Prompt-tips6" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -237,7 +346,15 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <p>本篇博客主要总结了 DeepLearning AI 公开课程 <em>Prompt Engineering 提示词工程</em> 第七章节 Expanding 扩充任务的内容，也可以理解为该章节的笔记。</p>
+    <p>Prompt Engineering 提示词工程笔记汇总</p>
+<p><a href="https://wuxinberry.github.io/2025/01/19/Prompt-tips/">第一、二章：编写指示的几个指导原则</a></p>
+<p><a href="https://wuxinberry.github.io/2025/01/20/Prompt-tips2/">第三章：迭代 Iterative</a></p>
+<p><a href="https://wuxinberry.github.io/2025/01/21/Prompt-tips3/">第四章：摘要 Summarizing</a></p>
+<p><a href="https://wuxinberry.github.io/2025/02/09/Prompt-tips4/">第五章：推理 Inferring</a></p>
+<p><a href="https://wuxinberry.github.io/2025/02/12/Prompt-tips5/">第六章：转化 Transferring</a></p>
+<p><a href="https://wuxinberry.github.io/2025/02/22/Prompt-tips6/">第七章：扩充 Expanding</a></p>
+<p><a href="https://wuxinberry.github.io/2025/03/02/Prompt-tips7/">第八章：聊天机器人 ChatBot</a></p>
+<p>本篇博客主要总结了 DeepLearning AI 公开课程 <em>Prompt Engineering 提示词工程</em> 第七章节 Expanding 扩充任务的内容，也可以理解为该章节的笔记。</p>
 <p>扩充任务，顾名思义，就是给出一段文本，可以是主题或说明等，让 LLM 生成一段更长的文本，例如一篇文章、一份邮件。本章节还将引入一个模型参数，temperature 温度。这个参数允许我们调节模型的多样性程度。</p>
 <h2 id="0-环境准备"><a href="#0-环境准备" class="headerlink" title="0. 环境准备"></a>0. 环境准备</h2><p>之前的章节中，我们都没有单独列出调用 openai 的环境准备，因为它们都很简单，并且如果是要调用不同的大模型，API各有不同。因此，为了专注于 prompt ，之前的几个章节都将 setup 的环节略过了。但是在这个章节，我们将引入一个新的参数，temperature，来增加模型输出的多元化程度，因此在这里特地列出，和其他章节作一个区分。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> openai</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> dotenv <span class="keyword">import</span> load_dotenv, find_dotenv</span><br><span class="line">_ = load_dotenv(find_dotenv()) <span class="comment"># read local .env file</span></span><br><span class="line"></span><br><span class="line">openai.api_key  = os.getenv(<span class="string">&#x27;OPENAI_API_KEY&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_completion</span>(<span class="params">prompt, model=<span class="string">&quot;gpt-3.5-turbo&quot;</span>,temperature=<span class="number">0</span></span>): <span class="comment"># Andrew mentioned that the prompt/ completion paradigm is preferable for this class</span></span><br><span class="line">    messages = [&#123;<span class="string">&quot;role&quot;</span>: <span class="string">&quot;user&quot;</span>, <span class="string">&quot;content&quot;</span>: prompt&#125;]</span><br><span class="line">    response = openai.ChatCompletion.create(</span><br><span class="line">        model=model,</span><br><span class="line">        messages=messages,</span><br><span class="line">        temperature=temperature, <span class="comment"># this is the degree of randomness of the model&#x27;s output</span></span><br><span class="line">    )</span><br><span class="line">    <span class="keyword">return</span> response.choices[<span class="number">0</span>].message[<span class="string">&quot;content&quot;</span>]</span><br></pre></td></tr></table></figure>
@@ -336,7 +453,15 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <p>本篇博客主要总结了 DeepLearning AI 公开课程 <em>Prompt Engineering 提示词工程</em> 第六章节 Transferring 转换的内容，也可以理解为该章节的笔记。</p>
+    <p>Prompt Engineering 提示词工程笔记汇总</p>
+<p><a href="https://wuxinberry.github.io/2025/01/19/Prompt-tips/">第一、二章：编写指示的几个指导原则</a></p>
+<p><a href="https://wuxinberry.github.io/2025/01/20/Prompt-tips2/">第三章：迭代 Iterative</a></p>
+<p><a href="https://wuxinberry.github.io/2025/01/21/Prompt-tips3/">第四章：摘要 Summarizing</a></p>
+<p><a href="https://wuxinberry.github.io/2025/02/09/Prompt-tips4/">第五章：推理 Inferring</a></p>
+<p><a href="https://wuxinberry.github.io/2025/02/12/Prompt-tips5/">第六章：转化 Transferring</a></p>
+<p><a href="https://wuxinberry.github.io/2025/02/22/Prompt-tips6/">第七章：扩充 Expanding</a></p>
+<p><a href="https://wuxinberry.github.io/2025/03/02/Prompt-tips7/">第八章：聊天机器人 ChatBot</a></p>
+<p>本篇博客主要总结了 DeepLearning AI 公开课程 <em>Prompt Engineering 提示词工程</em> 第六章节 Transferring 转换的内容，也可以理解为该章节的笔记。</p>
 <p>在这个章节，我们将学习如何使用 LLM 帮助我们完成翻译、拼写和语法检查、语气调整、格式转化等文本任务。虽然现在已经有很多很强大的翻译软件，但是当应用到特定领域的时候，我们还是会需要根据自己的应用需求，构建特定的翻译应用。例如某个电影或者游戏文本的翻译，其中可能会涉及很多设定上的词语需要约定，如果直接使用通用的翻译软件，会得到四不像的翻译结果。</p>
 <h2 id="1-翻译-Translation"><a href="#1-翻译-Translation" class="headerlink" title="1. 翻译 Translation"></a>1. 翻译 Translation</h2><p>LLM 大多是多语言训练的，因此能很好地胜任翻译工作。例如：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">prompt = <span class="string">f&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">Translate the following English text to Spanish: ```Hi, I would like to order a blender```</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="comment">## 输出</span></span><br><span class="line">Hola, me gustaría ordenar una licuadora.</span><br></pre></td></tr></table></figure>
@@ -440,7 +565,15 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <p>本篇博客主要总结了 DeepLearning AI 公开课程 <em>Prompt Engineering 提示词工程</em> 第五章节 Inferring 推理的内容，也可以理解为该章节的笔记。</p>
+    <p>Prompt Engineering 提示词工程笔记汇总</p>
+<p><a href="https://wuxinberry.github.io/2025/01/19/Prompt-tips/">第一、二章：编写指示的几个指导原则</a></p>
+<p><a href="https://wuxinberry.github.io/2025/01/20/Prompt-tips2/">第三章：迭代 Iterative</a></p>
+<p><a href="https://wuxinberry.github.io/2025/01/21/Prompt-tips3/">第四章：摘要 Summarizing</a></p>
+<p><a href="https://wuxinberry.github.io/2025/02/09/Prompt-tips4/">第五章：推理 Inferring</a></p>
+<p><a href="https://wuxinberry.github.io/2025/02/12/Prompt-tips5/">第六章：转化 Transferring</a></p>
+<p><a href="https://wuxinberry.github.io/2025/02/22/Prompt-tips6/">第七章：扩充 Expanding</a></p>
+<p><a href="https://wuxinberry.github.io/2025/03/02/Prompt-tips7/">第八章：聊天机器人 ChatBot</a></p>
+<p>本篇博客主要总结了 DeepLearning AI 公开课程 <em>Prompt Engineering 提示词工程</em> 第五章节 Inferring 推理的内容，也可以理解为该章节的笔记。</p>
 <p>输入一些文本，让模型帮助我们完成推理的工作，如提取标签、名字，梳理文本情感等。看起来和之前的输入文本，让模型提取其中的关键信息撰写文章有些类似，不过实际应用中，prompt 还是会有一些不同。</p>
 <h2 id="1-文本情绪分类"><a href="#1-文本情绪分类" class="headerlink" title="1. 文本情绪分类"></a>1. 文本情绪分类</h2><p>传统的机器学习工作流中，要实现文本情绪分类，必须收集标签数据集、训练模型并部署，推断等。对于个人开发者而言，这样的过程工作量大，很繁杂，并不是很合适。LLM将我们从这些繁琐的工作中解放出来，可以通过几个简短的 prompt 就完成这些工作。</p>
 <p>在上一个章节中，我们会采用如下的 prompt 来指示 LLM，让它提取文本。</p>
@@ -542,7 +675,15 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <p>本篇博客主要总结了 DeepLearning AI 公开课程 <em>Prompt Engineering 提示词工程</em> 第四章节 Summarizing 摘要的内容，也可以理解为该章节的笔记。</p>
+    <p>Prompt Engineering 提示词工程笔记汇总</p>
+<p><a href="https://wuxinberry.github.io/2025/01/19/Prompt-tips/">第一、二章：编写指示的几个指导原则</a></p>
+<p><a href="https://wuxinberry.github.io/2025/01/20/Prompt-tips2/">第三章：迭代 Iterative</a></p>
+<p><a href="https://wuxinberry.github.io/2025/01/21/Prompt-tips3/">第四章：摘要 Summarizing</a></p>
+<p><a href="https://wuxinberry.github.io/2025/02/09/Prompt-tips4/">第五章：推理 Inferring</a></p>
+<p><a href="https://wuxinberry.github.io/2025/02/12/Prompt-tips5/">第六章：转化 Transferring</a></p>
+<p><a href="https://wuxinberry.github.io/2025/02/22/Prompt-tips6/">第七章：扩充 Expanding</a></p>
+<p><a href="https://wuxinberry.github.io/2025/03/02/Prompt-tips7/">第八章：聊天机器人 ChatBot</a></p>
+<p>本篇博客主要总结了 DeepLearning AI 公开课程 <em>Prompt Engineering 提示词工程</em> 第四章节 Summarizing 摘要的内容，也可以理解为该章节的笔记。</p>
 <p>当下，有很多文本内容需要我们阅读，让 LLM 帮助我们总结摘要，可以提高我们的信息摄取效率。所谓的摘要任务，不仅仅是给出一段长文，要求它总结主旨，还可以有很多类似的工作，例如给出大量的评论数据，要求 LLM 帮助我们提取其中的反馈建议，又或者要求 LLM 只提取你关心的那部分信息，而不是对全文做一个笼统的概括。善用提示词，因此，让 LLM 帮助你完成数据的阅读和信息提取，可以节省大量的时间和精力。</p>
 <h2 id="1-生成指定信息的摘要"><a href="#1-生成指定信息的摘要" class="headerlink" title="1. 生成指定信息的摘要"></a>1. 生成指定信息的摘要</h2><p>给出一段文字，让 LLM 进行总结。这件事我们在上一个章节中已经做了很多遍。我们已经可以对输出的篇幅、重点关注的方面、输出的格式等做出要求。本章节的内容与上一章有些类似，也是为了让 LLM 生成更满足我们实际需求的文本。
     
@@ -640,7 +781,15 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <p>本篇博客主要总结了 DeepLearning AI 公开课程 <em>Prompt Engineering 提示词工程</em> 第三章节 Iterative 迭代的内容，也可以理解为该章节的笔记。</p>
+    <p>Prompt Engineering 提示词工程笔记汇总</p>
+<p><a href="https://wuxinberry.github.io/2025/01/19/Prompt-tips/">第一、二章：编写指示的几个指导原则</a></p>
+<p><a href="https://wuxinberry.github.io/2025/01/20/Prompt-tips2/">第三章：迭代 Iterative</a></p>
+<p><a href="https://wuxinberry.github.io/2025/01/21/Prompt-tips3/">第四章：摘要 Summarizing</a></p>
+<p><a href="https://wuxinberry.github.io/2025/02/09/Prompt-tips4/">第五章：推理 Inferring</a></p>
+<p><a href="https://wuxinberry.github.io/2025/02/12/Prompt-tips5/">第六章：转化 Transferring</a></p>
+<p><a href="https://wuxinberry.github.io/2025/02/22/Prompt-tips6/">第七章：扩充 Expanding</a></p>
+<p><a href="https://wuxinberry.github.io/2025/03/02/Prompt-tips7/">第八章：聊天机器人 ChatBot</a></p>
+<p>本篇博客主要总结了 DeepLearning AI 公开课程 <em>Prompt Engineering 提示词工程</em> 第三章节 Iterative 迭代的内容，也可以理解为该章节的笔记。</p>
 <p>这个章节主要是教授了如何通过不断迭代、修正、改进，找到完成任务效果更好的提示词。迭代的过程总是从想法，实践到根据结果调优，这几个阶段不断循环，最后找到一段合适的提示词。虽然网上有很多通用的提示词模板，但是实际应用过程中，我们还是得针对自己的需求对其进行改进、特化，这也是我们常说的”调教“你的 LLM。</p>
 <p>以下是一段关于椅子的介绍文本，在本章中我们用它作为示例。现在我们要指示 LLM 对它进行信息内容的总结、提取。
     
@@ -738,7 +887,15 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <p>当下，人工智能飞速发展，以 ChatGPT 为代表的大预言模型崭露头角后，诸如豆包、月之暗面、通义千问等生成式指令调优AI工具蓬勃发展。AI+各行各业成为了当下不可逆转的趋势，提示词工程（Prompt Engineering）成为了一项关键技能。本篇博客将介绍提示词工程的一些技巧，这些技巧不仅能帮助开发人员快速构建生成式AI应用，还可以帮助其他 AI 应用的使用者，撰写属于自己的提示词模板，调教出更符合自身需求的 AI 助理。</p>
+    <p>Prompt Engineering 提示词工程笔记汇总</p>
+<p><a href="https://wuxinberry.github.io/2025/01/19/Prompt-tips/">第一、二章：编写指示的几个指导原则</a></p>
+<p><a href="https://wuxinberry.github.io/2025/01/20/Prompt-tips2/">第三章：迭代 Iterative</a></p>
+<p><a href="https://wuxinberry.github.io/2025/01/21/Prompt-tips3/">第四章：摘要 Summarizing</a></p>
+<p><a href="https://wuxinberry.github.io/2025/02/09/Prompt-tips4/">第五章：推理 Inferring</a></p>
+<p><a href="https://wuxinberry.github.io/2025/02/12/Prompt-tips5/">第六章：转化 Transferring</a></p>
+<p><a href="https://wuxinberry.github.io/2025/02/22/Prompt-tips6/">第七章：扩充 Expanding</a></p>
+<p><a href="https://wuxinberry.github.io/2025/03/02/Prompt-tips7/">第八章：聊天机器人 ChatBot</a></p>
+<p>当下，人工智能飞速发展，以 ChatGPT 为代表的大预言模型崭露头角后，诸如豆包、月之暗面、通义千问等生成式指令调优AI工具蓬勃发展。AI+各行各业成为了当下不可逆转的趋势，提示词工程（Prompt Engineering）成为了一项关键技能。本篇博客将介绍提示词工程的一些技巧，这些技巧不仅能帮助开发人员快速构建生成式AI应用，还可以帮助其他 AI 应用的使用者，撰写属于自己的提示词模板，调教出更符合自身需求的 AI 助理。</p>
 <p>注：本博客主要总结了 DeepLearning AI 的公开课程内容，也可以理解为是该公开课程的笔记。如果你有足够的时间和条件，强烈建议直接访问文末的课程链接亲自学习，因为这样，你还可以在官网的 Jupyter Notebook 上一边听课，一边调试、实践。</p>
 <h2 id="0-为什么要学习提示词工程？"><a href="#0-为什么要学习提示词工程？" class="headerlink" title="0. 为什么要学习提示词工程？"></a>0. 为什么要学习提示词工程？</h2><p>不同于过去的基础大预言模型 Base LLM，当下的指令调优大语言模型 Instruction Tuned LLM，它更聪明，可以遵循用户的指令来进行预测，给出结果。如果你需要它给出一些方案，你可以告知已有的条件、决策方式、希望达成的目的等。如果你想要它撰写文章，除了主题、大纲以外，你还可以指定文字风格、篇幅，要求它阅读哪些参考文献等等。因此，学好提示词的使用，能够帮助我们和 AI 更好地共同完成任务。尤其是一些复杂的场景、要求比较多的任务，更需要我们组织有条理的提示词，来帮助 LLM 理解任务的含义。</p>
 <p>学习了提示词工程以后，即使不用做编写基于 LLM 的 AI 软件，你也可以通过抽象出一系列的提示词模板，只需要更换部分词语内容，完成相似的任务，提升你的工作、学习效率。</p>
@@ -1096,111 +1253,6 @@
     
     <p class="article-more-link">
       <a class="article-more-a" href="/2024/12/25/ComfyUI-tips/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-ComfyUI基础原理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2024/12/23/ComfyUI%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86/" target="_blank">AI绘图，是如何从算力到画面的</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2024/12/23/ComfyUI%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86/" class="archive-article-date">
-        <time datetime="2024-12-23T13:34:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-12-23</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <p>ComfyUI 相关博客目录：</p>
-<p><a href="https://wuxinberry.github.io/2024/04/17/ComfyUI%E5%85%A5%E9%97%A8/">AI绘图神器：ComfyUI零基础入门指南（一）</a></p>
-<p><a href="https://wuxinberry.github.io/2024/12/25/ComfyUI-tips/">ComfyUI踩坑记录，一些帮助你少走弯路的小技巧</a></p>
-<p><a href="https://wuxinberry.github.io/2025/01/12/ComfyUI-lora/">ComfyUI 中使用 LoRA 模型全攻略</a></p>
-<p><a href="https://wuxinberry.github.io/2024/12/23/ComfyUI%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86/">AI绘图，是如何从算力到画面的</a></p>
-<p>现如今，AI绘图软件风靡互联网。使用AI绘图，你只要输入几个词语，动动手指就可以生成一张图片。你是否好奇这背后的逻辑？SD是什么？潜空间又是什么？AI 究竟是如何将算力转化为那些鲜活的图片的？如果你对此感到好奇，那么请往下阅读。本文将以最简明易懂的方式，阐释 AI 的基础原理。了解其中的流程和原理，能够帮助你更好地使用AI绘图工具，更高效地调整AI绘图的参数，更有目的性地选择对应的模型。</p>
-<h2 id="AI绘图的过程"><a href="#AI绘图的过程" class="headerlink" title="AI绘图的过程"></a>AI绘图的过程</h2><p>首先，让我们来了解一下 AI绘图的基本流程，它到底是怎么运作的？不同的 AI 绘图软件，提供的界面、交互方式或许有很大差别，但是本质都是一样的。让我们从最简单的开始，以 ComfyUI 最基础的一个文生图流程为例。</p>
-<img src="/2024/12/23/ComfyUI%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86/Text2Img.png" class="" title="Text2Img">
-
-<p>或许你会感到奇怪，Load Checkpoint 为什么要载入模型？为什么输入 Prompt 的节点，却被称为 CLIP Text Encoder？为什么在 KSampler 之后，Save Image之前，还需要有一个 VAE Decoder？不要着急，我们先提炼这张图中显示的，AI绘图的基础流程。
-    
-    <a class="article-more-a" href="/2024/12/23/ComfyUI%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">AIGC</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">ComfyUI</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Stable Diffusion</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2024/12/23/ComfyUI%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86/">展开全文 >></a>
     </p>
     
 

@@ -208,6 +208,154 @@
             
 
   
+    <article id="post-Prompt-templates" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2025/03/09/Prompt-templates/" target="_blank">常用的AI提示词整理（持更）</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2025/03/09/Prompt-templates/" class="archive-article-date">
+        <time datetime="2025-03-09T08:12:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-03-09</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <p>本篇博客，记录日常生活、工作中经常用到的 AI 提示词模板，防止每次用到的时候重新敲，直接复制粘贴替换主体内容效率要高很多。</p>
+<p>大多数都是用于 deepseek-R1 的，ChatGPT 在中文理解上还是差点意思。</p>
+<p>持续更新。</p>
+<h2 id="技术相关"><a href="#技术相关" class="headerlink" title="技术相关"></a>技术相关</h2><blockquote>
+<p> 你是一个专业的运维开发人员，能够帮助解决很多运维、开发过程中的问题。现在，你需要在 &lt;系统版本&gt; 上部署 &lt;服务名+版本名&gt;，请给出具体的操作步骤和指令，并解释每条指令中各个参数的作用。如果部署过程中需要一些前提条件，如网络、数据库等，也请一并给出详细的操作指南。</p>
+</blockquote>
+<p>例：你是一个专业的运维开发人员。现在，你需要在 Debian10系统 上部署 Graylog 6.1，请给出具体的操作步骤和指令，并解释每条指令中各个参数的作用。要求使用 docker 命令行部署，不使用 docker compose。</p>
+<blockquote>
+<p>你是一个专业的运维开发人员，能够帮助解决很多运维、开发过程中的问题。</p>
+<p>当前使用的系统版本是 &lt;系统版本&gt;</p>
+<p>我在部署 &lt;服务名&gt; 的过程中遇到了问题，出现了如下抛错，请分析抛错产生的原因并给出详细的解决方法。</p>
+<ERR_INFO>
+</blockquote>
+<p>例：你是一个专业的运维开发人员，能够帮助解决很多运维、开发过程中的问题。当前使用的系统版本是 Debian10。我在部署 Graylog6.1 的过程中遇到了问题，出现了如下抛错，请分析抛错产生的原因并给出详细的解决方法。</p>
+<p>粘贴上一些错误日志</p>
+<blockquote>
+<p>你是一个专业的运维开发人员，能够帮助解决很多运维、开发过程中的问题。当前有一个项目需要部署为集群，采用了如下方案：</p>
+<p>简述方案</p>
+<p>请分析该方案的优劣以及潜在的风险点，并给出优化建议</p>
+</blockquote>
+<blockquote>
+<p>你是一个专业的开发人员，精通 Lua, C++, Python。当前需要实现一个方法，具体功能如下：</p>
+<p>描述功能</p>
+<p>输入参数依次为 param1, param2</p>
+<p>输出返回依次为 res1, res2</p>
+</blockquote>
+<blockquote>
+<p>你是一个专业的开发人员，精通 Lua, C++, Python。请分析以下代码，找出其中的错误点，并修正，如果已经没有错误，请找出其中影响效率的点并优化。</p>
+<code>
+</blockquote>
+<h2 id="SQL-查询"><a href="#SQL-查询" class="headerlink" title="SQL 查询"></a>SQL 查询</h2><p>版本1：给出表中的参数以及一条数据实例，适用于拿不到表中数据结构的情况</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># table信息 和 log sample</span></span><br><span class="line">table_structs = get_related_log_struct_text(log_names, project_prefix)</span><br><span class="line">samples_json = get_samples_by_log_names(log_names, project_prefix)</span><br><span class="line"><span class="comment"># 当前时间 用来做默认限制</span></span><br><span class="line">now = time.strftime(<span class="string">&quot;%Y-%m-%d-%H:%M:%S&quot;</span>, time.localtime())</span><br><span class="line">system = <span class="string">f&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">你是一个专业的sql人员, 可以根据自然语言生成sql语句, 同时也能够根据输入的sql语句解释其含义。\</span></span><br><span class="line"><span class="string">        收到任务时, 请不要急于给出答案, 请先思考应该如何拆解这个任务, 并根据给出的表结构和日志数据范例, \</span></span><br><span class="line"><span class="string">        提取存储的数据信息, 生成SQL的时候要注意各个字段的类型。\</span></span><br><span class="line"><span class="string">        每次查询, 都将给出需要用到的表结构和日志数据范例, 供你参考。通常, 会先给出所有的表结构, 然后再列出这些表的日志范例。\</span></span><br><span class="line"><span class="string">        表结构将会以JSON的形式给出, 其中key为`表名(表的用途)`, value 为 `字段1(字段1的注释), 字段2(字段2的注释), ...` 的形式, \</span></span><br><span class="line"><span class="string">        日志数据范例将会以 JSON 格式给出, 其中key为表名, value 为JSON格式的日志数据。\</span></span><br><span class="line"><span class="string">        以下是一个简单的例子: \</span></span><br><span class="line"><span class="string">        TABLE_SAMPLE(表范例) : account_id(账号), role_force(战力), \</span></span><br><span class="line"><span class="string">        TABLE_SAMPLE LOG: &#123;&#123; &#x27;account_id&#x27; : &#x27;123456&#x27;, &#x27;role_force&#x27; : 567523 &#125;&#125;, \</span></span><br><span class="line"><span class="string">        本次查询相关的表结构如下所示: \</span></span><br><span class="line"><span class="string">        <span class="subst">&#123;table_structs&#125;</span> \</span></span><br><span class="line"><span class="string">        本次查询相关的日志范例如下所示: \</span></span><br><span class="line"><span class="string">        <span class="subst">&#123;samples_json&#125;</span> \</span></span><br><span class="line"><span class="string">        当前的时间为 : <span class="subst">&#123;now&#125;</span></span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line">query = <span class="string">f&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        <span class="subst">&#123; user_query &#125;</span> \</span></span><br><span class="line"><span class="string">        请根据参考的表结构和日志范例, 解决以上的问题。\</span></span><br><span class="line"><span class="string">        如果要求查询数据, 请生成一段尽可能简单的 SQL 语句, 并解释这段 SQL 语句的查询逻辑。返回结果时, 请先返回结论, 如SQL语句, 之后再进行解释。\</span></span><br><span class="line"><span class="string">        如果要求解释SQL语句, 请结合表结构详细解析操作。\</span></span><br><span class="line"><span class="string">        如果要求验证SQL语句的正确性或者对SQL语句进行纠错, 请仔细检查SQL的语法、字段是否出错, 并检查查询逻辑是否不符合需求。\</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>版本2，直接给出数据库中数据表的创建语句作为参考</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># table信息 和 log sample</span></span><br><span class="line">table_structs = get_related_log_struct_text(log_names, project_prefix)</span><br><span class="line">samples_json = get_samples_by_log_names(log_names, project_prefix)</span><br><span class="line"><span class="comment"># 当前时间 用来做默认限制</span></span><br><span class="line">now = time.strftime(<span class="string">&quot;%Y-%m-%d-%H:%M:%S&quot;</span>, time.localtime())</span><br><span class="line">system = <span class="string">f&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">你是一个专业的sql人员, 可以根据自然语言生成sql语句, 同时也能够根据输入的sql语句解释其含义。\</span></span><br><span class="line"><span class="string">        收到任务时, 请不要急于给出答案, 请先思考应该如何拆解这个任务, 并根据给出的表结构, \</span></span><br><span class="line"><span class="string">        提取存储的数据信息, 生成SQL的时候要注意各个字段的类型。\</span></span><br><span class="line"><span class="string">        每次查询, 都将给出需要用到的表结构, 供你参考。\</span></span><br><span class="line"><span class="string">        以下是一个简单的例子: \</span></span><br><span class="line"><span class="string">        CREATE TABLE tName( \</span></span><br><span class="line"><span class="string">            name string, \</span></span><br><span class="line"><span class="string">            age int, \</span></span><br><span class="line"><span class="string">            id bigint) \</span></span><br><span class="line"><span class="string">        本次查询相关的表结构如下所示: \</span></span><br><span class="line"><span class="string">        <span class="subst">&#123;table_structs&#125;</span> \</span></span><br><span class="line"><span class="string">        本次查询相关的日志范例如下所示: \</span></span><br><span class="line"><span class="string">        <span class="subst">&#123;samples_json&#125;</span> \</span></span><br><span class="line"><span class="string">        当前的时间为 : <span class="subst">&#123;now&#125;</span> \</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">query = <span class="string">f&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        <span class="subst">&#123; user_query &#125;</span> \</span></span><br><span class="line"><span class="string">        请根据参考的表结构和日志范例, 解决以上的问题。\</span></span><br><span class="line"><span class="string">        如果要求查询数据, 请生成一段尽可能简单的 SQL 语句, 并解释这段 SQL 语句的查询逻辑。返回结果时, 请先返回结论, 如SQL语句, 之后再进行解释。\</span></span><br><span class="line"><span class="string">        如果要求解释SQL语句, 请结合表结构详细解析操作。\</span></span><br><span class="line"><span class="string">        如果要求验证SQL语句的正确性或者对SQL语句进行纠错, 请仔细检查SQL的语法、字段是否出错, 并检查查询逻辑是否不符合需求。\</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>如果需要用到 join 操作，可以显式地指出哪张表中的哪个字段是可以做连接的，提高正确率。</p>
+<h2 id="文本润色"><a href="#文本润色" class="headerlink" title="文本润色"></a>文本润色</h2><blockquote>
+<p>你是一个擅长写作的编辑助理，请根据以下要求，对输入的文本进行改写润色，改写过程中还要注意修正语法错误、拼写错误。输出时，先输出改写后的结果，再给出改写的逻辑说明。</p>
+<p>文风：&lt;&gt;</p>
+<p>文本：&lt;&gt;</p>
+</blockquote>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><h3 id="投资"><a href="#投资" class="headerlink" title="投资"></a>投资</h3><blockquote>
+<p>你是一个精于投资市场的理财助理，请根据以下客户情况，对其提出财务管理建议，并给出具体的可执行方案和预期收益。方案要包括如何逐步建仓和后续的调仓、止盈。</p>
+<p>客户基本情况如下所示，年龄XX，职业XX，教育背景XXX</p>
+<p>税前年收入：</p>
+<p>税后年收入：</p>
+<p>当前存款：</p>
+<p>日常开销：</p>
+<p>风险承受情况：</p>
+</blockquote>
+<blockquote>
+<p>你是一个精于投资市场的理财助理，请根据2025年政策导向以及国际局势，推荐最值得配置的十个指数和股票，并给出判断的方式和依据，详细解释决策的过程。</p>
+</blockquote>
+<h3 id="算命"><a href="#算命" class="headerlink" title="算命"></a>算命</h3><blockquote>
+<p>你是一个算命大师，可以根据对方的生辰八字进行算命。</p>
+<p>今年是2025年。我出生于XXXX年XX月XX日，&lt;出生地&gt;，教育背景为&lt;&gt;。</p>
+<ol>
+<li>请根据我的生辰八字推算我的前世，至少推断三世。</li>
+<li>请根据我的生辰八字，给出职业&#x2F;财富发展规划，先给出规划路径，然后再给出各个节点的具体实现方法</li>
+<li>请根据我的生辰八字给出生活建议和指导，有什么需要注意、规避的地方，请给出规避方法</li>
+</ol>
+</blockquote>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">AIGC</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2025/03/09/Prompt-templates/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Prompt-tips7" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1095,108 +1243,6 @@
     
     <p class="article-more-link">
       <a class="article-more-a" href="/2025/01/05/%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%973/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-ComfyUI-tips" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2024/12/25/ComfyUI-tips/" target="_blank">ComfyUI踩坑记录，一些帮助你少走弯路的小技巧</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2024/12/25/ComfyUI-tips/" class="archive-article-date">
-        <time datetime="2024-12-25T06:40:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-12-25</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <p>ComfyUI 相关博客目录：</p>
-<p><a href="https://wuxinberry.github.io/2024/04/17/ComfyUI%E5%85%A5%E9%97%A8/">AI绘图神器：ComfyUI零基础入门指南（一）</a></p>
-<p><a href="https://wuxinberry.github.io/2024/12/25/ComfyUI-tips/">ComfyUI踩坑记录，一些帮助你少走弯路的小技巧</a></p>
-<p><a href="https://wuxinberry.github.io/2025/01/12/ComfyUI-lora/">ComfyUI 中使用 LoRA 模型全攻略</a></p>
-<p><a href="https://wuxinberry.github.io/2024/12/23/ComfyUI%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86/">AI绘图，是如何从算力到画面的</a></p>
-<p>每一个使用 ComfyUI 或者其他 AI 绘图应用的人，尤其是初学者，大概率都有所体会：想要一张完全符合预期的图，总是耗费相当长的时间。你需要反复地换模型、调整参数、修改 prompt，几个小时过去，最终才能在上百张图中筛选出一张差强人意的图片。这和 “让 AI 解放你的生产力” 的口号实在是大相径庭。本篇博客，整理了作者本人在使用 ComfyUI 过程中踩过的一些坑，整理出来的一些实践小技巧，相信能够帮助你快速度过初学者的尴尬期，迅速提高出图效率和质量。</p>
-<h2 id="关于-Checkpoint-模型选取"><a href="#关于-Checkpoint-模型选取" class="headerlink" title="关于 Checkpoint 模型选取"></a>关于 Checkpoint 模型选取</h2><h3 id="SD-版本选取"><a href="#SD-版本选取" class="headerlink" title="SD 版本选取"></a>SD 版本选取</h3><p>从最早期的 Stable Diffusion v1.5 到 现如今的 Stable Diffusion XL，SD模型已经有多个应用中的版本。它们有着各自的特点和适用的场景，根据需要选择最适合的模型，能够帮助你提高出图的效率。话不多说，下面就是我整理的 SD 模型对比表格。
-    
-    <a class="article-more-a" href="/2024/12/25/ComfyUI-tips/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">AIGC</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">ComfyUI</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Stable Diffusion</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2024/12/25/ComfyUI-tips/">展开全文 >></a>
     </p>
     
 

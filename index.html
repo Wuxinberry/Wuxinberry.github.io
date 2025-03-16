@@ -208,6 +208,105 @@
             
 
   
+    <article id="post-Graylog61-deploy" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2025/03/16/Graylog61-deploy/" target="_blank">最新版本Graylog6.1+OpenSearch+Mongo 脚本部署（Docker自动化）</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2025/03/16/Graylog61-deploy/" class="archive-article-date">
+        <time datetime="2025-03-16T09:31:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-03-16</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <p>本篇博客，将介绍如何在 Linux 上快速高效地使用 Docker 部署最新版 Graylog 6.1，配套多机器的 Open Search 集群以及MongoDB。</p>
+<p>目前网络上的大多数部署教程都是基于 Graylog3.x 版本，再新一点也不过 4.x，用来提供数据服务的都是 Elastic Search。然而最新版的 Graylog 已经移除了对 Elastic Search 的支持，仅支持 graylog-datanode 或 Open Search。当然，你也可以通过安装 Graylog 插件的方式扩展，实现继续使用 Elastic Search 作为搜索引擎的目的。但是很遗憾，笔者在配置的时候并不知道还有这样的插件、以及该如何下载，因此直接选用了 Open Search。配置前后零零散散也踩了很多坑，特在本篇博客整理记录。</p>
+<h2 id="0-概述"><a href="#0-概述" class="headerlink" title="0. 概述"></a>0. 概述</h2><p>什么是 Graylog？什么是Open Search？MongoDB是用来做什么的？</p>
+<p><strong>Graylog</strong> 是一款开源的日志管理平台，用于集中收集、存储和实时分析系统或应用的日志数据。</p>
+<p><strong>OpenSearch</strong> 是基于 Elasticsearch 分支的搜索引擎，负责存储和快速检索 Graylog 接收的海量日志数据。</p>
+<p><strong>MongoDB</strong> 是 NoSQL 数据库，在此架构中存储 Graylog 的配置、用户权限等元数据信息。</p>
+<p>三者协作：Graylog 处理日志输入和可视化，OpenSearch 提供搜索能力，MongoDB 管理配置，构成完整的日志分析系统。这种组合常用于企业监控、安全审计和故障排查，替代传统的 ELK（Elasticsearch+Logstash+Kibana）方案。</p>
+<h2 id="1-前置条件和服务架构"><a href="#1-前置条件和服务架构" class="headerlink" title="1. 前置条件和服务架构"></a>1. 前置条件和服务架构</h2><p>首先，本博客的所有脚本和命令，都是基于 Debian10 操作系统的。如果使用 CentOS 或者其他操作系统，请注意命令的替换。</p>
+<h3 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h3><p>笔者安装时是用了两台机器，机器A部署 Graylog，opensearch node1，mongodb，机器B部署opensearch node2, 3, 4。以下是架构的简要示意图。注意，如果你也需要跨机器提供服务，那么首先要确保你的两台机器能够互相连通。由于笔者使用的是公司机器，默认就是在同一片子网下的，所以在这里不需要额外处理 。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">+-----------------------+</span><br><span class="line">|       机器A           |</span><br><span class="line">|                       |</span><br><span class="line">|  +-----------------+  |</span><br><span class="line">|  |     Graylog      |  |</span><br><span class="line">|  | (日志收集/分析)  |◄---日志输入（TCP/UDP/HTTP）</span><br><span class="line">|  +--------┬---------+  |</span><br><span class="line">|           │             |</span><br><span class="line">|  +--------▼---------+  |</span><br><span class="line">|  | OpenSearch Node1 |  |</span><br><span class="line">|  | (协调节点/数据节点) |  |</span><br><span class="line">|  +--------┬---------+  |</span><br><span class="line">|           │             |</span><br><span class="line">|  +--------▼---------+  |</span><br><span class="line">|  |    MongoDB       |  |</span><br><span class="line">|  | (存储Graylog配置) |  |</span><br><span class="line">|  +------------------+  |</span><br><span class="line">+-----------------------+</span><br><span class="line">           ▲</span><br><span class="line">           │ OpenSearch集群通信 (端口9300)</span><br><span class="line">           ▼</span><br><span class="line">+-----------------------+</span><br><span class="line">|       机器B           |</span><br><span class="line">|                       |</span><br><span class="line">|  +-----------------+  |</span><br><span class="line">|  | OpenSearch Node2 |  |</span><br><span class="line">|  |    (数据节点)     │  |</span><br><span class="line">|  +-----------------+  |</span><br><span class="line">|  +-----------------+  |</span><br><span class="line">|  | OpenSearch Node3 |  |</span><br><span class="line">|  |    (数据节点)     │  |</span><br><span class="line">|  +-----------------+  |</span><br><span class="line">|  +-----------------+  |</span><br><span class="line">|  | OpenSearch Node4 |  |</span><br><span class="line">|  |    (数据节点)     │  |</span><br><span class="line">|  +------------------+  |</span><br><span class="line">+-----------------------+</span><br></pre></td></tr></table></figure>
+
+<p>考虑到直接在原生系统上安装这些应用服务比较繁杂，并且环境配置上容易出现各种各样的问题，因此，这里选择了使用 Docker 进行安装。
+    
+    <a class="article-more-a" href="/2025/03/16/Graylog61-deploy/#more">more >></a>
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">部署</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2025/03/16/Graylog61-deploy/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Prompt-templates" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1176,102 +1275,6 @@
 
 
   
-    <article id="post-建站指南3" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2025/01/05/%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%973/" target="_blank">萌新友好！【WordPress】搭建属于你的个人网站（三）</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2025/01/05/%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%973/" class="archive-article-date">
-        <time datetime="2025-01-05T08:00:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-01-05</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <p>这是一份搭建属于你自己的个人网站的指南。如果你对于建立一个个人网站有兴趣，却不知道如何开展一系列的工作，那么请往下阅读。【建站指南】系列一共有三篇文章，其中，第一篇，介绍了为什么要搭建一个个人网站、快速建站的常用方式及优劣对比。第二、三篇将分别展开介绍<a href="https://wuxinberry.github.io/2024/12/21/%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%972/">GitHub+Hexo的建站方式</a>和<a href="https://wuxinberry.github.io/2025/01/05/%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%973/">WordPress建站方式</a>。本篇为第三篇，将展开介绍如何使用 <strong>WordPress</strong> 搭建你的个人博客网站。</p>
-<h2 id="零、一些准备工作"><a href="#零、一些准备工作" class="headerlink" title="零、一些准备工作"></a>零、一些准备工作</h2><h3 id="准备服务器"><a href="#准备服务器" class="headerlink" title="准备服务器"></a>准备服务器</h3><p>想要搭建属于你的个人独立站，首先，会需要一台服务器。我们的网站将部署、运行在这台服务器上。服务器可以是你本地的某一台机器，或者是云服务器。考虑到大多数人的情况，我推荐你在建站初期，先使用云服务器。正如我在建站指南第一篇中推荐的，云服务器使用、维护、扩容都相当便捷，比我们自己花心思维护一台机器要方便得多。</p>
-<p>云服务器的厂商最好和域名厂商一致，这样后续做域名认证、解析等会更方便。本篇将以阿里云为例（其他云也是大致类似的操作），展开建站的详细指南。</p>
-<p>在选择服务器的时候，切记选择 Linux &#x2F;CentOS 版本，这对我们后续安装 WordPress 更友好。</p>
-<p>在选择服务器地区的时候，如果选择了大陆的服务器，则后续如果想通过域名访问，还需要冗长的备案流程；选择香港或者海外的话，就可以跳过这些流程。不过，如果你想要在大陆接入支付宝等支付业务，不是放一个二维码让你的顾客扫码支付，而是接入支付宝的接口，那么就必须在大陆备案。关于服务器地区的选择，你可以自行取舍。
-    
-    <a class="article-more-a" href="/2025/01/05/%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%973/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">建站</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">教程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2025/01/05/%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%973/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1414,6 +1417,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Stable Diffusion</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">部署</a>
               </li>
              
               <li class="article-tag-list-item">

@@ -6,20 +6,27 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://wuxinberry.github.io">
-  <title>Tag: AIGC | Berry&#39;s Blog</title>
+  <title>最新版本Graylog6.1+OpenSearch+Mongo 脚本部署（Docker自动化） | Berry&#39;s Blog</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="目前是游戏行业服务器端工程师，一个空闲时摄影、游戏、电影什么都爱捣鼓捣鼓的00后">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Berry&#39;s Blog">
-<meta property="og:url" content="https://wuxinberry.github.io/tags/AIGC/page/2/index.html">
+  <meta name="description" content="本篇博客，将介绍如何在 Linux 上快速高效地使用 Docker 部署最新版 Graylog 6.1，配套多机器的 Open Search 集群以及MongoDB。 目前网络上的大多数部署教程都是基于 Graylog3.x 版本，再新一点也不过 4.x，用来提供数据服务的都是 Elastic Search。然而最新版的 Graylog 已经移除了对 Elastic Search 的支持，仅支持">
+<meta property="og:type" content="article">
+<meta property="og:title" content="最新版本Graylog6.1+OpenSearch+Mongo 脚本部署（Docker自动化）">
+<meta property="og:url" content="https://wuxinberry.github.io/2025/03/16/Graylog61-deploy/index.html">
 <meta property="og:site_name" content="Berry&#39;s Blog">
-<meta property="og:description" content="目前是游戏行业服务器端工程师，一个空闲时摄影、游戏、电影什么都爱捣鼓捣鼓的00后">
+<meta property="og:description" content="本篇博客，将介绍如何在 Linux 上快速高效地使用 Docker 部署最新版 Graylog 6.1，配套多机器的 Open Search 集群以及MongoDB。 目前网络上的大多数部署教程都是基于 Graylog3.x 版本，再新一点也不过 4.x，用来提供数据服务的都是 Elastic Search。然而最新版的 Graylog 已经移除了对 Elastic Search 的支持，仅支持">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://wuxinberry.github.io/2025/03/16/Graylog61-deploy/os_cluster.png">
+<meta property="og:image" content="https://wuxinberry.github.io/2025/03/16/Graylog61-deploy/graylog.png">
+<meta property="og:image" content="https://wuxinberry.github.io/2025/03/16/Graylog61-deploy/input_config_1.png">
+<meta property="og:image" content="https://wuxinberry.github.io/2025/03/16/Graylog61-deploy/input_test.png">
+<meta property="article:published_time" content="2025-03-16T09:31:58.000Z">
+<meta property="article:modified_time" content="2025-03-16T10:39:02.399Z">
 <meta property="article:author" content="Berry">
-<meta property="article:tag" content="后端&#x2F;游戏&#x2F;">
+<meta property="article:tag" content="部署">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wuxinberry.github.io/2025/03/16/Graylog61-deploy/os_cluster.png">
   
     <link rel="alternative" href="/atom.xml" title="Berry&#39;s Blog" type="application/atom+xml">
   
@@ -201,128 +208,381 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-Graylog61-deploy" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2024" class="archive-year">2024</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2024/12/23/ComfyUI%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86/" class="archive-article-date">
-        <time datetime="2024-12-23T13:34:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-12-23</time>
-</a>
-
-        </div>
-    	 
+      <header class="article-header">
   
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2024/12/23/ComfyUI%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86/" target="_blank">AI绘图，是如何从算力到画面的</a>
   
+    <h1 class="article-title" itemprop="name">
+      最新版本Graylog6.1+OpenSearch+Mongo 脚本部署（Docker自动化）
     </h1>
   
 
 
-        <div class="article-info info-on-right">
+  
+  
+        
+        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
+
+<a href="/2025/03/16/Graylog61-deploy/" class="archive-article-date">
+        <time datetime="2025-03-16T09:31:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-03-16</time>
+</a>
+
+  
+  
+    
+<div style="margin-top:10px;">
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <!-- fonts.scss -->
+      <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
+      <i class="icon-statistics"></i>
+      <span class="post-meta-item-text"> 字数统计:</span>
+      <span class="post-count">4.2k字</span>
+    </span>
+  </span>
+
+  <span class="post-time">
+    &nbsp; | &nbsp;
+    <span class="post-meta-item-icon">
+      <i class="icon-book icon"></i>
+      <span class="post-meta-item-text"> 阅读时长≈</span>
+      <span class="post-count">18分</span>
+    </span>
+  </span>
+</div>
+
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <p>本篇博客，将介绍如何在 Linux 上快速高效地使用 Docker 部署最新版 Graylog 6.1，配套多机器的 Open Search 集群以及MongoDB。</p>
+<p>目前网络上的大多数部署教程都是基于 Graylog3.x 版本，再新一点也不过 4.x，用来提供数据服务的都是 Elastic Search。然而最新版的 Graylog 已经移除了对 Elastic Search 的支持，仅支持 graylog-datanode 或 Open Search。当然，你也可以通过安装 Graylog 插件的方式扩展，实现继续使用 Elastic Search 作为搜索引擎的目的。但是很遗憾，笔者在配置的时候并不知道还有这样的插件、以及该如何下载，因此直接选用了 Open Search。配置前后零零散散也踩了很多坑，特在本篇博客整理记录。</p>
+<h2 id="0-概述"><a href="#0-概述" class="headerlink" title="0. 概述"></a>0. 概述</h2><p>什么是 Graylog？什么是Open Search？MongoDB是用来做什么的？</p>
+<p><strong>Graylog</strong> 是一款开源的日志管理平台，用于集中收集、存储和实时分析系统或应用的日志数据。</p>
+<p><strong>OpenSearch</strong> 是基于 Elasticsearch 分支的搜索引擎，负责存储和快速检索 Graylog 接收的海量日志数据。</p>
+<p><strong>MongoDB</strong> 是 NoSQL 数据库，在此架构中存储 Graylog 的配置、用户权限等元数据信息。</p>
+<p>三者协作：Graylog 处理日志输入和可视化，OpenSearch 提供搜索能力，MongoDB 管理配置，构成完整的日志分析系统。这种组合常用于企业监控、安全审计和故障排查，替代传统的 ELK（Elasticsearch+Logstash+Kibana）方案。</p>
+<h2 id="1-前置条件和服务架构"><a href="#1-前置条件和服务架构" class="headerlink" title="1. 前置条件和服务架构"></a>1. 前置条件和服务架构</h2><p>首先，本博客的所有脚本和命令，都是基于 Debian10 操作系统的。如果使用 CentOS 或者其他操作系统，请注意命令的替换。</p>
+<h3 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h3><p>笔者安装时是用了两台机器，机器A部署 Graylog，opensearch node1，mongodb，机器B部署opensearch node2, 3, 4。以下是架构的简要示意图。注意，如果你也需要跨机器提供服务，那么首先要确保你的两台机器能够互相连通。由于笔者使用的是公司机器，默认就是在同一片子网下的，所以在这里不需要额外处理 。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">+-----------------------+</span><br><span class="line">|       机器A           |</span><br><span class="line">|                       |</span><br><span class="line">|  +-----------------+  |</span><br><span class="line">|  |     Graylog      |  |</span><br><span class="line">|  | (日志收集/分析)  |◄---日志输入（TCP/UDP/HTTP）</span><br><span class="line">|  +--------┬---------+  |</span><br><span class="line">|           │             |</span><br><span class="line">|  +--------▼---------+  |</span><br><span class="line">|  | OpenSearch Node1 |  |</span><br><span class="line">|  | (协调节点/数据节点) |  |</span><br><span class="line">|  +--------┬---------+  |</span><br><span class="line">|           │             |</span><br><span class="line">|  +--------▼---------+  |</span><br><span class="line">|  |    MongoDB       |  |</span><br><span class="line">|  | (存储Graylog配置) |  |</span><br><span class="line">|  +------------------+  |</span><br><span class="line">+-----------------------+</span><br><span class="line">           ▲</span><br><span class="line">           │ OpenSearch集群通信 (端口9300)</span><br><span class="line">           ▼</span><br><span class="line">+-----------------------+</span><br><span class="line">|       机器B           |</span><br><span class="line">|                       |</span><br><span class="line">|  +-----------------+  |</span><br><span class="line">|  | OpenSearch Node2 |  |</span><br><span class="line">|  |    (数据节点)     │  |</span><br><span class="line">|  +-----------------+  |</span><br><span class="line">|  +-----------------+  |</span><br><span class="line">|  | OpenSearch Node3 |  |</span><br><span class="line">|  |    (数据节点)     │  |</span><br><span class="line">|  +-----------------+  |</span><br><span class="line">|  +-----------------+  |</span><br><span class="line">|  | OpenSearch Node4 |  |</span><br><span class="line">|  |    (数据节点)     │  |</span><br><span class="line">|  +------------------+  |</span><br><span class="line">+-----------------------+</span><br></pre></td></tr></table></figure>
+
+<p>考虑到直接在原生系统上安装这些应用服务比较繁杂，并且环境配置上容易出现各种各样的问题，因此，这里选择了使用 Docker 进行安装。<span id="more"></span></p>
+<h3 id="安装-Docker"><a href="#安装-Docker" class="headerlink" title="安装 Docker"></a>安装 Docker</h3><p>可以直接参考官方文档（<a target="_blank" rel="noopener" href="https://cn.linux-console.net/?p=4943">docker安装</a>）来安装 docker。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt-get update</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装依赖</span></span><br><span class="line"><span class="built_in">sudo</span> apt-get install -y \</span><br><span class="line">    apt-transport-https \</span><br><span class="line">    ca-certificates \</span><br><span class="line">    curl \</span><br><span class="line">    gnupg \</span><br><span class="line">    lsb-release</span><br><span class="line">    </span><br><span class="line"><span class="comment"># 添加Docker官方GPG密钥</span></span><br><span class="line">curl -fsSL https://download.docker.com/linux/debian/gpg | <span class="built_in">sudo</span> apt-key add -</span><br><span class="line"><span class="comment"># 输出 OK</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 Docker 存储库添加到 APT 源：</span></span><br><span class="line"><span class="built_in">sudo</span> add-apt-repository <span class="string">&quot;deb [arch=amd64] https://download.docker.com/linux/debian <span class="subst">$(lsb_release -cs)</span> stable&quot;</span></span><br><span class="line"><span class="comment"># 如果遇到 add-apt-repository: command not found 的抛错 就先执行如下命令</span></span><br><span class="line"><span class="built_in">sudo</span> apt install --reinstall software-properties-common -y</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装 Docker 引擎</span></span><br><span class="line"><span class="built_in">sudo</span> apt update</span><br><span class="line">apt-cache policy docker-ce</span><br><span class="line"><span class="built_in">sudo</span> apt install docker-ce -y</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看版本</span></span><br><span class="line">docker --version</span><br></pre></td></tr></table></figure>
+
+<p>安装完成后，启动docker，设置开机自启并查看运行状态。状态为 active(running) 即可。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 启动服务</span></span><br><span class="line"><span class="built_in">sudo</span> systemctl start docker</span><br><span class="line"><span class="comment"># 设置开机自启</span></span><br><span class="line"><span class="built_in">sudo</span> systemctl <span class="built_in">enable</span> docker</span><br><span class="line"><span class="comment"># 查看状态</span></span><br><span class="line"><span class="built_in">sudo</span> systemctl status docker</span><br></pre></td></tr></table></figure>
+
+<p>正常运行以后，接下来配置 docker 不用 sudo 也可以运行，这样方便其他用户在脚本中调用。不过这一步不是必须的，可以跳过，只是默认状态下都要加上sudo才能执行 docker 命令，不是很方便。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> usermod -aG docker &lt;username&gt;</span><br><span class="line">root@pm02-unknown12822253:/$ su - &lt;username&gt;</span><br><span class="line">wuxinbei@pm02-unknown12822253:~$ <span class="built_in">id</span> -nG</span><br><span class="line"><span class="comment"># 输出 &lt;username&gt; root adm docker</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="开放网络端口"><a href="#开放网络端口" class="headerlink" title="开放网络端口"></a>开放网络端口</h3><p>如果你也和我一样，需要跨机器部署，或者不只是在 localhost 访问，那么务必确保机器的网络端口已经开放。首先安装 net-tools，便于查看 IP 规则。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt reinstall net-tools -y</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加到系统环境中 否则还是无法使用</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;export PATH=&quot;/sbin:$PATH&quot;&#x27;</span> &gt;&gt; ~/.bashrc</span><br><span class="line"><span class="built_in">source</span> ~/.bashrc </span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看IP地址</span></span><br><span class="line">ifconfig -a </span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看当前的 iptables 规则</span></span><br><span class="line"><span class="built_in">sudo</span> iptables -L INPUT --line-numbers -v -n</span><br></pre></td></tr></table></figure>
+
+<p>如果要用的端口并没有开放，那么我们需要添加开放端口的规则。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 开放指定端口</span></span><br><span class="line"><span class="built_in">sudo</span> iptables -A INPUT -p tcp --dport &lt;port_number&gt; -j ACCEPT</span><br><span class="line"><span class="comment"># 永久保存配置 防止重启失效</span></span><br><span class="line"><span class="built_in">sudo</span> netfilter-persistent save</span><br></pre></td></tr></table></figure>
+
+<p>注意查看你的 iptables 规则，如果发现有 DROP，那么在这条规则之后的规则都会被丢弃，即不会生效。当时为了排查这已经配置规则却仍然不生效的问题，花了很长时间，结果发现是开发机自带了一条 DROP，新配置的规则都被丢弃了。</p>
+<h3 id="其他配置"><a href="#其他配置" class="headerlink" title="其他配置"></a>其他配置</h3><p>在安装OpenSearch之前，还需要修改一些系统配置，让OpenSearch的性能表现更好。如果不设置，即使运行了也会抛警告，甚至抛错，如下所示。这一点在 OpenSearch 的官方文档中也提到了。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ERROR [PreflightCheckService] Preflight check failed with error: /proc/sys/vm/max_map_count value should be at least 262144 but is 65530 (<span class="built_in">set</span> via <span class="string">&quot;vm.max_map_count&quot;</span> sysctl)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1. Disable memory paging and swapping performance on the host to improve performance.</span></span><br><span class="line"><span class="built_in">sudo</span> swapoff -a</span><br><span class="line"><span class="comment"># 2. Increase the number of memory maps available to OpenSearch.</span></span><br><span class="line"><span class="comment"># 2.1 Edit the sysctl config file</span></span><br><span class="line"><span class="built_in">sudo</span> vi /etc/sysctl.conf</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2.2 Add a line to define the desired value</span></span><br><span class="line"><span class="comment"># or change the value if the key exists,</span></span><br><span class="line"><span class="comment"># and then save your changes.</span></span><br><span class="line">vm.max_map_count=262144</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2.3 Reload the kernel parameters using sysctl</span></span><br><span class="line"><span class="built_in">sudo</span> sysctl -p</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2.4 Verify that the change was applied by checking the value</span></span><br><span class="line"><span class="built_in">cat</span> /proc/sys/vm/max_map_count</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-安装-MongoDB"><a href="#2-安装-MongoDB" class="headerlink" title="2. 安装 MongoDB"></a>2. 安装 MongoDB</h2><p>因为只需要在主节点安装即可，所以这里没有用到 Mongo 集群和副本。MongoDB 是用来保存 graylog 和 opensearch 的配置项的，所以 Graylog 必须在 mongo 启动成功以后才能成功启动。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ docker pull mongo</span><br><span class="line">$ docker run -itd --restart unless-stopped --name mongo -p 27017:27017 -d mongo</span><br></pre></td></tr></table></figure>
+
+<p>其实也可以把这些过程放到脚本中，但是为了安装完以后创建用户并验证，所以单独拎出来了。如果要通过客户端连接 mongo 那么还需要安装 mongosh。只是想要确认是否成功运行了的话，启动以后可以通过 <code>docker ps</code> 来查看当前是否成功运行mongo。看到有 mongo 容器在正常运行就ok。</p>
+<p>安装 mongosh 的方式可以参考这篇文档 <a target="_blank" rel="noopener" href="https://www.mongodb.com/zh-cn/docs/mongodb-shell/install/">安装 mongosh - MongoDB Shell</a>。</p>
+<h2 id="3-根据集群拓扑写部署脚本"><a href="#3-根据集群拓扑写部署脚本" class="headerlink" title="3. 根据集群拓扑写部署脚本"></a>3. 根据集群拓扑写部署脚本</h2><p>话不多说，先放脚本。这里其实可以把 IP 地址换成参数，可读性会更强一点。</p>
+<h3 id="主节点脚本"><a href="#主节点脚本" class="headerlink" title="主节点脚本"></a>主节点脚本</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">OPEN_SEARCH_VERSION=2.12.0 <span class="comment"># OpenSearch 版本</span></span><br><span class="line">OS_JVM_MEM_INIT=2g <span class="comment"># OpenSearch 使用的内存初始化大小</span></span><br><span class="line">OS_JVM_MEM_MAX=2g <span class="comment"># OpenSearch 使用的最大内存限制</span></span><br><span class="line">OS_NODE_COUNT=4 <span class="comment"># OpenSearch 节点数量</span></span><br><span class="line">OS_NODE_PREFIX=<span class="string">&quot;open_search_&quot;</span> <span class="comment"># OpenSearch 节点前缀</span></span><br><span class="line">OS_DATA_PATH=/code/OSDATA <span class="comment"># OpenSearch 本地数据目录</span></span><br><span class="line">OS_PASSWORD=<span class="string">&quot;password&quot;</span> <span class="comment"># OpenSearch 密码 密码强度太弱会直接导致OS setup失败，进程退出</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 拉取 docker 镜像 如果是第一次执行，请把注释去掉</span></span><br><span class="line"><span class="comment"># docker pull docker.elastic.co/elasticsearch/elasticsearch-oss:7.10.0</span></span><br><span class="line"><span class="comment"># docker pull opensearchproject/opensearch:$OPEN_SEARCH_VERSION</span></span><br><span class="line"></span><br><span class="line">docker run -d --name es -p 9200:9200 -p 9300:9300 \</span><br><span class="line">  -e <span class="string">&quot;cluster.name=os-cluster&quot;</span> \</span><br><span class="line">  -e <span class="string">&quot;node.name=node_1&quot;</span> \</span><br><span class="line">  -e <span class="string">&quot;network.bind_host=0.0.0.0&quot;</span> \</span><br><span class="line">  -e <span class="string">&quot;network.host=7.25.140.167&quot;</span> \</span><br><span class="line">  -e <span class="string">&quot;network.publish_host=7.25.140.167&quot;</span> \</span><br><span class="line">  -e <span class="string">&quot;discovery.seed_hosts=7.25.140.167:9300,7.25.140.168:9300,7.25.140.168:9301,7.25.140.168:9302&quot;</span> \</span><br><span class="line">  -e <span class="string">&quot;OPENSEARCH_INITIAL_ADMIN_PASSWORD=&quot;</span><span class="variable">$OS_PASSWORD</span> \</span><br><span class="line">  -e <span class="string">&quot;cluster.initial_master_nodes=node_1,node_2,node_3,node_4&quot;</span> \</span><br><span class="line">  -e <span class="string">&quot;DISABLE_SECURITY_PLUGIN=true&quot;</span> \</span><br><span class="line">  -v /data/opensearch_node_1:/usr/share/opensearch/data \</span><br><span class="line">  -e <span class="string">&quot;OPENSEARCH_JAVA_OPTS=-Xms8g -Xmx8g -XX:MaxDirectMemorySize=4g&quot;</span> \</span><br><span class="line">  opensearchproject/opensearch:<span class="variable">$OPEN_SEARCH_VERSION</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">GRAYLOG_PASSWORD=<span class="string">&quot;password&quot;</span>        <span class="comment"># Graylog管理员密码</span></span><br><span class="line">GRAYLOG_PASSWORD_SALT=<span class="string">&quot;uhKQHMhc6JXxiH8NzJjmX/owrg1RoGrW+ahcoo8wMz8p7Uo6CD2r27s4PkaarRiAWS5XcF3a/CI1cadCnk0UbA==&quot;</span> <span class="comment"># 加密盐（至少64字符） 这段是随机生成的</span></span><br><span class="line">password=`<span class="built_in">echo</span> -n <span class="variable">$GRAYLOG_PASSWORD</span> | shasum -a 256 | awk <span class="string">&#x27;&#123;print $1&#125;&#x27;</span>`</span><br><span class="line">docker run --network=host --log-driver=syslog --log-opt tag=graylog \</span><br><span class="line"> -e GRAYLOG_HTTP_ENABLE_CORS=<span class="literal">true</span> \</span><br><span class="line"> -e GRAYLOG_MONGODB_URI=<span class="string">&quot;mongodb://127.0.0.1:27017/graylog&quot;</span> \</span><br><span class="line"> -e GRAYLOG_PROCESSBUFFER_PROCESSORS=40 \</span><br><span class="line"> -e GRAYLOG_OUTPUTBUFFER_PROCESSORS=40 \</span><br><span class="line"> -e GRAYLOG_HTTP_PUBLISH_URI=<span class="string">&quot;http://7.25.140.167:9000/&quot;</span> \</span><br><span class="line"> -e GRAYLOG_HTTP_EXTERNAL_URI=<span class="string">&quot;http://7.25.140.167:9000/&quot;</span> \</span><br><span class="line"> -e GRAYLOG_ROOT_TIMEZONE=Asia/Shanghai \</span><br><span class="line"> -e GRAYLOG_WEB_ENDPOINT_URI=<span class="string">&quot;http://7.25.140.167:9000/api&quot;</span> \</span><br><span class="line"> -e GRAYLOG_PASSWORD_SECRET=<span class="variable">$GRAYLOG_PASSWORD_SALT</span> \</span><br><span class="line"> -e GRAYLOG_MESSAGE_JOURNAL_MAX_SIZE=30gb \</span><br><span class="line"> -e GRAYLOG_ROOT_PASSWORD_SHA2=<span class="variable">$password</span> \</span><br><span class="line"> -e GRAYLOG_ELASTICSEARCH_HOSTS=<span class="string">&quot;http://7.25.140.167:9200,http://7.25.140.168:9200,http://7.25.140.168:9201,http://7.25.140.168:9202&quot;</span> \</span><br><span class="line"> --name graylog \</span><br><span class="line"> -d graylog/graylog:6.1</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="从节点脚本"><a href="#从节点脚本" class="headerlink" title="从节点脚本"></a>从节点脚本</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">OPEN_SEARCH_VERSION=2.12.0 <span class="comment"># OpenSearch 版本</span></span><br><span class="line">OS_JVM_MEM_INIT=2g <span class="comment"># OpenSearch 使用的内存初始化大小</span></span><br><span class="line">OS_JVM_MEM_MAX=2g <span class="comment"># OpenSearch 使用的最大内存限制</span></span><br><span class="line">OS_NODE_COUNT=4 <span class="comment"># OpenSearch 节点数量</span></span><br><span class="line">OS_NODE_PREFIX=<span class="string">&quot;open_search_&quot;</span> <span class="comment"># OpenSearch 节点前缀</span></span><br><span class="line">OS_DATA_PATH=/code/OSDATA <span class="comment"># OpenSearch 本地数据目录</span></span><br><span class="line">OS_PASSWORD=<span class="string">&quot;password&quot;</span> <span class="comment"># OpenSearch 密码 密码强度太弱会直接导致OS setup失败，进程退出</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># docker pull docker.elastic.co/elasticsearch/elasticsearch-oss:7.10.0</span></span><br><span class="line"><span class="comment"># docker pull opensearchproject/opensearch:$OPEN_SEARCH_VERSION</span></span><br><span class="line"></span><br><span class="line">docker run -d --name es_2 -p 9200:9200 -p 9300:9300 \</span><br><span class="line">  -e <span class="string">&quot;cluster.name=os-cluster&quot;</span> \</span><br><span class="line">  -e <span class="string">&quot;node.name=node_2&quot;</span> \</span><br><span class="line">  -e <span class="string">&quot;network.bind_host=0.0.0.0&quot;</span> \</span><br><span class="line">  -e <span class="string">&quot;http.host=0.0.0.0&quot;</span> \</span><br><span class="line">  -e <span class="string">&quot;network.host=7.25.140.168&quot;</span> \</span><br><span class="line">  -e <span class="string">&quot;network.publish_host=7.25.140.168&quot;</span> \</span><br><span class="line">  -e <span class="string">&quot;discovery.seed_hosts=7.25.140.167:9300,7.25.140.168:9300,7.25.140.168:9301,7.25.140.168:9302&quot;</span> \</span><br><span class="line">  -e <span class="string">&quot;OPENSEARCH_INITIAL_ADMIN_PASSWORD=&quot;</span><span class="variable">$OS_PASSWORD</span> \</span><br><span class="line">  -e <span class="string">&quot;cluster.initial_master_nodes=node_1,node_2,node_3,node_4&quot;</span> \</span><br><span class="line">  -e <span class="string">&quot;DISABLE_SECURITY_PLUGIN=true&quot;</span> \</span><br><span class="line">  -e <span class="string">&quot;OPENSEARCH_JAVA_OPTS=-Xms3g -Xmx3g -XX:MaxDirectMemorySize=2g&quot;</span> \</span><br><span class="line">  -v /data/opensearch_node_2:/usr/share/opensearch/data \</span><br><span class="line">  opensearchproject/opensearch:<span class="variable">$OPEN_SEARCH_VERSION</span></span><br><span class="line"></span><br><span class="line">docker run -d --name es_3 -p 9201:9201 -p 9301:9301 \</span><br><span class="line">  -e <span class="string">&quot;cluster.name=os-cluster&quot;</span> \</span><br><span class="line">  -e <span class="string">&quot;http.port=9201&quot;</span> \</span><br><span class="line">  -e <span class="string">&quot;http.host=0.0.0.0&quot;</span> \</span><br><span class="line">  -e <span class="string">&quot;transport.port=9301&quot;</span> \</span><br><span class="line">  -e <span class="string">&quot;node.name=node_3&quot;</span> \</span><br><span class="line">  -e <span class="string">&quot;network.bind_host=0.0.0.0&quot;</span> \</span><br><span class="line">  -e <span class="string">&quot;network.host=7.25.140.168&quot;</span> \</span><br><span class="line">  -e <span class="string">&quot;network.publish_host=7.25.140.168&quot;</span> \</span><br><span class="line">  -e <span class="string">&quot;discovery.seed_hosts=7.25.140.167:9300,7.25.140.168:9300,7.25.140.168:9301,7.25.140.168:9302&quot;</span> \</span><br><span class="line">  -e <span class="string">&quot;OPENSEARCH_INITIAL_ADMIN_PASSWORD=&quot;</span><span class="variable">$OS_PASSWORD</span> \</span><br><span class="line">  -e <span class="string">&quot;cluster.initial_master_nodes=node_1,node_2,node_3,node_4&quot;</span> \</span><br><span class="line">  -e <span class="string">&quot;DISABLE_SECURITY_PLUGIN=true&quot;</span> \</span><br><span class="line">  -e <span class="string">&quot;OPENSEARCH_JAVA_OPTS=-Xms3g -Xmx3g -XX:MaxDirectMemorySize=2g&quot;</span> \</span><br><span class="line">  -v /data/opensearch_node_3:/usr/share/opensearch/data \</span><br><span class="line">  opensearchproject/opensearch:<span class="variable">$OPEN_SEARCH_VERSION</span></span><br><span class="line"></span><br><span class="line">docker run -d --name es_4 -p 9202:9202 -p 9302:9302 \</span><br><span class="line">  -e <span class="string">&quot;cluster.name=os-cluster&quot;</span> \</span><br><span class="line">  -e <span class="string">&quot;http.port=9202&quot;</span> \</span><br><span class="line">  -e <span class="string">&quot;http.host=0.0.0.0&quot;</span> \</span><br><span class="line">  -e <span class="string">&quot;transport.port=9302&quot;</span> \</span><br><span class="line">  -e <span class="string">&quot;node.name=node_4&quot;</span> \</span><br><span class="line">  -e <span class="string">&quot;network.bind_host=0.0.0.0&quot;</span> \</span><br><span class="line">  -e <span class="string">&quot;network.host=7.25.140.168&quot;</span> \</span><br><span class="line">  -e <span class="string">&quot;network.publish_host=7.25.140.168&quot;</span> \</span><br><span class="line">  -e <span class="string">&quot;discovery.seed_hosts=7.25.140.167:9300,7.25.140.168:9300,7.25.140.168:9301,7.25.140.168:9302&quot;</span> \</span><br><span class="line">  -e <span class="string">&quot;OPENSEARCH_INITIAL_ADMIN_PASSWORD=&quot;</span><span class="variable">$OS_PASSWORD</span> \</span><br><span class="line">  -e <span class="string">&quot;cluster.initial_master_nodes=node_1,node_2,node_3,node_4&quot;</span> \</span><br><span class="line">  -e <span class="string">&quot;DISABLE_SECURITY_PLUGIN=true&quot;</span> \</span><br><span class="line">  -e <span class="string">&quot;OPENSEARCH_JAVA_OPTS=-Xms3g -Xmx3g -XX:MaxDirectMemorySize=2g&quot;</span> \</span><br><span class="line">  -v /data/opensearch_node_4:/usr/share/opensearch/data \</span><br><span class="line">  opensearchproject/opensearch:<span class="variable">$OPEN_SEARCH_VERSION</span></span><br></pre></td></tr></table></figure>
+
+<p>脚本中包含了拉取镜像的指令。如果之前已经执行过一遍，或者已经拉取过镜像，要注意不要重复拉取，把 <code>docker pull</code> 那几行注释掉。如果重复拉取了 OpenSearch 的镜像，不管是同版本还是不同版本，都可能导致一些依赖问题。按照官网社区的 Issue 回复，需要保持 OpenSearch clean 的环境。可以通过 <code>docker images</code> 查看当前已经拉去的镜像，通过 <code>docker rmi &lt;images-id&gt;</code> 删除指定的镜像。</p>
+<h3 id="关于脚本中一些配置项的解释"><a href="#关于脚本中一些配置项的解释" class="headerlink" title="关于脚本中一些配置项的解释"></a>关于脚本中一些配置项的解释</h3><h4 id="graylog"><a href="#graylog" class="headerlink" title="graylog"></a>graylog</h4><ul>
+<li>GRAYLOG_HTTP_ENABLE_CORS 配置跨域访问</li>
+<li>GRAYLOG_ELASTICSEARCH_HOSTS 虽然现在不支持 ES了，但是配置的字段名还是没有改，这里要配置所有的 open search 节点地址</li>
+</ul>
+<h4 id="open-search"><a href="#open-search" class="headerlink" title="open search"></a>open search</h4><ul>
+<li>cluster.name 同一个集群名字一定要一样</li>
+<li>discovery.seed_hosts 这里要填写所有的opensearch node的通信地址，否则无法互相发现。</li>
+<li>network.bind_host 这是为了能够被外部，而不仅仅是 localhost 访问</li>
+<li>cluster.initial_master_nodes 这里也要填写所有的节点名字，对应的就是 node.name</li>
+<li>OPENSEARCH_JAVA_OPTS 这里的 Xms 和 Xmx 对应的是 JVM 可用的最大最小内存，这个值要谨慎设置，不能乱填，需要结合你的机器情况来填写，笔者使用的机器只有16G，所以分配的比较少。官方文档上指出，分配的内存不要超过机器内存的一半，也不要超过 32g。如果超过了，就会频繁 GC，影响效率。笔者之前分配多了，导致节点之间发生竞争和宕机，服务挂掉了。</li>
+<li>DISABLE_SECURITY_PLUGIN 禁用安全插件，看上去这很不安全，但是如果不加上这一行，就又会有很多抛错要处理……权衡了一下还是禁用了</li>
+<li>http.port 这个要配置外部访问端口</li>
+<li>transport.port 这个字段是 OpenSearch 内部的通信端口</li>
+<li>-p 9202:9202 -p 9302:9302 这一行很重要，不可以忽略，需要这里的映射关系，才能够让我们配置的 9202，也同样作用于docker，否则还是不生效的。</li>
+</ul>
+<h3 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h3><p>直接运行上述的脚本是无法直接成功的。在此之前，还有一些基础工作要做。</p>
+<p>首先，要创建文件夹，并添加用户权限，用来读写数据。否则 OpenSearch 启动以后会有权限问题，无法正常启动。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 以node_4为例，每个节点都需要创建对应的文件夹</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /data/opensearch_node_4</span><br><span class="line"><span class="built_in">chown</span> -R 1000:1000 /data/opensearch_node_4</span><br></pre></td></tr></table></figure>
+
+<p>然后，分别在主节点和从节点的机器上执行部署脚本 <code>bash ctor_os.sh</code>，等待运行完成。这几个节点启动和初始化需要一些时间，可以通过 <code>docker logs &lt;container-name&gt;</code>来查看运行日志。例如 <code>docker logs es_1</code>可以查看 node_1 的运行日志。确认没有 ERROR ，看到 cluster 状态从 YELLOW 转为 GREEN 的日志以后，可以在浏览器访问，查看集群运行情况。</p>
+<p>正常运行的 OpenSearch 集群如下所示：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://7.25.140.167:9200/_cluster/health?pretty</span><br></pre></td></tr></table></figure>
+
+<img src="/2025/03/16/Graylog61-deploy/os_cluster.png" class="" title="OpenSearch 集群">
+
+<p>截图的时候部署了5个节点，实际情况请根据自身的架构拓扑判断哈，主要核对 OpenSearch 节点数量、status 等信息。</p>
+<p>通过 <code>docker logs graylog</code> 查看 graylog 节点运行状态，看到运行成功以后，在浏览器访问 <code>http://7.25.140.167:9000</code>，会看到登录界面，输入用户名（默认为 admin），密码即脚本文件中的密码登录。如下所示即为成功。</p>
+<img src="/2025/03/16/Graylog61-deploy/graylog.png" class="" title="Graylog初始界面">
+
+<h3 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h3><p>如果已经启动过，但是发现有问题，需要停止容器运行，并删掉容器，否则下次直接运行脚本会有问题。因为脚本中的命令是 <code>docker run</code>，会新建一个容器，而不是运行已有的容器。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">docker stop graylog</span><br><span class="line">docker stop es_1</span><br><span class="line"></span><br><span class="line">docker <span class="built_in">rm</span> graylog</span><br><span class="line">docker <span class="built_in">rm</span> es_1</span><br></pre></td></tr></table></figure>
+
+<p>如果 OpenSearch 之前启动过，修改配置以后要重启的时候，必须要删除对应的本地数据，否则节点会选举失败，导致无法加入集群等一系列问题。清空存盘数据的指令如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 主节点机器</span></span><br><span class="line"><span class="built_in">rm</span> -rf /data/opensearch_node_1/*</span><br><span class="line"><span class="built_in">rm</span> -rf /usr/share/opensearch/data/*</span><br><span class="line"></span><br><span class="line"><span class="comment"># 从节点机器</span></span><br><span class="line"><span class="built_in">rm</span> -rf /data/opensearch_node_2/*</span><br><span class="line"><span class="built_in">rm</span> -rf /data/opensearch_node_3/*</span><br><span class="line"><span class="built_in">rm</span> -rf /data/opensearch_node_4/*</span><br><span class="line"><span class="built_in">rm</span> -rf /usr/share/opensearch/data/*</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="4-Graylog-配置"><a href="#4-Graylog-配置" class="headerlink" title="4. Graylog 配置"></a>4. Graylog 配置</h2><p>部署成功以后，还需要进行 INPUTS 配置，否则无法收集到日志。点击 System ，找到菜单中的 INPUTS。</p>
+<img src="/2025/03/16/Graylog61-deploy/input_config_1.png" class="" title="System -&gt; Inputs">
+
+<p>这里就直接根据自己的需求选择合适的 INPUTS 即可。我这里选择的是 GELF HTTP（便于测试）。除了勾选 Global 以外，没有做其他的操作。</p>
+<p>直接在主节点机器上执行如下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -XPOST http://127.0.0.1:12201/gelf -p0 -d <span class="string">&#x27;&#123;&quot;message&quot;:&quot;hello berry&quot;, &quot;host&quot;:&quot;127.0.0.1&quot;, &quot;facility&quot;:&quot;test&quot;, &quot;topic&quot;: &quot;meme&quot;&#125;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>回到 Search 页面，可以看到已经显示我们刚才发送的消息。注意，如果配置的不是 GELF HTTP，那么直接用上述命令测试，是不会成功的。</p>
+<img src="/2025/03/16/Graylog61-deploy/input_test.png" class="" title="Inputs-Log">
+
+
+
+<hr>
+<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>配置过程中尝试了很多种方式，除了直接使用 <code>docker run</code>外，还使用了 <code>docker compose</code> 和 <code>docker stack</code>。其中，如果只需要单机配置的话，使用 docker compose 其实更方便，只需要一个配置文件，就能够一步到位解决网络和环境变量的问题。至于 docker stack，这是最初我在尝试跨机器建立集群时，官方文档推荐我采用的方式，但是经过实践发现，使用 docker stack 总是会出现 OOM 导致进程异常退出，但是除了错误代码143指向 OOM 以外，又没有任何的错误信息，包括系统日志中也没有 OOM 的 ERR。没有线索，排查不下去，因此最后还是采用了最原生的办法。</p>
+<p>Graylog 还可以配置定期删除索引，防止磁盘被占满。可以在 <code>System -&gt; Indices</code> 面板进行配置。</p>
+<p>一些查看当前存储占用情况的 API ：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看集群存储统计（需开放 9200 端口）</span></span><br><span class="line">curl -XGET http://localhost:9200/_cat/allocation?v&amp;h=shard,disk.indices,disk.used,disk.avail,disk.total,host</span><br><span class="line"><span class="comment"># 查看索引级存储详情</span></span><br><span class="line">curl -XGET http://localhost:9200/_cat/indices?v&amp;h=index,store.size,pri.store.size</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看集群未分配节点异常的具体原因</span></span><br><span class="line">curl -X GET <span class="string">&quot;localhost:9200/_cluster/allocation/explain&quot;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p>这里仅列出了官方文档，如果你有足够的部署经验，那么官方文档足以解决你的全部问题。</p>
+<ul>
+<li>Graylog 官方文档：<a target="_blank" rel="noopener" href="https://docs.graylog.org/">https://docs.graylog.org</a></li>
+<li>OpenSearch 文档：<a target="_blank" rel="noopener" href="https://opensearch.org/docs">https://opensearch.org/docs</a></li>
+<li>MongoDB 手册：<a target="_blank" rel="noopener" href="https://docs.mongodb.com/">https://docs.mongodb.com</a></li>
+<li><a target="_blank" rel="noopener" href="https://cn.linux-console.net/?p=4943">如何在 Debian 10 上安装和使用 Docker</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.mongodb.com/zh-cn/docs/mongodb-shell/install/">安装 mongosh - MongoDB Shell</a></li>
+</ul>
+
+    
+
+    
+    <div class="page-reward">
+      <a href="javascript:void(0);" class="page-reward-btn tooltip-top" target="_self">
+        <div class="tooltip tooltip-east">
+          <span class="tooltip-item">
+            赏
+          </span>
+          <span class="tooltip-content">
+            <span class="tooltip-text">
+              <span class="tooltip-inner">
+                <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i
+                    class="icon icon-quo-right"></i></p>
+                <div class="reward-box">
+                  
+                  <div class="reward-box-item">
+                    <img class="reward-img" src="/img/alipay.jpg">
+                    <span class="reward-type">支付宝</span>
+                  </div>
+                  
+                  
+                  <div class="reward-box-item">
+                    <img class="reward-img" src="/img/wechat_pay.jpg">
+                    <span class="reward-type">微信</span>
+                  </div>
+                  
+                </div>
+              </span>
+            </span>
+          </span>
+        </div>
+      </a>
+    </div>
+    
+
+    
+    <div class="declare"> 
+      <ul class="post-copyright">
+        <li>
+          <strong>本文作者：</strong>
+          Berry
+        </li>
+        <li>
+          <strong>本文链接：</strong>
+          <a href="https://wuxinberry.github.io/2025/03/16/Graylog61-deploy/" title="最新版本Graylog6.1+OpenSearch+Mongo 脚本部署（Docker自动化）" target="_blank">https://wuxinberry.github.io/2025/03/16/Graylog61-deploy/</a>
+        </li>
+        
+        <li>
+          <strong>版权声明： </strong>
           
+          本博客所有文章除特别声明外，均采用 <a href="https://github.com/JoeyBling/hexo-theme-yilia-plus/blob/master/LICENSE" rel="external nofollow" target="_blank">MIT</a> 许可协议。转载请注明出处！
+        </li>
+        
+      </ul>
+    </div>
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">AIGC</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">ComfyUI</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Stable Diffusion</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">部署</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+    
 
+    
+
+    
+    
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <!-- <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a> -->
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://wuxinberry.github.io/2025/03/16/Graylog61-deploy/" alt="微信分享二维码"> -->
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+
+    
+    <div class="clearfix"></div>
+  </div>
   </div>
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2024/04/17/ComfyUI%E5%85%A5%E9%97%A8/" class="archive-article-date">
-        <time datetime="2024-04-17T10:01:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-04-17</time>
-</a>
 
+
+<nav id="article-nav">
+  
+  
+    <a href="/2025/03/09/Prompt-templates/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">常用的AI提示词整理（持更）</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2024/04/17/ComfyUI%E5%85%A5%E9%97%A8/" target="_blank">AI绘图神器：ComfyUI零基础入门指南（一）</a>
-  
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">AIGC</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">ComfyUI</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Stable Diffusion</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0-%E6%A6%82%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">0. 概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%89%8D%E7%BD%AE%E6%9D%A1%E4%BB%B6%E5%92%8C%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84"><span class="toc-number">2.</span> <span class="toc-text">1. 前置条件和服务架构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%B6%E6%9E%84"><span class="toc-number">2.1.</span> <span class="toc-text">架构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-Docker"><span class="toc-number">2.2.</span> <span class="toc-text">安装 Docker</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%80%E6%94%BE%E7%BD%91%E7%BB%9C%E7%AB%AF%E5%8F%A3"><span class="toc-number">2.3.</span> <span class="toc-text">开放网络端口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E9%85%8D%E7%BD%AE"><span class="toc-number">2.4.</span> <span class="toc-text">其他配置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%AE%89%E8%A3%85-MongoDB"><span class="toc-number">3.</span> <span class="toc-text">2. 安装 MongoDB</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%A0%B9%E6%8D%AE%E9%9B%86%E7%BE%A4%E6%8B%93%E6%89%91%E5%86%99%E9%83%A8%E7%BD%B2%E8%84%9A%E6%9C%AC"><span class="toc-number">4.</span> <span class="toc-text">3. 根据集群拓扑写部署脚本</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BB%E8%8A%82%E7%82%B9%E8%84%9A%E6%9C%AC"><span class="toc-number">4.1.</span> <span class="toc-text">主节点脚本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8E%E8%8A%82%E7%82%B9%E8%84%9A%E6%9C%AC"><span class="toc-number">4.2.</span> <span class="toc-text">从节点脚本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E%E8%84%9A%E6%9C%AC%E4%B8%AD%E4%B8%80%E4%BA%9B%E9%85%8D%E7%BD%AE%E9%A1%B9%E7%9A%84%E8%A7%A3%E9%87%8A"><span class="toc-number">4.3.</span> <span class="toc-text">关于脚本中一些配置项的解释</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#graylog"><span class="toc-number">4.3.1.</span> <span class="toc-text">graylog</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#open-search"><span class="toc-number">4.3.2.</span> <span class="toc-text">open search</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%83%A8%E7%BD%B2"><span class="toc-number">4.4.</span> <span class="toc-text">部署</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F%E7%82%B9"><span class="toc-number">4.5.</span> <span class="toc-text">注意点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-Graylog-%E9%85%8D%E7%BD%AE"><span class="toc-number">5.</span> <span class="toc-text">4. Graylog 配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%8E%E8%AE%B0"><span class="toc-number">6.</span> <span class="toc-text">后记</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E6%A1%A3"><span class="toc-number">7.</span> <span class="toc-text">参考文档</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
+
+
+
+
+
+
+
+
   
+  <div id="gitment-ctn"></div>
   
-    </div></section>
+    <!-- 中文 -->
+    <link rel="stylesheet" href="/lib/gitment.css">
+    <script src="/lib/gitment.js"></script>
+  
+  <script>
+    <!-- id: "最新版本Graylog6.1+OpenSearch+Mongo 脚本部署（Docker自动化）" -->
+    var gitment = new Gitment({
+      id: "20250316173158",
+      owner: 'Wuxinberry',
+      repo: 'blog_comments',
+      oauth: {
+        client_id: 'Ov23linQcyh9hypoAT9t',
+        client_secret: 'aa9da44b5100641bc5144e38c22465ca48640297',
+      },
+    })
+    gitment.render('gitment-ctn')
+  </script>
+
+
   
 
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/tags/AIGC/">&laquo; Prev</a><a class="page-number" href="/tags/AIGC/">1</a><span class="page-number current">2</span>
-    </nav>
-  
 
 
           </div>
@@ -363,9 +623,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: true,
 		toc_hide_index: true,

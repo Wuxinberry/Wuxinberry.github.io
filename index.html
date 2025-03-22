@@ -208,6 +208,103 @@
             
 
   
+    <article id="post-luajit" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2025/03/22/luajit/" target="_blank">LuaJIT底层方法修改的踩坑记录以及源码分析</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2025/03/22/luajit/" class="archive-article-date">
+        <time datetime="2025-03-22T13:41:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-03-22</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <p>LuaJIT，是 Lua 语言的高性能即时编译器，结合了 Lua5.1 的语法和特性，大幅提升了执行效率。LuaJIT 的 JIT 编译器能将 Lua 代码动态编译为机器码，实现接近原生 C&#x2F;C++ 的运行速度。在项目开发过程中，会有一些需求要对底层的方法做一些修改，实现进一步的性能优化和业务安全。本篇文章记录了修改 LuaJIT 底层方法过程中踩的坑。</p>
+<h2 id="1-问题概述"><a href="#1-问题概述" class="headerlink" title="1. 问题概述"></a>1. 问题概述</h2><p>根据需要，要对 LuaJIT 底层的一些方法做出修改，使设为只读的 table 不可以被修改，因此要对 <code>table.remove</code> <code>table.insert</code> 等方法做一些改动。但是修改以后发现，使用 <code>table.remove</code> 仍然可以修改 table 中的数据，但是代码本身没有问题，只是检查没有被触发。因此开始排查该问题。</p>
+<h2 id="2-源码分析"><a href="#2-源码分析" class="headerlink" title="2. 源码分析"></a>2. 源码分析</h2><p>考虑到 <code>insert</code> 的修改成功了，但是 <code>remove</code> 的修改没有成功，因此我对比了这两个方法的实现，发现两个方法使用的宏定义不同。<code>table.insert</code> 使用的是 <code>LJLIB_CF</code>，即 C function ，而<code>table.remove</code> 使用的是<code>LJLIB_LUA</code>，并且后面的具体实现是被注释掉的。于是去查看了这两个宏究竟被定义成了什么。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">LJLIB_CF</span>(table_insert)		<span class="built_in">LJLIB_REC</span>(.)</span><br><span class="line">&#123;</span><br><span class="line">  GCtab *t = <span class="built_in">lj_lib_checkwtab</span>(L, <span class="number">1</span>); <span class="comment">// 检查是否是 readonly table</span></span><br><span class="line">  <span class="type">int32_t</span> n, i = (<span class="type">int32_t</span>)<span class="built_in">lj_tab_len</span>(t) + <span class="number">1</span>;</span><br><span class="line">  <span class="type">int</span> nargs = (<span class="type">int</span>)((<span class="type">char</span> *)L-&gt;top - (<span class="type">char</span> *)L-&gt;base);</span><br><span class="line">  <span class="keyword">if</span> (nargs != <span class="number">2</span>*<span class="built_in">sizeof</span>(TValue)) &#123;</span><br><span class="line">    <span class="keyword">if</span> (nargs != <span class="number">3</span>*<span class="built_in">sizeof</span>(TValue))</span><br><span class="line">      <span class="built_in">lj_err_caller</span>(L, LJ_ERR_TABINS);</span><br><span class="line">    <span class="comment">/* NOBARRIER: This just moves existing elements around. */</span></span><br><span class="line">    <span class="keyword">for</span> (n = <span class="built_in">lj_lib_checkint</span>(L, <span class="number">2</span>); i &gt; n; i--) &#123;</span><br><span class="line">      <span class="comment">/* The set may invalidate the get pointer, so need to do it first! */</span></span><br><span class="line">      TValue *dst = <span class="built_in">lj_tab_setint</span>(L, t, i);</span><br><span class="line">      cTValue *src = <span class="built_in">lj_tab_getint</span>(t, i<span class="number">-1</span>);</span><br><span class="line">      <span class="keyword">if</span> (src) &#123;</span><br><span class="line">	<span class="built_in">copyTV</span>(L, dst, src);</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">	<span class="built_in">setnilV</span>(dst);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    i = n;</span><br><span class="line">  &#125;</span><br><span class="line">  &#123;</span><br><span class="line">    TValue *dst = <span class="built_in">lj_tab_setint</span>(L, t, i);</span><br><span class="line">    <span class="built_in">copyTV</span>(L, dst, L-&gt;top<span class="number">-1</span>);  <span class="comment">/* Set new value. */</span></span><br><span class="line">    <span class="built_in">lj_gc_barriert</span>(L, t, dst);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">LJLIB_LUA</span>(table_remove) <span class="comment">/*</span></span><br><span class="line"><span class="comment">  function(t, pos)</span></span><br><span class="line"><span class="comment">    CHECK_tab(t)</span></span><br><span class="line"><span class="comment">    // 检查 readonly 逻辑 如果是readonly的table就返回并警告</span></span><br><span class="line"><span class="comment">    local len = #t</span></span><br><span class="line"><span class="comment">    if pos == nil then</span></span><br><span class="line"><span class="comment">      if len ~= 0 then</span></span><br><span class="line"><span class="comment">	local old = t[len]</span></span><br><span class="line"><span class="comment">	t[len] = nil</span></span><br><span class="line"><span class="comment">	return old</span></span><br><span class="line"><span class="comment">      end</span></span><br><span class="line"><span class="comment">    else</span></span><br><span class="line"><span class="comment">      CHECK_int(pos)</span></span><br><span class="line"><span class="comment">      if pos &gt;= 1 and pos &lt;= len then</span></span><br><span class="line"><span class="comment">	local old = t[pos]</span></span><br><span class="line"><span class="comment">	for i=pos+1,len do</span></span><br><span class="line"><span class="comment">	  t[i-1] = t[i]</span></span><br><span class="line"><span class="comment">	end</span></span><br><span class="line"><span class="comment">	t[len] = nil</span></span><br><span class="line"><span class="comment">	return old</span></span><br><span class="line"><span class="comment">      end</span></span><br><span class="line"><span class="comment">    end</span></span><br><span class="line"><span class="comment">  end</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<p>可以看到，如下所示，<code>LJLIB_CF</code> 被定义为了一个静态函数，但是 <code>LJLIB_LUA</code> 则是一个空字符，也就是说在编译过程中，这段代码会被替换成空字符串，结合后面代码主体内容是写在注释中的，说明实际编译以后，这段代码根本不生效。
+    
+    <a class="article-more-a" href="/2025/03/22/luajit/#more">more >></a>
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">LuaJIT</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">踩坑记录</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2025/03/22/luajit/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Graylog61-deploy" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1169,112 +1266,6 @@
 
 
   
-    <article id="post-ComfyUI-lora" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2025/01/12/ComfyUI-lora/" target="_blank">ComfyUI 中使用 LoRA 模型全攻略</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2025/01/12/ComfyUI-lora/" class="archive-article-date">
-        <time datetime="2025-01-12T10:21:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-01-12</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <p>ComfyUI 相关博客目录：</p>
-<p><a href="https://wuxinberry.github.io/2024/04/17/ComfyUI%E5%85%A5%E9%97%A8/">AI绘图神器：ComfyUI零基础入门指南（一）</a></p>
-<p><a href="https://wuxinberry.github.io/2024/12/25/ComfyUI-tips/">ComfyUI踩坑记录，一些帮助你少走弯路的小技巧</a></p>
-<p><a href="https://wuxinberry.github.io/2025/01/12/ComfyUI-lora/">ComfyUI 中使用 LoRA 模型全攻略</a></p>
-<p><a href="https://wuxinberry.github.io/2024/12/23/ComfyUI%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86/">AI绘图，是如何从算力到画面的</a></p>
-<p>在 AI 绘画领域，ComfyUI 是一款备受欢迎的工具，而 LoRA 模型的加入更是为创作带来了更多可能。本文将详细介绍如何在 ComfyUI 中使用 LoRA 模型，包括 LoRA 模型的原理、安装方法以及工作流的搭建。</p>
-<h2 id="LoRA模型的原理"><a href="#LoRA模型的原理" class="headerlink" title="LoRA模型的原理"></a>LoRA模型的原理</h2><p>如果你是AI绘图的忠实用户，或许你早已耳闻 LoRA。它堪称是AI绘图神器之一。</p>
-<p>LoRA，即 Low-Rank Adaptation of Large Language Models，最初是为了高效微调大型语言模型而提出的，后来广泛应用于 AI 绘画模型中。它的核心原理是通过引入可训练的低秩矩阵，对预训练模型的特定层进行微调。</p>
-<p>在传统的模型微调中，需要对整个模型的参数进行更新，这不仅计算成本高，而且容易导致过拟合。LoRA 模型则是在模型的某些层后添加两个可训练的低秩矩阵（一个降维矩阵和一个升维矩阵），只对这两个低秩矩阵进行训练，这样一来，就大大减少了需要训练的参数数量，提升了训练效率。这样，在不改变原始模型权重的情况下，能够快速适应新的任务或数据集，同时保持了模型的泛化能力。例如，在绘画模型中，LoRA 可以针对特定的风格、主题等进行微调，让模型生成符合特定要求的图像。就好像我们想要一幅画像，画像中有一个微笑的女人，那么，不同的画风会带来极大的差异，有可能是蒙娜丽莎，也有可能是幼稚园插画。通常我们会在 prompt 中描述我们想要的艺术风格，但这样做的效果很难让人满意，而 LoRA 则可以帮助我们实现对风格的精准把控。</p>
-<p>总结就是，LoRA能够让我们灵活地指定个性风格，同时因为其模型小、参数少，训练快，效率高，应用起来也十分方便。</p>
-<h2 id="LoRA模型的安装"><a href="#LoRA模型的安装" class="headerlink" title="LoRA模型的安装"></a>LoRA模型的安装</h2><p>LoRA 模型既然那么好用，我们应该去哪里下载呢？大多数AI绘图的社区都有提供 LoRA 模型下载，例如C站（civitai: <a target="_blank" rel="noopener" href="https://civitai.com/">https://civitai.com</a>）、L站（liblib: <a target="_blank" rel="noopener" href="https://www.liblib.art/%EF%BC%89%E7%AD%89%E3%80%82">https://www.liblib.art/）等。</a>
-    
-    <a class="article-more-a" href="/2025/01/12/ComfyUI-lora/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">AIGC</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">ComfyUI</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Stable Diffusion</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2025/01/12/ComfyUI-lora/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1429,6 +1420,14 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">提示词工程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">LuaJIT</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">踩坑记录</a>
               </li>
              
               <li class="article-tag-list-item">
